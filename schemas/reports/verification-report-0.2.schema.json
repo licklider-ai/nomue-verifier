@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nomue:schema:verification-report:0.2.0-draft.1",
+  "title": "Phase 2A nomue verification report",
+  "description": "The Phase 2A verification report. A separate artifact from the Record (NRS-CORE-0008), with no overall status, no VERIFIED value, no significance boolean, and no whole-record validity boolean; every result is inseparable from its check identifier, version, and scope. The guarantee boundary makes the non-claims explicit: scientific validity, declaration truth, distributional-model validity, causal interpretation, and standardized effect size are all not_asserted.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "report_type",
+    "record_reference",
+    "interpretation_bundle_id",
+    "verifier",
+    "generated_at",
+    "conformance",
+    "verification_results",
+    "guarantee_boundary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "const": "urn:nomue:schema:verification-report:0.2.0-draft.1" },
+    "report_type": { "const": "nomue-verification-report" },
+    "record_reference": { "$ref": "#/$defs/recordReference" },
+    "interpretation_bundle_id": {
+      "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/uri"
+    },
+    "verifier": { "$ref": "#/$defs/verifier" },
+    "generated_at": {
+      "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/rfc3339UtcZ",
+      "$comment": "Excluded from the verification semantic projection."
+    },
+    "conformance": {
+      "$ref": "urn:nomue:schema:common:execution-outcome:0.2.0-draft.1#/$defs/conformanceResult"
+    },
+    "verification_results": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nomue:schema:common:execution-outcome:0.2.0-draft.1#/$defs/checkResult"
+      }
+    },
+    "guarantee_boundary": { "$ref": "#/$defs/guaranteeBoundary" }
+  },
+  "$defs": {
+    "recordReference": {
+      "type": "object",
+      "required": ["record_id", "revision_id", "content_digest"],
+      "additionalProperties": false,
+      "properties": {
+        "record_id": {
+          "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/uri"
+        },
+        "revision_id": {
+          "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/uri"
+        },
+        "content_digest": {
+          "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/sha256Digest",
+          "$comment": "The independently recomputed digest of the verified revision (NRS-VERIFY-0011)."
+        }
+      }
+    },
+    "verifier": {
+      "type": "object",
+      "required": ["name", "version", "source_commit"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "version": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "source_commit": { "type": "string", "minLength": 1, "maxLength": 256 }
+      }
+    },
+    "guaranteeBoundary": {
+      "type": "object",
+      "required": [
+        "scientific_validity",
+        "declaration_truth",
+        "distributional_model_validity",
+        "causal_interpretation",
+        "standardized_effect_size"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scientific_validity": { "const": "not_asserted" },
+        "declaration_truth": { "const": "not_asserted" },
+        "distributional_model_validity": { "const": "not_asserted" },
+        "causal_interpretation": { "const": "not_asserted" },
+        "standardized_effect_size": { "const": "not_asserted" }
+      }
+    }
+  }
+}

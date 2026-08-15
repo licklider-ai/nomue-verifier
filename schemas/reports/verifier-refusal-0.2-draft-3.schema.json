@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nomue:schema:verifier-refusal:0.2.0-draft.3",
+  "title": "nomue verifier refusal",
+  "description": "Machine-readable refusal emitted when a normal verification report cannot be produced (NRS-CORE-0011). A refusal carries no overall status, no VERIFIED value, no verification outcome, and no scientific-validity evaluation; it is never a partial success (NRS-SEC-0004). Fields that could not be read from the input are omitted, never fabricated: there is no record reference, because no Record was interpreted. Supersedes urn:nomue:schema:verifier-refusal:0.2.0-draft.2 by adding the processing_timeout and memory_limit limit_category values for the in-process time and memory bounds of NRS-SEC-0006 (ADR-0022); the draft.2 schema is retained unmodified as a historical artifact.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "output_type",
+    "refusal_kind",
+    "reason_codes",
+    "message",
+    "verifier",
+    "input_evidence",
+    "generated_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "const": "urn:nomue:schema:verifier-refusal:0.2.0-draft.3" },
+    "output_type": { "const": "nomue-verifier-refusal" },
+    "refusal_kind": {
+      "enum": [
+        "parse_error",
+        "routing_error",
+        "unsupported_bundle",
+        "resource_limit",
+        "canonicalization_failure",
+        "internal_error"
+      ]
+    },
+    "reason_codes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^NRS-[A-Z][A-Z-]*[A-Z]$" }
+    },
+    "message": { "type": "string", "minLength": 1, "maxLength": 4096 },
+    "declared_bundle_id": {
+      "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/uri",
+      "$comment": "Present only for unsupported_bundle refusals, where the declared identifier was readable. A routing_error refusal has no readable declared identifier by definition (missing or non-string), so the field never appears there."
+    },
+    "limit_category": {
+      "enum": [
+        "file_size",
+        "nesting_depth",
+        "observation_count",
+        "string_length",
+        "parser_exhaustion",
+        "processing_timeout",
+        "memory_limit"
+      ],
+      "$comment": "Present for resource_limit refusals (NRS-SEC-0005). processing_timeout and memory_limit are checked in-process at pipeline checkpoints (NRS-SEC-0006), not by an external test harness."
+    },
+    "verifier": {
+      "type": "object",
+      "required": ["name", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "version": { "type": "string", "minLength": 1, "maxLength": 256 }
+      }
+    },
+    "input_evidence": {
+      "type": "object",
+      "required": ["input_size_bytes"],
+      "additionalProperties": false,
+      "properties": {
+        "input_size_bytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "generated_at": {
+      "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/rfc3339UtcZ"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "properties": { "refusal_kind": { "not": { "const": "unsupported_bundle" } } },
+        "required": ["refusal_kind"]
+      },
+      "then": {
+        "type": "object",
+        "not": { "type": "object", "required": ["declared_bundle_id"] }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": { "refusal_kind": { "not": { "const": "resource_limit" } } },
+        "required": ["refusal_kind"]
+      },
+      "then": {
+        "type": "object",
+        "not": { "type": "object", "required": ["limit_category"] }
+      }
+    }
+  ]
+}

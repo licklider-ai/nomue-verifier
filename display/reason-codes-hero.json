@@ -1,0 +1,6 @@
+{
+  "NRS-DECLARED-RESULT-MISMATCH": {
+    "title": "Declared result differs from recomputed result",
+    "description": "One or more declared result quantities differ from the recomputed values beyond the tolerance policy of the applicable check version."
+  }
+}

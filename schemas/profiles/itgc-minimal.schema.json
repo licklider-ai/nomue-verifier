@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nomue:schema:profile:itgc-minimal:0.1.0-draft.1",
+  "title": "Phase 1 minimal ITGC payload",
+  "description": "Payload structure for the Phase 1 minimal Independent Two-Group Continuous profile. Declarative preconditions that a schema cannot fully express (group_order permutation, uniqueness, group resolution, minimum group size per group, supported method) are registered state invariants evaluated by semantic conformance.",
+  "type": "object",
+  "required": ["dataset", "design", "analysis", "result"],
+  "additionalProperties": false,
+  "properties": {
+    "dataset": { "$ref": "#/$defs/dataset" },
+    "design": { "$ref": "#/$defs/design" },
+    "analysis": { "$ref": "#/$defs/analysis" },
+    "result": { "$ref": "#/$defs/result" }
+  },
+  "$defs": {
+    "localId": {
+      "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/localId"
+    },
+    "dataset": {
+      "type": "object",
+      "required": ["dataset_id", "observations"],
+      "additionalProperties": false,
+      "properties": {
+        "dataset_id": { "$ref": "#/$defs/localId" },
+        "observations": {
+          "type": "array",
+          "minItems": 4,
+          "items": { "$ref": "#/$defs/observation" },
+          "$comment": "Two groups of at least two observations each imply at least four observations; per-group minimums are semantic invariants."
+        }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "required": ["observation_id", "experimental_unit_id", "group_id", "outcome_value"],
+      "additionalProperties": false,
+      "properties": {
+        "observation_id": { "$ref": "#/$defs/localId" },
+        "experimental_unit_id": { "$ref": "#/$defs/localId" },
+        "group_id": { "$ref": "#/$defs/localId" },
+        "outcome_value": { "type": "number" }
+      }
+    },
+    "design": {
+      "type": "object",
+      "required": [
+        "design_id",
+        "dataset_id",
+        "experimental_unit_type",
+        "groups",
+        "group_order",
+        "outcome",
+        "independence_declared"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "design_id": { "$ref": "#/$defs/localId" },
+        "dataset_id": { "$ref": "#/$defs/localId" },
+        "experimental_unit_type": {
+          "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/label"
+        },
+        "groups": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/group" }
+        },
+        "group_order": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/localId" }
+        },
+        "outcome": { "$ref": "#/$defs/outcome" },
+        "independence_declared": {
+          "type": "boolean",
+          "$comment": "Semantic conformance requires true (NRS-PROFILE-ITGC-0005); false fails with NRS-INDEPENDENCE-NOT-DECLARED rather than a schema error."
+        }
+      }
+    },
+    "group": {
+      "type": "object",
+      "required": ["group_id", "label"],
+      "additionalProperties": false,
+      "properties": {
+        "group_id": { "$ref": "#/$defs/localId" },
+        "label": { "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/label" }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["outcome_id", "label", "scale"],
+      "additionalProperties": false,
+      "properties": {
+        "outcome_id": { "$ref": "#/$defs/localId" },
+        "label": { "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/label" },
+        "scale": { "const": "continuous" }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "required": ["analysis_id", "design_id", "method_id", "alternative"],
+      "additionalProperties": false,
+      "properties": {
+        "analysis_id": { "$ref": "#/$defs/localId" },
+        "design_id": { "$ref": "#/$defs/localId" },
+        "method_id": {
+          "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/uri",
+          "$comment": "Semantic conformance requires urn:nomue:method:welch-two-sample-t:1 (NRS-PROFILE-ITGC-0007); other methods fail with NRS-UNSUPPORTED-METHOD rather than a schema error."
+        },
+        "alternative": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "$comment": "Semantic conformance requires two_sided; other alternatives fail with NRS-UNSUPPORTED-ALTERNATIVE rather than a schema error."
+        }
+      }
+    },
+    "resultGroupSummary": {
+      "type": "object",
+      "required": ["group_id", "n", "mean", "sample_variance"],
+      "additionalProperties": false,
+      "properties": {
+        "group_id": { "$ref": "#/$defs/localId" },
+        "n": { "type": "integer", "minimum": 2, "maximum": 9007199254740991 },
+        "mean": { "type": "number" },
+        "sample_variance": { "type": "number", "minimum": 0 }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "result_id",
+        "analysis_id",
+        "group_summaries",
+        "mean_difference",
+        "test_statistic",
+        "degrees_of_freedom",
+        "p_value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "result_id": { "$ref": "#/$defs/localId" },
+        "analysis_id": { "$ref": "#/$defs/localId" },
+        "group_summaries": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/resultGroupSummary" }
+        },
+        "mean_difference": { "type": "number" },
+        "test_statistic": { "type": "number" },
+        "degrees_of_freedom": { "type": "number", "exclusiveMinimum": 0 },
+        "p_value": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

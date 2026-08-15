@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nomue:schema:common:execution-outcome:0.1.0-draft.1",
+  "title": "nomue execution/outcome check-result definitions",
+  "description": "Shared definitions for scoped check results. A completed check declares an outcome; a not-run or errored check omits outcome and declares reasons (NRS-VERIFY-0010, NRS-VERIFY-0012). There is no overall status of any kind.",
+  "$defs": {
+    "reasonCode": {
+      "type": "string",
+      "pattern": "^NRS-[A-Z][A-Z-]*[A-Z]$"
+    },
+    "scope": {
+      "type": "object",
+      "required": ["kind", "id"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["record", "record_revision", "analysis", "result"] },
+        "id": { "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/uri" }
+      }
+    },
+    "errorObject": {
+      "type": "object",
+      "required": ["error_type", "message"],
+      "additionalProperties": false,
+      "properties": {
+        "error_type": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "message": { "type": "string", "minLength": 1, "maxLength": 4096 }
+      }
+    },
+    "groupSummary": {
+      "type": "object",
+      "required": ["group_id", "n", "mean", "sample_variance"],
+      "additionalProperties": false,
+      "properties": {
+        "group_id": { "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/localId" },
+        "n": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 9007199254740991
+        },
+        "mean": { "type": "number" },
+        "sample_variance": { "type": "number", "minimum": 0 }
+      }
+    },
+    "recomputedWelchResult": {
+      "type": "object",
+      "required": [
+        "group_summaries",
+        "mean_difference",
+        "test_statistic",
+        "degrees_of_freedom",
+        "p_value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "group_summaries": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/groupSummary" }
+        },
+        "mean_difference": { "type": "number" },
+        "test_statistic": { "type": "number" },
+        "degrees_of_freedom": { "type": "number", "exclusiveMinimum": 0 },
+        "p_value": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "mismatch": {
+      "type": "object",
+      "required": ["quantity", "declared", "recomputed"],
+      "additionalProperties": false,
+      "properties": {
+        "quantity": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "group_id": { "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/localId" },
+        "declared": {
+          "anyOf": [{ "type": "number" }, { "type": "string" }, { "type": "integer" }]
+        },
+        "recomputed": {
+          "anyOf": [{ "type": "number" }, { "type": "string" }, { "type": "integer" }]
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "declared_content_digest": {
+          "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/sha256Digest"
+        },
+        "recomputed_content_digest": {
+          "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/sha256Digest"
+        },
+        "standard_error": { "type": "number", "minimum": 0 },
+        "p_value_clamped": { "type": "boolean" },
+        "recomputed": { "$ref": "#/$defs/recomputedWelchResult" },
+        "mismatches": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/mismatch" }
+        }
+      }
+    },
+    "executionOutcomeInvariant": {
+      "type": "object",
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": { "execution": { "const": "completed" } },
+            "required": ["execution"]
+          },
+          "then": {
+            "type": "object",
+            "required": ["outcome"],
+            "not": { "type": "object", "required": ["error"] }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": { "execution": { "const": "not_run" } },
+            "required": ["execution"]
+          },
+          "then": {
+            "type": "object",
+            "properties": { "reason_codes": { "type": "array", "minItems": 1 } },
+            "not": {
+              "anyOf": [
+                { "type": "object", "required": ["outcome"] },
+                { "type": "object", "required": ["error"] }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": { "execution": { "const": "error" } },
+            "required": ["execution"]
+          },
+          "then": {
+            "type": "object",
+            "required": ["error"],
+            "properties": { "reason_codes": { "type": "array", "minItems": 1 } },
+            "not": { "type": "object", "required": ["outcome"] }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "execution": { "const": "completed" },
+              "outcome": { "enum": ["fail", "indeterminate"] }
+            },
+            "required": ["execution", "outcome"]
+          },
+          "then": {
+            "type": "object",
+            "properties": { "reason_codes": { "type": "array", "minItems": 1 } }
+          }
+        }
+      ]
+    },
+    "checkResult": {
+      "type": "object",
+      "required": ["check_id", "check_version", "execution", "scope", "reason_codes"],
+      "additionalProperties": false,
+      "properties": {
+        "check_id": {
+          "type": "string",
+          "pattern": "^urn:nomue:check:[a-z0-9-]+:[A-Za-z0-9.-]+$"
+        },
+        "check_version": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "execution": { "enum": ["completed", "not_run", "error"] },
+        "outcome": { "enum": ["pass", "fail", "indeterminate"] },
+        "scope": { "$ref": "#/$defs/scope" },
+        "reason_codes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/reasonCode" }
+        },
+        "evidence": { "$ref": "#/$defs/evidence" },
+        "error": { "$ref": "#/$defs/errorObject" }
+      },
+      "$ref": "#/$defs/executionOutcomeInvariant"
+    },
+    "conformanceResult": {
+      "type": "object",
+      "required": ["check_id", "execution", "scope", "reason_codes"],
+      "additionalProperties": false,
+      "properties": {
+        "check_id": {
+          "type": "string",
+          "pattern": "^urn:nomue:check:[a-z0-9-]+:[A-Za-z0-9.-]+$"
+        },
+        "execution": { "enum": ["completed", "not_run", "error"] },
+        "outcome": { "enum": ["pass", "fail", "indeterminate"] },
+        "scope": { "$ref": "#/$defs/scope" },
+        "reason_codes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/reasonCode" }
+        },
+        "error": { "$ref": "#/$defs/errorObject" }
+      },
+      "$ref": "#/$defs/executionOutcomeInvariant"
+    }
+  }
+}

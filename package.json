@@ -1,0 +1,28 @@
+{
+  "name": "nomue-verifier",
+  "version": "0.1.0-experimental.1",
+  "description": "nomue verifier — August Experimental Category Demo (local scoped Record verification, not Release 1)",
+  "license": "Apache-2.0",
+  "private": false,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "nomue": "./bin/nomue.cjs"
+  },
+  "scripts": {
+    "test": "tsx tests/smoke.ts && tsx tests/boundary.ts && tsx tests/reason-metadata.test.ts"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "yaml": "^2.9.0",
+    "@stdlib/stats-base-dists-t-cdf": "^0.2.3",
+    "@stdlib/stats-base-dists-t-quantile": "^0.2.3",
+    "tsx": "^4.23.11"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "typescript": "^7.0.2"
+  }
+}

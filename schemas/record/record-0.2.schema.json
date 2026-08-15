@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nomue:schema:record:0.2.0-draft.1",
+  "title": "Phase 2A nomue Record",
+  "description": "The Phase 2A Record envelope with the ITGC guarantee payload. The surface is closed (NRS-CORE-0007); identifiers are identifiers, not locators (NRS-CORE-0004). The 0.1 Record schema remains registered and unchanged (NRS-CORE-0010).",
+  "type": "object",
+  "required": [
+    "$schema",
+    "record_type",
+    "record_id",
+    "revision_id",
+    "created_at",
+    "interpretation_bundle_id",
+    "profile_id",
+    "payload",
+    "integrity"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "const": "urn:nomue:schema:record:0.2.0-draft.1" },
+    "record_type": { "const": "nomue-record" },
+    "record_id": {
+      "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/uri"
+    },
+    "revision_id": {
+      "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/uri"
+    },
+    "created_at": {
+      "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/rfc3339UtcZ"
+    },
+    "interpretation_bundle_id": {
+      "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/uri",
+      "$comment": "Not a schema constant: an unknown bundle is refused before schema validation (fail closed, NRS-VERSION-0002, NRS-VERSION-0005)."
+    },
+    "profile_id": { "const": "urn:nomue:profile:itgc:0.2.0-draft.1" },
+    "payload": { "$ref": "urn:nomue:schema:profile:itgc-guarantee:0.2.0-draft.1" },
+    "integrity": { "$ref": "#/$defs/integrity" }
+  },
+  "$defs": {
+    "integrity": {
+      "type": "object",
+      "required": ["canonicalization_id", "digest_algorithm", "digest_scope", "content_digest"],
+      "additionalProperties": false,
+      "properties": {
+        "canonicalization_id": {
+          "const": "urn:nomue:canonicalization:jcs:0.2.0-draft.1"
+        },
+        "digest_algorithm": { "const": "sha-256" },
+        "digest_scope": { "const": "record_without_integrity" },
+        "content_digest": {
+          "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/sha256Digest"
+        }
+      }
+    }
+  }
+}

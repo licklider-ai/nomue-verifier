@@ -1,0 +1,165 @@
+# Interpretation bundle registry - authoritative for supported combinations
+# of specification, schema, canonicalization, profile, and public-check
+# versions. Combinations outside a registered bundle fail closed
+# (NRS-VERSION-0002).
+# Validated by schemas/meta/interpretation-bundles.schema.json.
+
+registry: nrs-interpretation-bundles
+registry_version: "0.5.0"
+updated: "2026-08-13"
+
+# Which verifier output is selected by what. The routing envelope and the
+# verifier refusal are bundle-independent verifier-level output contracts:
+# routing runs BEFORE any bundle is selected, and parse failures and
+# pre-dispatch resource refusals cannot depend on any Record bundle. The
+# verification report is an output of the interpreted bundle. The 0.1 bundle
+# therefore has no dependency on any 0.2 Record schema; the routing-envelope
+# and refusal schema versions track the verifier output protocol, not a
+# bundle.
+verifier_output_contract:
+  verifier_output_protocol_version: "0.2.0-draft.3"
+  routing_envelope:
+    selected_by: verifier_output_protocol
+    bundle_independent: true
+    schema_ref: schemas/routing/routing-envelope-0.2.schema.json
+  verification_report:
+    selected_by: interpretation_bundle
+    bundle_independent: false
+  verifier_refusal:
+    selected_by: verifier_output_protocol
+    bundle_independent: true
+    schema_ref: schemas/reports/verifier-refusal-0.2-draft-3.schema.json
+    supersedes:
+      - schema_id: "urn:nomue:schema:verifier-refusal:0.2.0-draft.1"
+        schema_ref: schemas/reports/verifier-refusal-0.2.schema.json
+        status: superseded
+        note: >-
+          Used by Phase 2A development evidence and fixtures before the
+          bundle-routing correction (ADR-0017). Retained unmodified; the
+          draft.2 schema adds the routing_error kind. No silent mutation.
+      - schema_id: "urn:nomue:schema:verifier-refusal:0.2.0-draft.2"
+        schema_ref: schemas/reports/verifier-refusal-0.2-draft-2.schema.json
+        status: superseded
+        note: >-
+          Retained unmodified; the draft.3 schema adds the
+          processing_timeout and memory_limit limit_category values for the
+          in-process time/memory bounds of NRS-SEC-0006 (ADR-0022). No
+          silent mutation.
+
+# Entry order in this registry is NON-NORMATIVE and carries no semantic and carries no semantic
+# meaning (NRS-VERSION-0007): a verifier selects a bundle solely by exact
+# registered identifier equality. There is no default bundle, no first/
+# fallback entry, and no selection by insertion order or version proximity.
+entry_order_semantics: none
+
+status_note: >-
+  Phase 1 issued the initial Record interpretation bundle (itgc-minimal
+  0.1); Phase 2A adds the ITGC guarantee bundle (itgc-guarantee 0.2) without
+  altering the meaning of the earlier bundle (NRS-CORE-0010). Both bundles
+  are EXPERIMENTAL and not publicly released; no attestation procedure
+  version exists, and none is fabricated (attestation_support: none). A
+  verifier selects behavior only by exact bundle identifier
+  (NRS-VERSION-0005); registry order has no semantic meaning and no default
+  bundle exists (NRS-VERSION-0007).
+
+entries:
+  - bundle_id: "urn:nomue:bundle:itgc-minimal:0.1.0-draft.1"
+    title: Phase 1 minimal ITGC bundle
+    status: EXPERIMENTAL
+    public_release: false
+    spec_version: "0.1.0-draft.1"
+    schema_version: "0.1.0-draft.1"
+    canonicalization_version: "urn:nomue:canonicalization:jcs:0.2.0-draft.1"
+    profile_id: "urn:nomue:profile:itgc:0.1.0-draft.1"
+    public_check_set_version: "0.1.0-draft.1"
+    attestation_support: none
+    allowed_check_ids:
+      - "urn:nomue:check:record-conformance:0.1.0-draft.1"
+      - "urn:nomue:check:record-integrity:0.1.0-draft.1"
+      - "urn:nomue:check:itgc-preconditions:0.1.0-draft.1"
+      - "urn:nomue:check:welch-recompute:0.1.0-draft.1"
+    schema_refs:
+      - schemas/record/record.schema.json
+      - schemas/profiles/itgc-minimal.schema.json
+      - schemas/reports/verification-report.schema.json
+      - schemas/common/identifier.schema.json
+      - schemas/common/execution-outcome.schema.json
+    conformance_manifest_ref: conformance/manifest.yaml
+    requirement_ids:
+      - NRS-VERSION-0003
+      - NRS-VERSION-0004
+    notes: >-
+      Records declaring this bundle are parsed with the pinned Record and
+      profile schemas, canonicalized with the pinned JCS canonicalization,
+      and verified with the pinned check set only.
+
+  - bundle_id: "urn:nomue:bundle:itgc-guarantee:0.2.0-draft.1"
+    title: Phase 2A ITGC guarantee bundle
+    status: EXPERIMENTAL
+    public_release: false
+    spec_version: "0.2.0-draft.1"
+    schema_version: "0.2.0-draft.1"
+    canonicalization_version: "urn:nomue:canonicalization:jcs:0.2.0-draft.1"
+    profile_id: "urn:nomue:profile:itgc:0.2.0-draft.1"
+    public_check_set_version: "0.2.0-draft.1"
+    attestation_support: none
+    allowed_check_ids:
+      - "urn:nomue:check:record-conformance:0.2.0-draft.1"
+      - "urn:nomue:check:record-integrity:0.2.0-draft.1"
+      - "urn:nomue:check:itgc-profile-admissibility:0.2.0-draft.1"
+      - "urn:nomue:check:welch-computability:0.2.0-draft.1"
+      - "urn:nomue:check:welch-recompute:0.2.0-draft.1"
+    schema_refs:
+      - schemas/record/record-0.2.schema.json
+      - schemas/profiles/itgc-guarantee-0.2.schema.json
+      - schemas/reports/verification-report-0.2.schema.json
+      - schemas/common/identifier.schema.json
+      - schemas/common/execution-outcome-0.2.schema.json
+    conformance_manifest_ref: conformance/manifest.yaml
+    requirement_ids:
+      - NRS-VERSION-0003
+      - NRS-VERSION-0004
+      - NRS-VERSION-0005
+      - NRS-CORE-0010
+    notes: >-
+      Adds the ITGC statistical guarantee surface: profile admissibility,
+      Welch computability, and recomputation of the unstandardized
+      arithmetic mean difference with its Welch-Satterthwaite 95% confidence
+      interval. Reuses the Phase 1 JCS canonicalization unchanged. The
+      verifier refusal schema is not listed here because the refusal is a
+      bundle-independent verifier-level output (see
+      verifier_output_contract), not a bundle artifact (ADR-0017).
+
+  - bundle_id: "urn:nomue:bundle:itgc-guarantee:0.2.1-draft.1"
+    title: Phase 2A ITGC guarantee bundle (numerical contract 0.2.1)
+    status: EXPERIMENTAL
+    public_release: false
+    spec_version: "0.2.1-draft.1"
+    schema_version: "0.2.0-draft.1"
+    canonicalization_version: "urn:nomue:canonicalization:jcs:0.2.0-draft.1"
+    profile_id: "urn:nomue:profile:itgc:0.2.0-draft.1"
+    public_check_set_version: "0.2.1-draft.1"
+    attestation_support: none
+    allowed_check_ids:
+      - "urn:nomue:check:record-conformance:0.2.0-draft.1"
+      - "urn:nomue:check:record-integrity:0.2.0-draft.1"
+      - "urn:nomue:check:itgc-profile-admissibility:0.2.0-draft.1"
+      - "urn:nomue:check:welch-computability:0.2.1-draft.1"
+      - "urn:nomue:check:welch-recompute:0.2.1-draft.1"
+    schema_refs:
+      - schemas/record/record-0.2.schema.json
+      - schemas/profiles/itgc-guarantee-0.2.schema.json
+      - schemas/reports/verification-report-0.2.schema.json
+      - schemas/common/identifier.schema.json
+      - schemas/common/execution-outcome-0.2.schema.json
+    conformance_manifest_ref: conformance/manifest.yaml
+    requirement_ids:
+      - NRS-VERSION-0003
+      - NRS-VERSION-0004
+      - NRS-VERSION-0005
+      - NRS-VERSION-0009
+      - NRS-CORE-0010
+    notes: >-
+      Successor bundle for numerical contract hardening (ADR-0020,
+      ADR-0021). Reuses the 0.2 Record schema. The 0.2.0 bundle semantics
+      remain immutable (NRS-VERSION-0006).

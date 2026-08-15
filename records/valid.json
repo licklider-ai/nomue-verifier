@@ -1,0 +1,163 @@
+{
+  "$schema": "urn:nomue:schema:record:0.2.0-draft.1",
+  "record_type": "nomue-record",
+  "record_id": "urn:uuid:00000000-0000-4000-8000-000000003802",
+  "revision_id": "urn:uuid:00000000-0000-4000-8000-000000003803",
+  "created_at": "2026-08-10T00:00:00Z",
+  "interpretation_bundle_id": "urn:nomue:bundle:itgc-guarantee:0.2.0-draft.1",
+  "profile_id": "urn:nomue:profile:itgc:0.2.0-draft.1",
+  "payload": {
+    "dataset": {
+      "dataset_id": "dataset-1",
+      "observations": [
+        {
+          "observation_id": "observation-1",
+          "experimental_unit_id": "unit-1",
+          "group_id": "group-a",
+          "outcome_value": 7.9
+        },
+        {
+          "observation_id": "observation-2",
+          "experimental_unit_id": "unit-2",
+          "group_id": "group-a",
+          "outcome_value": 8.4
+        },
+        {
+          "observation_id": "observation-3",
+          "experimental_unit_id": "unit-3",
+          "group_id": "group-a",
+          "outcome_value": 8.1
+        },
+        {
+          "observation_id": "observation-4",
+          "experimental_unit_id": "unit-4",
+          "group_id": "group-a",
+          "outcome_value": 8.6
+        },
+        {
+          "observation_id": "observation-5",
+          "experimental_unit_id": "unit-5",
+          "group_id": "group-a",
+          "outcome_value": 8.2
+        },
+        {
+          "observation_id": "observation-6",
+          "experimental_unit_id": "unit-6",
+          "group_id": "group-b",
+          "outcome_value": 9.1
+        },
+        {
+          "observation_id": "observation-7",
+          "experimental_unit_id": "unit-7",
+          "group_id": "group-b",
+          "outcome_value": 9.6
+        },
+        {
+          "observation_id": "observation-8",
+          "experimental_unit_id": "unit-8",
+          "group_id": "group-b",
+          "outcome_value": 8.9
+        },
+        {
+          "observation_id": "observation-9",
+          "experimental_unit_id": "unit-9",
+          "group_id": "group-b",
+          "outcome_value": 9.4
+        },
+        {
+          "observation_id": "observation-10",
+          "experimental_unit_id": "unit-10",
+          "group_id": "group-b",
+          "outcome_value": 9.2
+        }
+      ]
+    },
+    "design": {
+      "design_id": "design-1",
+      "dataset_id": "dataset-1",
+      "experimental_unit_type": "biological replicate",
+      "groups": [
+        {
+          "group_id": "group-a",
+          "label": "Control"
+        },
+        {
+          "group_id": "group-b",
+          "label": "Treatment"
+        }
+      ],
+      "group_order": [
+        "group-a",
+        "group-b"
+      ],
+      "outcome": {
+        "outcome_id": "outcome-1",
+        "label": "Synthetic continuous outcome",
+        "scale": "continuous"
+      },
+      "declarations": {
+        "grouping_structure": "independent_groups",
+        "pairing": "none",
+        "repeated_measurements": "none",
+        "clustering": "none_declared"
+      },
+      "data_handling": {
+        "analysis_population": "all_record_observations",
+        "missing_outcomes": "none",
+        "transformation": "none",
+        "weighting": "none"
+      }
+    },
+    "analysis": {
+      "analysis_id": "analysis-1",
+      "design_id": "design-1",
+      "method_id": "urn:nomue:method:welch-two-sample-t:1",
+      "alternative": "two_sided",
+      "estimand": {
+        "kind": "unstandardized_arithmetic_mean_difference",
+        "direction": "group_order_first_minus_second"
+      },
+      "confidence_level": 0.95
+    },
+    "result": {
+      "result_id": "result-1",
+      "analysis_id": "analysis-1",
+      "group_summaries": [
+        {
+          "group_id": "group-a",
+          "n": 5,
+          "mean": 8.24,
+          "sample_variance": 0.07299999999999994
+        },
+        {
+          "group_id": "group-b",
+          "n": 5,
+          "mean": 9.24,
+          "sample_variance": 0.07299999999999994
+        }
+      ],
+      "effect_estimate": {
+        "kind": "unstandardized_arithmetic_mean_difference",
+        "estimate": -1,
+        "standard_error": 0.17088007490635054,
+        "confidence_interval": {
+          "method_id": "urn:nomue:method:welch-satterthwaite-mean-difference-ci:1",
+          "confidence_level": 0.95,
+          "lower": -1.3940501593580419,
+          "upper": -0.6059498406419581
+        }
+      },
+      "test": {
+        "test_statistic": -5.852057359806531,
+        "degrees_of_freedom": 8,
+        "p_value": 0.00038188621617164174
+      }
+    }
+  },
+  "integrity": {
+    "canonicalization_id": "urn:nomue:canonicalization:jcs:0.2.0-draft.1",
+    "digest_algorithm": "sha-256",
+    "digest_scope": "record_without_integrity",
+    "content_digest": "sha256:8318f928c49ddb5e678a1e884b8ec75288091056e2b9986e5a01260900b44f10"
+  }
+}

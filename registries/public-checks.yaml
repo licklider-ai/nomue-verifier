@@ -1,0 +1,450 @@
+# Public check registry - authoritative for check identifiers, versions,
+# evidence classes, and tolerance policy. Tolerances live here, never in a
+# Record (NRS-CANON-0006).
+# Validated by schemas/meta/public-checks-registry.schema.json.
+
+registry: nrs-public-checks
+registry_version: "0.2.0"
+updated: "2026-08-10"
+
+# Dependency propagation (machine-readable): when a check listed in
+# depends_on completes with outcome fail, or is not_run or errored, the
+# dependent check is not_run and carries the blocking check's reason codes
+# (dependency_propagation: not_run_with_blocking_reason_codes,
+# NRS-VERIFY-0017).
+#
+# Scope convention for pre-conformance gating: when conformance fails, the
+# local identifiers a check's declared scope_kind would need (analysis id,
+# result id) are not trustworthy, so its not_run result uses the
+# record_revision scope instead of the declared scope_kind. Post-conformance
+# not_run results use the declared scopes.
+
+check_sets:
+  - version: "0.1.0-draft.1"
+    check_ids:
+      - "urn:nomue:check:record-conformance:0.1.0-draft.1"
+      - "urn:nomue:check:record-integrity:0.1.0-draft.1"
+      - "urn:nomue:check:itgc-preconditions:0.1.0-draft.1"
+      - "urn:nomue:check:welch-recompute:0.1.0-draft.1"
+  - version: "0.2.0-draft.1"
+    check_ids:
+      - "urn:nomue:check:record-conformance:0.2.0-draft.1"
+      - "urn:nomue:check:record-integrity:0.2.0-draft.1"
+      - "urn:nomue:check:itgc-profile-admissibility:0.2.0-draft.1"
+      - "urn:nomue:check:welch-computability:0.2.0-draft.1"
+      - "urn:nomue:check:welch-recompute:0.2.0-draft.1"
+  - version: "0.2.1-draft.1"
+    check_ids:
+      - "urn:nomue:check:record-conformance:0.2.0-draft.1"
+      - "urn:nomue:check:record-integrity:0.2.0-draft.1"
+      - "urn:nomue:check:itgc-profile-admissibility:0.2.0-draft.1"
+      - "urn:nomue:check:welch-computability:0.2.1-draft.1"
+      - "urn:nomue:check:welch-recompute:0.2.1-draft.1"
+
+checks:
+  - check_id: "urn:nomue:check:record-conformance:0.1.0-draft.1"
+    title: Record structural and semantic conformance
+    version: "0.1.0-draft.1"
+    stability: EXPERIMENTAL
+    scope_kind: record
+    calculation_evidence: not_checked
+    consistency_evidence: checked
+    signature_evidence: not_checked
+    claim_posture: asserted
+    requirement_ids:
+      - NRS-CORE-0003
+      - NRS-CORE-0007
+      - NRS-PROFILE-ITGC-0001
+      - NRS-PROFILE-ITGC-0002
+      - NRS-PROFILE-ITGC-0003
+      - NRS-PROFILE-ITGC-0004
+      - NRS-PROFILE-ITGC-0005
+      - NRS-PROFILE-ITGC-0007
+      - NRS-PROFILE-ITGC-0012
+    tolerance_policy:
+      kind: not_applicable
+    implementation_status: implemented
+    notes: >-
+      Conceptually a conformance judgment, not a verification check
+      (NRS-VERIFY-0005). It is registered here so its behavior is versioned
+      and covered by fixtures, but a verification report places its result in
+      the conformance section, never among verification_results.
+
+  - check_id: "urn:nomue:check:record-integrity:0.1.0-draft.1"
+    title: Content digest recomputation
+    version: "0.1.0-draft.1"
+    stability: EXPERIMENTAL
+    scope_kind: record_revision
+    calculation_evidence: recomputed
+    consistency_evidence: checked
+    signature_evidence: not_checked
+    claim_posture: asserted
+    requirement_ids:
+      - NRS-VERIFY-0006
+      - NRS-CANON-0001
+      - NRS-CANON-0002
+      - NRS-CANON-0005
+      - NRS-CORE-0006
+    tolerance_policy:
+      kind: exact
+    implementation_status: implemented
+    notes: >-
+      Recomputes the JCS/SHA-256 content digest of the digest projection and
+      compares it exactly with the declared integrity.content_digest.
+
+  - check_id: "urn:nomue:check:itgc-preconditions:0.1.0-draft.1"
+    title: ITGC profile preconditions
+    version: "0.1.0-draft.1"
+    stability: EXPERIMENTAL
+    scope_kind: analysis
+    calculation_evidence: consistency_only
+    consistency_evidence: checked
+    signature_evidence: not_checked
+    claim_posture: asserted
+    requirement_ids:
+      - NRS-VERIFY-0007
+      - NRS-PROFILE-ITGC-0013
+      - NRS-PROFILE-ITGC-0014
+    tolerance_policy:
+      kind: not_applicable
+    implementation_status: implemented
+    notes: >-
+      Evaluates the declared ITGC preconditions, including the data-dependent
+      zero-standard-error condition. Runs only after conformance passes;
+      gates Welch recomputation.
+
+  - check_id: "urn:nomue:check:welch-recompute:0.1.0-draft.1"
+    title: Welch result recomputation and comparison
+    version: "0.1.0-draft.1"
+    stability: EXPERIMENTAL
+    scope_kind: result
+    calculation_evidence: recomputed
+    consistency_evidence: checked
+    signature_evidence: not_checked
+    claim_posture: asserted
+    requirement_ids:
+      - NRS-VERIFY-0008
+      - NRS-VERIFY-0009
+      - NRS-PROFILE-ITGC-0006
+      - NRS-PROFILE-ITGC-0008
+      - NRS-PROFILE-ITGC-0009
+      - NRS-PROFILE-ITGC-0010
+      - NRS-PROFILE-ITGC-0011
+      - NRS-CANON-0006
+    tolerance_policy:
+      kind: numeric
+      exact_fields:
+        - n
+        - group_id
+      numeric_tolerances:
+        mean:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        sample_variance:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        mean_difference:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        test_statistic:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        degrees_of_freedom:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        p_value:
+          absolute: 1.0e-12
+          relative: 1.0e-10
+    implementation_status: implemented
+    notes: >-
+      Recomputes the supported Welch result from the Record observations and
+      compares it with the declared result under this check version's
+      tolerance policy (canonicalization/numerical-comparison.md). Asserts
+      declared-result consistency, never scientific validity.
+
+  # ------------------------------------------------------------- Phase 2A
+
+  - check_id: "urn:nomue:check:record-conformance:0.2.0-draft.1"
+    title: Record structural and semantic conformance (Phase 2A)
+    version: "0.2.0-draft.1"
+    stability: EXPERIMENTAL
+    scope_kind: record
+    calculation_evidence: not_checked
+    consistency_evidence: checked
+    signature_evidence: not_checked
+    claim_posture: asserted
+    requirement_ids:
+      - NRS-CORE-0003
+      - NRS-CORE-0007
+      - NRS-PROFILE-ITGC-0001
+      - NRS-PROFILE-ITGC-0002
+      - NRS-PROFILE-ITGC-0003
+      - NRS-PROFILE-ITGC-0004
+      - NRS-PROFILE-ITGC-0006
+    tolerance_policy:
+      kind: not_applicable
+    implementation_status: implemented
+    notes: >-
+      Structural and semantic coherence of the 0.2 Record. Method,
+      alternative, estimand, and design-declaration support move to the
+      profile-admissibility check in this bundle (NRS-VERIFY-0013).
+
+  - check_id: "urn:nomue:check:record-integrity:0.2.0-draft.1"
+    title: Content digest recomputation (Phase 2A)
+    version: "0.2.0-draft.1"
+    stability: EXPERIMENTAL
+    scope_kind: record_revision
+    calculation_evidence: recomputed
+    consistency_evidence: checked
+    signature_evidence: not_checked
+    claim_posture: asserted
+    depends_on:
+      - "urn:nomue:check:record-conformance:0.2.0-draft.1"
+    dependency_propagation: not_run_with_blocking_reason_codes
+    requirement_ids:
+      - NRS-VERIFY-0006
+      - NRS-CANON-0001
+      - NRS-CANON-0002
+      - NRS-CANON-0005
+      - NRS-CORE-0006
+    tolerance_policy:
+      kind: exact
+    implementation_status: implemented
+    notes: >-
+      Same JCS/SHA-256 recomputation as the 0.1 check, against the 0.2
+      digest projection. Independent of the profile checks.
+
+  - check_id: "urn:nomue:check:itgc-profile-admissibility:0.2.0-draft.1"
+    title: ITGC profile admissibility
+    version: "0.2.0-draft.1"
+    stability: EXPERIMENTAL
+    scope_kind: record
+    calculation_evidence: not_checked
+    consistency_evidence: checked
+    signature_evidence: not_checked
+    claim_posture: asserted
+    depends_on:
+      - "urn:nomue:check:record-conformance:0.2.0-draft.1"
+    dependency_propagation: not_run_with_blocking_reason_codes
+    requirement_ids:
+      - NRS-VERIFY-0013
+      - NRS-CORE-0009
+      - NRS-PROFILE-ITGC-0005
+      - NRS-PROFILE-ITGC-0007
+      - NRS-PROFILE-ITGC-0015
+      - NRS-PROFILE-ITGC-0016
+      - NRS-PROFILE-ITGC-0019
+      - NRS-PROFILE-ITGC-0020
+      - NRS-PROFILE-ITGC-0021
+      - NRS-PROFILE-ITGC-0022
+      - NRS-PROFILE-ITGC-0023
+      - NRS-PROFILE-ITGC-0024
+      - NRS-PROFILE-ITGC-0025
+    tolerance_policy:
+      kind: not_applicable
+    implementation_status: implemented
+    notes: >-
+      Judges whether the DECLARED Record structure lies inside the ITGC
+      guarantee boundary (judgment basis: declared_record_structure). A pass
+      never asserts that a declaration is true in the real world
+      (NRS-CORE-0009).
+
+  - check_id: "urn:nomue:check:welch-computability:0.2.0-draft.1"
+    title: Welch computability
+    version: "0.2.0-draft.1"
+    stability: EXPERIMENTAL
+    scope_kind: analysis
+    calculation_evidence: consistency_only
+    consistency_evidence: checked
+    signature_evidence: not_checked
+    claim_posture: asserted
+    depends_on:
+      - "urn:nomue:check:itgc-profile-admissibility:0.2.0-draft.1"
+    dependency_propagation: not_run_with_blocking_reason_codes
+    requirement_ids:
+      - NRS-VERIFY-0013
+      - NRS-VERIFY-0017
+      - NRS-PROFILE-ITGC-0014
+    tolerance_policy:
+      kind: not_applicable
+    implementation_status: implemented
+    notes: >-
+      Whether the supported quantities are numerically computable from the
+      observations: finite values, computable variances, positive standard
+      error, finite degrees of freedom, finite critical value, finite
+      p-value, finite confidence-interval endpoints.
+
+  - check_id: "urn:nomue:check:welch-recompute:0.2.0-draft.1"
+    title: Welch result recomputation and comparison (Phase 2A)
+    version: "0.2.0-draft.1"
+    stability: EXPERIMENTAL
+    scope_kind: result
+    calculation_evidence: recomputed
+    consistency_evidence: checked
+    signature_evidence: not_checked
+    claim_posture: asserted
+    depends_on:
+      - "urn:nomue:check:welch-computability:0.2.0-draft.1"
+    dependency_propagation: not_run_with_blocking_reason_codes
+    requirement_ids:
+      - NRS-VERIFY-0014
+      - NRS-VERIFY-0015
+      - NRS-VERIFY-0016
+      - NRS-PROFILE-ITGC-0006
+      - NRS-PROFILE-ITGC-0008
+      - NRS-PROFILE-ITGC-0009
+      - NRS-PROFILE-ITGC-0010
+      - NRS-PROFILE-ITGC-0011
+      - NRS-PROFILE-ITGC-0017
+      - NRS-PROFILE-ITGC-0018
+      - NRS-PROFILE-ITGC-0026
+      - NRS-CANON-0006
+    tolerance_policy:
+      kind: numeric
+      exact_fields:
+        - n
+        - group_id
+        - confidence_level
+        - estimand_kind
+        - ci_method_id
+      numeric_tolerances:
+        mean:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        sample_variance:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        estimate:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        standard_error:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        test_statistic:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        degrees_of_freedom:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        p_value:
+          absolute: 1.0e-12
+          relative: 1.0e-10
+        ci_lower:
+          absolute: 1.0e-12
+          relative: 1.0e-10
+        ci_upper:
+          absolute: 1.0e-12
+          relative: 1.0e-10
+    comparison_constants:
+      supported_confidence_level: 0.95
+      supported_ci_method_id: "urn:nomue:method:welch-satterthwaite-mean-difference-ci:1"
+      supported_estimand_kind: unstandardized_arithmetic_mean_difference
+    implementation_status: implemented
+    notes: >-
+      Recomputes group summaries, the mean-difference effect estimate, its
+      standard error, the two-sided 95% Welch-Satterthwaite confidence
+      interval (including the Student t critical value), and the test result,
+      and compares them with the declared result under this check version's
+      tolerance policy. Tolerances are owned by this check version and can
+      never be widened by a Record (NRS-CANON-0006).
+
+  # --------------------------------------------- Numerical contract 0.2.1
+
+  - check_id: "urn:nomue:check:welch-computability:0.2.1-draft.1"
+    title: Welch computability (numerical contract 0.2.1)
+    version: "0.2.1-draft.1"
+    stability: EXPERIMENTAL
+    scope_kind: analysis
+    calculation_evidence: consistency_only
+    consistency_evidence: checked
+    signature_evidence: not_checked
+    claim_posture: asserted
+    depends_on:
+      - "urn:nomue:check:itgc-profile-admissibility:0.2.0-draft.1"
+    dependency_propagation: not_run_with_blocking_reason_codes
+    requirement_ids:
+      - NRS-VERIFY-0013
+      - NRS-VERIFY-0017
+      - NRS-VERIFY-0019
+      - NRS-VERIFY-0021
+    tolerance_policy:
+      kind: not_applicable
+    implementation_status: implemented
+    notes: >-
+      Successor computability check: finite positive p-value required;
+      binary64 p=0 from finite t and positive df is numerical underflow
+      (NRS-P-VALUE-UNDERFLOW), not exact probability zero.
+
+  - check_id: "urn:nomue:check:welch-recompute:0.2.1-draft.1"
+    title: Welch result recomputation (numerical contract 0.2.1)
+    version: "0.2.1-draft.1"
+    stability: EXPERIMENTAL
+    scope_kind: result
+    calculation_evidence: recomputed
+    consistency_evidence: checked
+    signature_evidence: not_checked
+    claim_posture: asserted
+    depends_on:
+      - "urn:nomue:check:welch-computability:0.2.1-draft.1"
+    dependency_propagation: not_run_with_blocking_reason_codes
+    requirement_ids:
+      - NRS-VERIFY-0014
+      - NRS-VERIFY-0015
+      - NRS-VERIFY-0016
+      - NRS-VERIFY-0019
+      - NRS-VERIFY-0020
+      - NRS-PROFILE-ITGC-0006
+      - NRS-PROFILE-ITGC-0008
+      - NRS-PROFILE-ITGC-0009
+      - NRS-PROFILE-ITGC-0010
+      - NRS-PROFILE-ITGC-0011
+      - NRS-PROFILE-ITGC-0017
+      - NRS-PROFILE-ITGC-0018
+      - NRS-PROFILE-ITGC-0026
+      - NRS-CANON-0006
+      - NRS-VERSION-0009
+    tolerance_policy:
+      kind: numeric
+      exact_fields:
+        - n
+        - group_id
+        - confidence_level
+        - estimand_kind
+        - ci_method_id
+      numeric_tolerances:
+        mean:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        sample_variance:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        estimate:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        standard_error:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        test_statistic:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        degrees_of_freedom:
+          absolute: 1.0e-12
+          relative: 1.0e-12
+        p_value:
+          absolute: 0.0
+          relative: 1.0e-10
+        ci_lower:
+          absolute: 1.0e-12
+          relative: 1.0e-10
+        ci_upper:
+          absolute: 1.0e-12
+          relative: 1.0e-10
+    comparison_constants:
+      supported_confidence_level: 0.95
+      supported_ci_method_id: "urn:nomue:method:welch-satterthwaite-mean-difference-ci:1"
+      supported_estimand_kind: unstandardized_arithmetic_mean_difference
+    implementation_status: implemented
+    notes: >-
+      Successor recompute check: p-value uses zero absolute tolerance and
+      relative 1e-10 only; positive p and zero are never equivalent
+      (NRS-VERIFY-0020).

@@ -1,0 +1,257 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nomue:schema:profile:itgc-guarantee:0.2.0-draft.1",
+  "title": "Phase 2A ITGC guarantee payload",
+  "description": "Payload structure for the Phase 2A ITGC guarantee profile. The schema deliberately represents unsupported declaration values (pairing present, weighting present, non-0.95 confidence levels, unsupported estimands, ...) so that a structurally readable Record can still fail the ITGC profile-admissibility check with a specific reason code; structural validity is never profile admissibility, and admissibility never asserts that a declaration is true (NRS-CORE-0009).",
+  "type": "object",
+  "required": ["dataset", "design", "analysis", "result"],
+  "additionalProperties": false,
+  "properties": {
+    "dataset": { "$ref": "#/$defs/dataset" },
+    "design": { "$ref": "#/$defs/design" },
+    "analysis": { "$ref": "#/$defs/analysis" },
+    "result": { "$ref": "#/$defs/result" }
+  },
+  "$defs": {
+    "localId": {
+      "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/localId"
+    },
+    "dataset": {
+      "type": "object",
+      "required": ["dataset_id", "observations"],
+      "additionalProperties": false,
+      "properties": {
+        "dataset_id": { "$ref": "#/$defs/localId" },
+        "observations": {
+          "type": "array",
+          "minItems": 4,
+          "items": { "$ref": "#/$defs/observation" }
+        }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "required": ["observation_id", "experimental_unit_id", "group_id", "outcome_value"],
+      "additionalProperties": false,
+      "properties": {
+        "observation_id": { "$ref": "#/$defs/localId" },
+        "experimental_unit_id": { "$ref": "#/$defs/localId" },
+        "group_id": { "$ref": "#/$defs/localId" },
+        "outcome_value": { "type": "number" }
+      }
+    },
+    "design": {
+      "type": "object",
+      "required": [
+        "design_id",
+        "dataset_id",
+        "experimental_unit_type",
+        "groups",
+        "group_order",
+        "outcome",
+        "declarations",
+        "data_handling"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "design_id": { "$ref": "#/$defs/localId" },
+        "dataset_id": { "$ref": "#/$defs/localId" },
+        "experimental_unit_type": {
+          "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/label"
+        },
+        "groups": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/group" }
+        },
+        "group_order": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/localId" }
+        },
+        "outcome": { "$ref": "#/$defs/outcome" },
+        "declarations": { "$ref": "#/$defs/admissibilityDeclarations" },
+        "data_handling": { "$ref": "#/$defs/dataHandlingDeclarations" }
+      }
+    },
+    "admissibilityDeclarations": {
+      "type": "object",
+      "required": ["grouping_structure", "pairing", "repeated_measurements", "clustering"],
+      "additionalProperties": false,
+      "properties": {
+        "grouping_structure": { "enum": ["independent_groups"] },
+        "pairing": {
+          "enum": ["none", "present"],
+          "$comment": "present is structurally readable but fails admissibility (NRS-PROFILE-ITGC-0019)."
+        },
+        "repeated_measurements": {
+          "enum": ["none", "present"],
+          "$comment": "present fails admissibility (NRS-PROFILE-ITGC-0020)."
+        },
+        "clustering": {
+          "enum": ["none_declared", "present"],
+          "$comment": "present fails admissibility (NRS-PROFILE-ITGC-0021)."
+        }
+      }
+    },
+    "dataHandlingDeclarations": {
+      "type": "object",
+      "required": ["analysis_population", "missing_outcomes", "transformation", "weighting"],
+      "additionalProperties": false,
+      "properties": {
+        "analysis_population": {
+          "enum": ["all_record_observations", "subset_or_exclusions_present"],
+          "$comment": "subset_or_exclusions_present fails admissibility (NRS-PROFILE-ITGC-0024)."
+        },
+        "missing_outcomes": {
+          "enum": ["none", "present"],
+          "$comment": "present fails admissibility (NRS-PROFILE-ITGC-0025)."
+        },
+        "transformation": {
+          "enum": ["none", "present"],
+          "$comment": "present fails admissibility (NRS-PROFILE-ITGC-0023)."
+        },
+        "weighting": {
+          "enum": ["none", "present"],
+          "$comment": "present fails admissibility (NRS-PROFILE-ITGC-0022)."
+        }
+      }
+    },
+    "group": {
+      "type": "object",
+      "required": ["group_id", "label"],
+      "additionalProperties": false,
+      "properties": {
+        "group_id": { "$ref": "#/$defs/localId" },
+        "label": { "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/label" }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["outcome_id", "label", "scale"],
+      "additionalProperties": false,
+      "properties": {
+        "outcome_id": { "$ref": "#/$defs/localId" },
+        "label": { "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/label" },
+        "scale": { "const": "continuous" }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "required": [
+        "analysis_id",
+        "design_id",
+        "method_id",
+        "alternative",
+        "estimand",
+        "confidence_level"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "analysis_id": { "$ref": "#/$defs/localId" },
+        "design_id": { "$ref": "#/$defs/localId" },
+        "method_id": {
+          "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/uri",
+          "$comment": "Admissibility requires the Welch method (NRS-PROFILE-ITGC-0007); other methods fail with NRS-UNSUPPORTED-METHOD."
+        },
+        "alternative": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "estimand": {
+          "type": "object",
+          "required": ["kind", "direction"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "$comment": "Admissibility requires unstandardized_arithmetic_mean_difference (NRS-PROFILE-ITGC-0015); other kinds fail with NRS-UNSUPPORTED-ESTIMAND."
+            },
+            "direction": { "type": "string", "minLength": 1, "maxLength": 128 }
+          }
+        },
+        "confidence_level": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1,
+          "$comment": "Admissibility requires exactly 0.95 (NRS-PROFILE-ITGC-0016); other levels fail with NRS-CONFIDENCE-LEVEL-MISMATCH. The Record never chooses the supported level."
+        }
+      }
+    },
+    "resultGroupSummary": {
+      "type": "object",
+      "required": ["group_id", "n", "mean", "sample_variance"],
+      "additionalProperties": false,
+      "properties": {
+        "group_id": { "$ref": "#/$defs/localId" },
+        "n": { "type": "integer", "minimum": 2, "maximum": 9007199254740991 },
+        "mean": { "type": "number" },
+        "sample_variance": { "type": "number", "minimum": 0 }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": ["result_id", "analysis_id", "group_summaries", "effect_estimate", "test"],
+      "additionalProperties": false,
+      "properties": {
+        "result_id": { "$ref": "#/$defs/localId" },
+        "analysis_id": { "$ref": "#/$defs/localId" },
+        "group_summaries": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/resultGroupSummary" }
+        },
+        "effect_estimate": { "$ref": "#/$defs/effectEstimate" },
+        "test": { "$ref": "#/$defs/testResult" }
+      }
+    },
+    "effectEstimate": {
+      "type": "object",
+      "required": ["kind", "estimate", "standard_error", "confidence_interval"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "unstandardized_arithmetic_mean_difference",
+          "$comment": "The declared result representation is fixed to the supported estimand; no standardized effect size exists (NRS-PROFILE-ITGC-0026)."
+        },
+        "estimate": { "type": "number" },
+        "standard_error": { "type": "number", "exclusiveMinimum": 0 },
+        "confidence_interval": {
+          "type": "object",
+          "required": ["method_id", "confidence_level", "lower", "upper"],
+          "additionalProperties": false,
+          "properties": {
+            "method_id": {
+              "$ref": "urn:nomue:schema:common:identifier:0.1.0-draft.1#/$defs/uri",
+              "$comment": "Compared exactly against the supported CI method by the recompute check; a different method fails comparison, not schema validation."
+            },
+            "confidence_level": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "exclusiveMaximum": 1,
+              "$comment": "Compared exactly against 0.95 by the recompute check (NRS-CONFIDENCE-LEVEL-MISMATCH on mismatch)."
+            },
+            "lower": { "type": "number" },
+            "upper": {
+              "type": "number",
+              "$comment": "lower <= upper is a semantic invariant (NRS-CONFIDENCE-INTERVAL-ORDER-INVALID), deliberately not a schema constraint so reversed endpoints reach the comparison check."
+            }
+          }
+        }
+      }
+    },
+    "testResult": {
+      "type": "object",
+      "required": ["test_statistic", "degrees_of_freedom", "p_value"],
+      "additionalProperties": false,
+      "properties": {
+        "test_statistic": { "type": "number" },
+        "degrees_of_freedom": { "type": "number", "exclusiveMinimum": 0 },
+        "p_value": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

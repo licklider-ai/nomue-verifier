@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nomue:schema:routing-envelope:0.2.0-draft.1",
+  "title": "nomue verifier routing envelope",
+  "description": "Bundle-independent verifier-level routing contract (NRS-VERSION-0008). Before any interpretation bundle is selected, the verifier validates ONLY the minimum needed for exact bundle dispatch: the JSON root is an object and interpretation_bundle_id is present as a string. This is NOT a Record conformance schema: it never judges Record conformance, it does not interpret the scientific or structural meaning of any other field, and it never selects a default bundle (NRS-VERSION-0007). Bundle selection itself is exact registered identifier equality against the interpretation-bundle registry; registry order has no semantic meaning.",
+  "type": "object",
+  "required": ["interpretation_bundle_id"],
+  "properties": {
+    "interpretation_bundle_id": {
+      "type": "string",
+      "$comment": "Any string is accepted here; whether it names a supported bundle is decided by exact registry lookup, never by this schema and never by version proximity."
+    }
+  }
+}
