@@ -34,7 +34,7 @@
     {
       "source": "DISTRIBUTABLE.sha256",
       "destination": "DISTRIBUTABLE.sha256",
-      "sha256": "f1752c92238ccee5543849cd41fec342de09ea988a2367e9831da6f32dc17f11"
+      "sha256": "22ed6f7011cc57613473d22fb78200975f16ea8c4703fcdb70ffe1be9efd5a21"
     },
     {
       "source": "EXPERIMENTAL-NOTICE.md",
@@ -44,7 +44,7 @@
     {
       "source": "EXTRACTION-MANIFEST.json",
       "destination": "EXTRACTION-MANIFEST.json",
-      "sha256": "23c681be11c52cb2c5bc6f20a591b67a39c050728d703a1ddaa00f800a0d0aa6"
+      "sha256": "708853c5e823970341f143ef030f407fee1d7463f1d3a9d7edcd582990489445"
     },
     {
       "source": "LICENSE",
@@ -269,7 +269,7 @@
     {
       "source": "SOURCE-PIN.json",
       "destination": "SOURCE-PIN.json",
-      "sha256": "1c6ef43f8326b068bd280d8dc137a2c6dd1aaf163f7450849fea78f0415a044d"
+      "sha256": "ac61b75afa39f0a9d519fd2d05d04cebc11b9065874122cb01e59ded4aebcf4c"
     },
     {
       "source": "src/nomue-cli.ts",
@@ -279,7 +279,7 @@
     {
       "source": "tests/boundary.ts",
       "destination": "tests/boundary.ts",
-      "sha256": "50a45eff37647b017535b2475e5aed1563032e13b4ef23179874e911aa68ee70"
+      "sha256": "1e6311e35f4f7c4680c3d4d0138b84a17e79f99e107abd5485449d7364ea4b4a"
     },
     {
       "source": "tests/reason-metadata.test.ts",

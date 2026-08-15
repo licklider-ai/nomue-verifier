@@ -2,8 +2,8 @@
   "protocol_source_commit": "87bb911b565892e626a1e891560adebd60779a2f",
   "authorization_commit": "4798f895fe88c78ce671e1fcb44a0371a7254197",
   "packaging_version": "0.1.0-experimental.1",
-  "extraction_manifest_digest": "sha256:4dfe7c52123398b321e27a2c1ab59645c3699d4097d69425786b036e41b8051f",
+  "extraction_manifest_digest": "sha256:3f9a6e33a6c78aa254fd182fa5c8c4969e0dfd644a6c6393368974ec46e9b58e",
   "generated_at": "2026-08-15T18:10:20.528Z",
-  "finalized_at": "2026-08-15T18:34:42.052Z",
-  "demo_packaging_commit": "6b71c8d8d941f273c41280b6080c15dd2f54a6d3"
+  "finalized_at": "2026-08-15T18:38:38.573Z",
+  "demo_packaging_commit": "c69f923bf603e708618056529dbe7a0383fb2fa0"
 }
