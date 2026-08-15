@@ -14,7 +14,7 @@ function walk(dir: string, base = ""): string[] {
   const out: string[] = [];
   for (const e of entries) {
     const rel = base ? `${base}/${e.name}` : e.name;
-    if (e.name === "node_modules") continue;
+    if (e.name === "node_modules" || e.name === ".git") continue;
     if (e.name.endsWith(".tgz")) continue;
     const full = path.join(dir, e.name);
     if (e.isDirectory()) out.push(...walk(full, rel));
