@@ -1,5 +1,7 @@
 # nomue August Experimental Category Demo
 
+A Record can be intact and still disagree with its own recorded evidence. This demo separates those questions: it checks Record integrity, then independently recomputes a narrow supported statistical result under an explicit verification contract.
+
 Local, offline **experimental** verification of synthetic nomue Records. Checks
 **scoped** properties only: Record integrity (content digest), Welch result
 recomputation from recorded data under the included verification contract, and
@@ -27,7 +29,8 @@ evidence under the included verification contract.
 - An experimental category demonstration: scoped verification vs overall
   "verified" claims
 - A minimal reference verifier for synthetic Records
-- No network, API key, or nomue server required
+- After dependencies are installed, verification itself requires no network
+  connection, API key, or nomue server
 
 ## What this is not
 
