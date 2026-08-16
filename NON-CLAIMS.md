@@ -11,6 +11,9 @@ scientific truth.
 - A failing outcome on the hero invalid Record shows a **declared result
   mismatch** only within the supported Welch recomputation check — not that
   the underlying science is "wrong" in a general sense.
+- This demo does **not** assert that exported figures, legends, Methods or
+  Results text, Word/LaTeX manuscripts, or publisher-formatted artifacts remain
+  bound to the verified Record after downstream editing or transformation.
 
 ## Guarantee boundary
 
