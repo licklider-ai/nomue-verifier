@@ -12,7 +12,9 @@ agreement between declared and recomputed quantities. **Not Release 1.**
 scientific validity passed. The CLI prints `scientific_validity: not_asserted`
 for that boundary.
 
-## Quick start
+## Try the mismatch
+
+Two synthetic Records ship in `records/`. Run both to see the difference.
 
 ```bash
 npm install
@@ -20,9 +22,62 @@ npm exec nomue verify records/valid.json
 npm exec nomue verify records/invalid-result-mismatch.json
 ```
 
-The invalid example is internally intact (digest matches content), but a
-**declared result does not match** the value recomputed from the recorded
-evidence under the included verification contract.
+Output excerpt (`records/valid.json`, exit code 0):
+
+```text
+PASS
+
+verification completed
+scientific_validity: not_asserted
+...
+```
+
+Output excerpt (`records/invalid-result-mismatch.json`, exit code 2):
+
+```text
+FAIL
+
+NRS-DECLARED-RESULT-MISMATCH
+One or more declared result quantities differ from the recomputed values beyond the tolerance policy of the applicable check version.
+scientific_validity: not_asserted
+...
+```
+
+The invalid example is internally intact — its content digest matches the
+recorded payload — but a **declared result quantity does not match** the value
+recomputed from the recorded observations under the included verification
+contract. The CLI reports the mismatch reason code; it does not print the
+individual declared or recomputed values. A failing outcome here is not a claim
+that the underlying science is wrong.
+
+Verification runs locally after `npm install`. It does not call a nomue server
+or API.
+
+## Quick start
+
+```bash
+git clone https://github.com/licklider-ai/nomue-verifier.git
+cd nomue-verifier
+npm install
+npm exec nomue verify records/valid.json
+npm exec nomue verify records/invalid-result-mismatch.json
+```
+
+## What this verifies
+
+- Record integrity: content digest recomputed from the payload
+- Welch two-sample t-test result recomputation from recorded observations
+- Agreement between declared and recomputed quantities under the included
+  verification contract
+
+## What this does not verify
+
+- Scientific correctness, validity, or truth
+- That exported figures, manuscripts, or downstream artifacts remain bound to
+  the Record
+
+**PASS** means scoped checks passed — not that scientific validity passed.
+See [NON-CLAIMS.md](NON-CLAIMS.md) and [EXPERIMENTAL-NOTICE.md](EXPERIMENTAL-NOTICE.md).
 
 ## What this is
 
@@ -37,8 +92,6 @@ evidence under the included verification contract.
 - Proof that science is correct or scientifically valid
 - A production-ready or stable nomue protocol release
 - Patent-free or royalty-free implementation of the full nomue protocol
-
-See [NON-CLAIMS.md](NON-CLAIMS.md) and [EXPERIMENTAL-NOTICE.md](EXPERIMENTAL-NOTICE.md).
 
 ## Contributing
 
