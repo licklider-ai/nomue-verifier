@@ -34,7 +34,7 @@
     {
       "source": "DISTRIBUTABLE.sha256",
       "destination": "DISTRIBUTABLE.sha256",
-      "sha256": "22ed6f7011cc57613473d22fb78200975f16ea8c4703fcdb70ffe1be9efd5a21"
+      "sha256": "8b078ab8f1a6293c4ba9e4651fdcd8305b61245818b74bde95a45b44d258479b"
     },
     {
       "source": "EXPERIMENTAL-NOTICE.md",
@@ -44,7 +44,7 @@
     {
       "source": "EXTRACTION-MANIFEST.json",
       "destination": "EXTRACTION-MANIFEST.json",
-      "sha256": "708853c5e823970341f143ef030f407fee1d7463f1d3a9d7edcd582990489445"
+      "sha256": "e71f2b7a02ac73b349419ebdc36679b0e1ece986e1bc5dcf90bf49821748a933"
     },
     {
       "source": "LICENSE",
@@ -54,7 +54,7 @@
     {
       "source": "NON-CLAIMS.md",
       "destination": "NON-CLAIMS.md",
-      "sha256": "0f12ae144d625f017b5f0de59899be1b3f912e304ce68f886c695f25bced2a70"
+      "sha256": "ebd4df8e97495bb818f0c84dcd4f7007976ab6fc3b2bd8047f6174675c0e3cb7"
     },
     {
       "source": "NOTICE",
@@ -74,7 +74,7 @@
     {
       "source": "README.md",
       "destination": "README.md",
-      "sha256": "459de558a08e15467cb3e684e069185e47b5af1e912a7e09dcb98c4266ed18de"
+      "sha256": "a4dad1a45071973a760a760a8b0e600020b681733751989b96dca21032a32109"
     },
     {
       "source": "records/invalid-result-mismatch.json",
@@ -269,7 +269,7 @@
     {
       "source": "SOURCE-PIN.json",
       "destination": "SOURCE-PIN.json",
-      "sha256": "ac61b75afa39f0a9d519fd2d05d04cebc11b9065874122cb01e59ded4aebcf4c"
+      "sha256": "d6f0f1ec524ec75dca4b377fdd21bf205a7119077c79de97133cd601b0052a3d"
     },
     {
       "source": "src/nomue-cli.ts",
