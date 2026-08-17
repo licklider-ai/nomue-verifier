@@ -27,7 +27,10 @@ packaging release.
 
 Questions and critique about the nomue Record Specification itself belong to
 the master nomue-protocol project once that repository is publicly released.
-Until then, use the contact channel published with the August Demo announcement.
+Until then, contact [https://licklider.ai](https://licklider.ai).
+
+Security issues in this demo should be reported privately via the same
+address; see [SECURITY.md](SECURITY.md).
 
 ## No contributor agreement in this repository
 

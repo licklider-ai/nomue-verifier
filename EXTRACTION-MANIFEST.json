@@ -32,11 +32,6 @@
       "sha256": "054834cfd08958c23dc0dc7df73d769a8f2aa363cdc3117d03de00d7370540dc"
     },
     {
-      "source": "DISTRIBUTABLE.sha256",
-      "destination": "DISTRIBUTABLE.sha256",
-      "sha256": "8b078ab8f1a6293c4ba9e4651fdcd8305b61245818b74bde95a45b44d258479b"
-    },
-    {
       "source": "EXPERIMENTAL-NOTICE.md",
       "destination": "EXPERIMENTAL-NOTICE.md",
       "sha256": "b62b27b7bf81dced76fa25bd4dff7527f8855dc036ca75b7cf7894c84f2cbd3c"
@@ -265,6 +260,11 @@
       "source": "schemas/routing/routing-envelope-0.2.schema.json",
       "destination": "schemas/routing/routing-envelope-0.2.schema.json",
       "sha256": "313b80252d529cd1b32d0f5cc1fc71e705542e885284ecc3f3d6a463073e873a"
+    },
+    {
+      "source": "SECURITY.md",
+      "destination": "SECURITY.md",
+      "sha256": "f99e0b14ae9a91cc8d6c449325c16025b2e7ea00cd2a76d89e1ade1621f2d189"
     },
     {
       "source": "SOURCE-PIN.json",

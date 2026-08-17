@@ -3,6 +3,14 @@
   "version": "0.1.0-experimental.1",
   "description": "nomue verifier — August Experimental Category Demo (local scoped Record verification, not Release 1)",
   "license": "Apache-2.0",
+  "homepage": "https://github.com/licklider-ai/nomue-verifier#readme",
+  "bugs": {
+    "url": "https://github.com/licklider-ai/nomue-verifier/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/licklider-ai/nomue-verifier.git"
+  },
   "private": false,
   "type": "module",
   "engines": {

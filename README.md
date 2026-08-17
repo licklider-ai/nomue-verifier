@@ -98,6 +98,13 @@ See [NON-CLAIMS.md](NON-CLAIMS.md) and [EXPERIMENTAL-NOTICE.md](EXPERIMENTAL-NOT
 External code and specification contributions are not currently accepted.
 See [CONTRIBUTING.md](CONTRIBUTING.md).
 
+Contact: [https://licklider.ai](https://licklider.ai)
+
+## Security
+
+Report security issues in this demo privately via [https://licklider.ai](https://licklider.ai).
+See [SECURITY.md](SECURITY.md).
+
 ## License
 
 Apache License 2.0. See [LICENSE](LICENSE). No trademark rights are granted
