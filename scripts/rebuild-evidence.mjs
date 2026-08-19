@@ -17,7 +17,11 @@ function git(args) {
 }
 
 function npm(args) {
-  return execFileSync(process.platform === "win32" ? "npm.cmd" : "npm", args, {
+  const npmCli = process.env.npm_execpath;
+  if (!npmCli) {
+    throw new Error("npm_execpath is not available; run this generator through `npm run rebuild:evidence`");
+  }
+  return execFileSync(process.execPath, [npmCli, ...args], {
     encoding: "utf8",
     maxBuffer: 32 * 1024 * 1024,
   }).trim();
