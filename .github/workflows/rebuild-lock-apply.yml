@@ -1,0 +1,43 @@
+name: Rebuild package-lock apply
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'agent/release1-rebuildability'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Regenerate lockfile metadata exactly
+        run: |
+          set -euo pipefail
+          npm install --package-lock-only --ignore-scripts
+          CHANGED=$(git diff --name-only)
+          printf '%s\n' "$CHANGED"
+          BAD=$(printf '%s\n' "$CHANGED" | grep -v -E '^package-lock.json$' || true)
+          if [ -n "$BAD" ]; then
+            echo "Unexpected lock regeneration changes:" >&2
+            echo "$BAD" >&2
+            exit 1
+          fi
+          if [ -z "$CHANGED" ]; then
+            echo "package-lock already synchronized"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "release1: synchronize verifier package lock"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
