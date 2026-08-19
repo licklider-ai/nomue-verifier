@@ -27,3 +27,62 @@ jobs:
           name: rebuild-regression-${{ matrix.os }}-node${{ matrix.node }}
           path: ${{ runner.temp }}/rebuild-evidence/
           if-no-files-found: error
+
+  offline-kit-regression:
+    name: offline isolation kit regression (internal only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build verifier image
+        run: docker build --no-cache -f offline/Dockerfile -t nomue-verifier-r1-offline .
+      - name: Run verifier with Docker network disabled
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p offline-evidence
+          chmod 0777 offline-evidence
+          CID=$(docker create \
+            --network none \
+            --read-only \
+            --cap-drop ALL \
+            --security-opt no-new-privileges \
+            --tmpfs /tmp:rw,noexec,nosuid,size=16m \
+            --mount type=bind,src="$PWD/offline-evidence",dst=/evidence \
+            nomue-verifier-r1-offline \
+            sh -lc '
+              set -eu
+              node offline/network-probe.mjs > /evidence/network-probe.json
+              node bin/nomue.cjs verify records/valid.json --format json > /evidence/verification-valid.json
+              printf "%s\n" "$?" > /evidence/valid-exit-code.txt
+              set +e
+              node bin/nomue.cjs verify records/invalid-result-mismatch.json --format json > /evidence/verification-mismatch.json
+              mismatch_exit=$?
+              set -e
+              printf "%s\n" "$mismatch_exit" > /evidence/mismatch-exit-code.txt
+            ')
+          trap 'docker rm -f "$CID" >/dev/null 2>&1 || true' EXIT
+          docker start -a "$CID" | tee offline-evidence/container-console.log
+          docker inspect "$CID" > offline-evidence/container-inspect.json
+          docker inspect --format '{{.HostConfig.NetworkMode}}' "$CID" > offline-evidence/network-mode.txt
+          test "$(cat offline-evidence/network-mode.txt)" = "none"
+          test "$(cat offline-evidence/valid-exit-code.txt)" = "0"
+          test "$(cat offline-evidence/mismatch-exit-code.txt)" = "2"
+          node - <<'NODE'
+          const fs = require('fs');
+          const probe = JSON.parse(fs.readFileSync('offline-evidence/network-probe.json','utf8'));
+          const valid = JSON.parse(fs.readFileSync('offline-evidence/verification-valid.json','utf8'));
+          const mismatch = JSON.parse(fs.readFileSync('offline-evidence/verification-mismatch.json','utf8'));
+          if (!probe.isolation_observed || probe.non_loopback_interfaces.length !== 0) process.exit(1);
+          if (valid.interpretation_bundle_id !== 'urn:nomue:bundle:itgc-guarantee:0.2.1-draft.1') process.exit(1);
+          if (valid.guarantee_boundary?.scientific_validity !== 'not_asserted') process.exit(1);
+          if (!JSON.stringify(mismatch).includes('NRS-DECLARED-RESULT-MISMATCH')) process.exit(1);
+          NODE
+          printf '%s\n' 'Internal regression evidence only; not R1-04 external-operator evidence.' > offline-evidence/INTERNAL-NOTICE.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: offline-kit-regression-internal
+          path: offline-evidence/
+          if-no-files-found: error
