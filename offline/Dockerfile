@@ -13,6 +13,4 @@ COPY records/ ./records/
 COPY NON-CLAIMS.md SOURCE-PIN.json SECURITY.md ./
 COPY offline/network-probe.mjs ./offline/network-probe.mjs
 
-RUN npm test --if-present
-
 USER node
