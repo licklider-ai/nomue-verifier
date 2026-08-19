@@ -82,7 +82,7 @@ checks:
     requirement_ids:
       - NRS-VERIFY-0006
       - NRS-CANON-0001
-      - NRS-CANON-0002
+      - NRS-CANON-0022
       - NRS-CANON-0005
       - NRS-CORE-0006
     tolerance_policy:
@@ -204,7 +204,7 @@ checks:
     requirement_ids:
       - NRS-VERIFY-0006
       - NRS-CANON-0001
-      - NRS-CANON-0002
+      - NRS-CANON-0022
       - NRS-CANON-0005
       - NRS-CORE-0006
     tolerance_policy:
