@@ -10,11 +10,14 @@ const manifest = JSON.parse(
 const historicalExtractionFiles = new Set(manifest.files.map((f) => f.destination));
 
 // EXTRACTION-MANIFEST.json is immutable historical evidence for the August demo
-// extraction. Release 1 operational/rebuild files added later are authorized here
-// explicitly instead of rewriting that historical manifest.
+// extraction. Release 1 operational/rebuild/offline-evidence files added later are
+// authorized here explicitly instead of rewriting that historical manifest.
 const postExtractionOperationalFiles = new Set([
   "REBUILD.md",
   "scripts/rebuild-evidence.mjs",
+  "OFFLINE-VERIFICATION.md",
+  "offline/Dockerfile",
+  "offline/network-probe.mjs",
 ]);
 const currentAllowlist = new Set([
   ...historicalExtractionFiles,
