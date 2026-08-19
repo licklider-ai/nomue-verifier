@@ -5,8 +5,8 @@
 # Validated by schemas/meta/interpretation-bundles.schema.json.
 
 registry: nrs-interpretation-bundles
-registry_version: "0.5.0"
-updated: "2026-08-13"
+registry_version: "0.6.0"
+updated: "2026-08-19"
 
 # Which verifier output is selected by what. The routing envelope and the
 # verifier refusal are bundle-independent verifier-level output contracts:
@@ -46,7 +46,7 @@ verifier_output_contract:
           in-process time/memory bounds of NRS-SEC-0006 (ADR-0022). No
           silent mutation.
 
-# Entry order in this registry is NON-NORMATIVE and carries no semantic and carries no semantic
+# Entry order in this registry is NON-NORMATIVE and carries no semantic
 # meaning (NRS-VERSION-0007): a verifier selects a bundle solely by exact
 # registered identifier equality. There is no default bundle, no first/
 # fallback entry, and no selection by insertion order or version proximity.
@@ -54,13 +54,18 @@ entry_order_semantics: none
 
 status_note: >-
   Phase 1 issued the initial Record interpretation bundle (itgc-minimal
-  0.1); Phase 2A adds the ITGC guarantee bundle (itgc-guarantee 0.2) without
-  altering the meaning of the earlier bundle (NRS-CORE-0010). Both bundles
-  are EXPERIMENTAL and not publicly released; no attestation procedure
-  version exists, and none is fabricated (attestation_support: none). A
-  verifier selects behavior only by exact bundle identifier
-  (NRS-VERSION-0005); registry order has no semantic meaning and no default
-  bundle exists (NRS-VERSION-0007).
+  0.1); Phase 2A added the ITGC guarantee bundle (itgc-guarantee 0.2), and
+  the registered 0.2.1 successor reuses the same structural schemas while
+  versioning the numerical check set. The 0.2.1 successor is the sole
+  planned Release 1 public support target after the 2026-08-19 final scope
+  audit. It remains EXPERIMENTAL with public_release: false until the final
+  legally cleared Release Candidate promotes it deliberately. The 0.1 and
+  0.2.0 bundles remain immutable historical/development interpretation
+  surfaces and are not Release 1 public support targets. All three bundles
+  currently declare attestation_support: none; no attestation procedure
+  version is bound by a registered bundle. A verifier selects behavior only
+  by exact bundle identifier (NRS-VERSION-0005); registry order has no
+  semantic meaning and no default bundle exists (NRS-VERSION-0007).
 
 entries:
   - bundle_id: "urn:nomue:bundle:itgc-minimal:0.1.0-draft.1"
@@ -91,7 +96,8 @@ entries:
     notes: >-
       Records declaring this bundle are parsed with the pinned Record and
       profile schemas, canonicalized with the pinned JCS canonicalization,
-      and verified with the pinned check set only.
+      and verified with the pinned check set only. This historical minimal
+      bundle is not the planned Release 1 public support target.
 
   - bundle_id: "urn:nomue:bundle:itgc-guarantee:0.2.0-draft.1"
     title: Phase 2A ITGC guarantee bundle
@@ -127,8 +133,9 @@ entries:
       arithmetic mean difference with its Welch-Satterthwaite 95% confidence
       interval. Reuses the Phase 1 JCS canonicalization unchanged. The
       verifier refusal schema is not listed here because the refusal is a
-      bundle-independent verifier-level output (see
-      verifier_output_contract), not a bundle artifact (ADR-0017).
+      bundle-independent verifier-level output (see verifier_output_contract),
+      not a bundle artifact (ADR-0017). This bundle is not the planned
+      Release 1 public support target; its 0.2.1 numerical successor is.
 
   - bundle_id: "urn:nomue:bundle:itgc-guarantee:0.2.1-draft.1"
     title: Phase 2A ITGC guarantee bundle (numerical contract 0.2.1)
@@ -162,4 +169,7 @@ entries:
     notes: >-
       Successor bundle for numerical contract hardening (ADR-0020,
       ADR-0021). Reuses the 0.2 Record schema. The 0.2.0 bundle semantics
-      remain immutable (NRS-VERSION-0006).
+      remain immutable (NRS-VERSION-0006). Selected by the 2026-08-19 final
+      scope audit as the sole planned Release 1 public support target; it
+      remains public_release: false until the final candidate-content/legal
+      adoption batch deliberately promotes it.
