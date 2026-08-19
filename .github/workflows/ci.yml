@@ -20,3 +20,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - name: Rebuild/package provenance regression evidence
+        run: npm run rebuild:evidence -- "${{ runner.temp }}/rebuild-evidence"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rebuild-regression-${{ matrix.os }}-node${{ matrix.node }}
+          path: ${{ runner.temp }}/rebuild-evidence/
+          if-no-files-found: error

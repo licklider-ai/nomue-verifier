@@ -16,11 +16,22 @@
   "engines": {
     "node": ">=20"
   },
+  "files": [
+    "bin/",
+    "reference/verifier/src/",
+    "reference/stats-kernel/src/",
+    "schemas/",
+    "registries/",
+    "NON-CLAIMS.md",
+    "SOURCE-PIN.json",
+    "SECURITY.md"
+  ],
   "bin": {
     "nomue": "./bin/nomue.cjs"
   },
   "scripts": {
-    "test": "tsx tests/smoke.ts && tsx tests/boundary.ts && tsx tests/reason-metadata.test.ts"
+    "test": "tsx tests/smoke.ts && tsx tests/boundary.ts && tsx tests/reason-metadata.test.ts",
+    "rebuild:evidence": "node scripts/rebuild-evidence.mjs"
   },
   "dependencies": {
     "ajv": "^8.20.0",
