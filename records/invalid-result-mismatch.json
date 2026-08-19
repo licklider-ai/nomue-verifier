@@ -1,10 +1,10 @@
 {
   "$schema": "urn:nomue:schema:record:0.2.0-draft.1",
   "record_type": "nomue-record",
-  "record_id": "urn:uuid:00000000-0000-4000-8000-000000003802",
-  "revision_id": "urn:uuid:00000000-0000-4000-8000-000000003803",
+  "record_id": "urn:uuid:00000000-0000-4000-8000-000000004208",
+  "revision_id": "urn:uuid:00000000-0000-4000-8000-000000004209",
   "created_at": "2026-08-10T00:00:00Z",
-  "interpretation_bundle_id": "urn:nomue:bundle:itgc-guarantee:0.2.0-draft.1",
+  "interpretation_bundle_id": "urn:nomue:bundle:itgc-guarantee:0.2.1-draft.1",
   "profile_id": "urn:nomue:profile:itgc:0.2.0-draft.1",
   "payload": {
     "dataset": {
@@ -14,61 +14,37 @@
           "observation_id": "observation-1",
           "experimental_unit_id": "unit-1",
           "group_id": "group-a",
-          "outcome_value": 7.9
+          "outcome_value": 1
         },
         {
           "observation_id": "observation-2",
           "experimental_unit_id": "unit-2",
           "group_id": "group-a",
-          "outcome_value": 8.4
+          "outcome_value": 2
         },
         {
           "observation_id": "observation-3",
           "experimental_unit_id": "unit-3",
           "group_id": "group-a",
-          "outcome_value": 8.1
+          "outcome_value": 3
         },
         {
           "observation_id": "observation-4",
           "experimental_unit_id": "unit-4",
-          "group_id": "group-a",
-          "outcome_value": 8.6
+          "group_id": "group-b",
+          "outcome_value": 4
         },
         {
           "observation_id": "observation-5",
           "experimental_unit_id": "unit-5",
-          "group_id": "group-a",
-          "outcome_value": 8.2
+          "group_id": "group-b",
+          "outcome_value": 5
         },
         {
           "observation_id": "observation-6",
           "experimental_unit_id": "unit-6",
           "group_id": "group-b",
-          "outcome_value": 9.1
-        },
-        {
-          "observation_id": "observation-7",
-          "experimental_unit_id": "unit-7",
-          "group_id": "group-b",
-          "outcome_value": 9.6
-        },
-        {
-          "observation_id": "observation-8",
-          "experimental_unit_id": "unit-8",
-          "group_id": "group-b",
-          "outcome_value": 8.9
-        },
-        {
-          "observation_id": "observation-9",
-          "experimental_unit_id": "unit-9",
-          "group_id": "group-b",
-          "outcome_value": 9.4
-        },
-        {
-          "observation_id": "observation-10",
-          "experimental_unit_id": "unit-10",
-          "group_id": "group-b",
-          "outcome_value": 9.2
+          "outcome_value": 6
         }
       ]
     },
@@ -125,32 +101,32 @@
       "group_summaries": [
         {
           "group_id": "group-a",
-          "n": 5,
-          "mean": 8.3,
-          "sample_variance": 0.07299999999999994
+          "n": 3,
+          "mean": 2,
+          "sample_variance": 1
         },
         {
           "group_id": "group-b",
-          "n": 5,
-          "mean": 9.24,
-          "sample_variance": 0.07299999999999994
+          "n": 3,
+          "mean": 5,
+          "sample_variance": 1
         }
       ],
       "effect_estimate": {
         "kind": "unstandardized_arithmetic_mean_difference",
-        "estimate": -1,
-        "standard_error": 0.17088007490635054,
+        "estimate": -3,
+        "standard_error": 0.816496580927726,
         "confidence_interval": {
           "method_id": "urn:nomue:method:welch-satterthwaite-mean-difference-ci:1",
           "confidence_level": 0.95,
-          "lower": -1.3940501593580419,
-          "upper": -0.6059498406419581
+          "lower": -5.266957935527519,
+          "upper": -0.7330420644724809
         }
       },
       "test": {
-        "test_statistic": -5.852057359806531,
-        "degrees_of_freedom": 8,
-        "p_value": 0.00038188621617164174
+        "test_statistic": -3.6742346141747673,
+        "degrees_of_freedom": 4,
+        "p_value": 0
       }
     }
   },
@@ -158,6 +134,6 @@
     "canonicalization_id": "urn:nomue:canonicalization:jcs:0.2.0-draft.1",
     "digest_algorithm": "sha-256",
     "digest_scope": "record_without_integrity",
-    "content_digest": "sha256:52f7e118b0e0a6c9e21a7fbab2ea24a14c6dba5990b9b1f6e4a291a6a7c62284"
+    "content_digest": "sha256:598d30efa183ccbf5edf6e987257917a032cab3ac7d82f10200d46c8b4e2a67b"
   }
 }
