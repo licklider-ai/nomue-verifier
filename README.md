@@ -4,8 +4,8 @@ Issuer-independent local verification of scoped nomue Record properties.
 
 ## Status
 
-This repository is being aligned to the planned **nomue Protocol Release 1** support
-target:
+This repository is aligned to frozen **nomue Protocol Release 1 Candidate C3** for
+the following support target:
 
 ```text
 urn:nomue:bundle:itgc-guarantee:0.2.1-draft.1
@@ -13,11 +13,11 @@ urn:nomue:bundle:itgc-guarantee:0.2.1-draft.1
 
 Package version: **`0.2.1-rc.0`**.
 
-This is still **pre-release**. The Protocol has not yet published Release 1 and the
-final Release 1 candidate content commit has not yet been pinned. `SOURCE-PIN.json`
-therefore records a pre-candidate Protocol alignment commit and explicitly requires a
-final re-pin to candidate C before Release 1 publication. Do not treat this package
-version as evidence that the Protocol itself has been publicly released.
+This is still **pre-release**. The Protocol has not yet published Release 1.
+`SOURCE-PIN.json` now pins frozen Candidate C3
+`8833ee02664903a69459fc178e4d2802f4241e0f` and records that the final candidate pin
+is complete. This pin identifies the exact Protocol source used by this package; it
+does not by itself assert that the Protocol has been publicly released.
 
 Release 1 is intentionally narrow: independent two-group continuous outcomes under
 the registered ITGC Profile, with the two-sided Welch two-sample t procedure and the
@@ -110,9 +110,9 @@ historical/development surfaces, not aliases for Release 1.
 ## Source provenance
 
 `SOURCE-PIN.json` identifies the Protocol source commit used for this package state.
-The current pin is a **pre-candidate alignment pin**. Before Release 1 publication it
-must be replaced by the frozen candidate content commit C and the package must be
-revalidated against that exact candidate.
+The current pin is the final frozen Candidate C3 commit, and
+`final_candidate_pin_pending` is `false`. Release 1 publication remains a separate
+Founder/Steward decision in the Protocol repository.
 
 `EXTRACTION-MANIFEST.json` records the earlier August-demo extraction boundary and is
 retained as historical packaging evidence; it is not the final Release 1 candidate
