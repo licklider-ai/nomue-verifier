@@ -1,7 +1,7 @@
 {
   "name": "nomue-verifier",
   "version": "0.2.1-rc.0",
-  "description": "nomue verifier — pre-release Release 1 verifier aligned to the 0.2.1 ITGC Welch bundle",
+  "description": "nomue verifier — Release 1 verifier aligned to the 0.2.1 ITGC Welch bundle",
   "license": "Apache-2.0",
   "homepage": "https://github.com/licklider-ai/nomue-verifier#readme",
   "bugs": {
