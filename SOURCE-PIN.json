@@ -1,12 +1,17 @@
 {
-  "protocol_source_commit": "8833ee02664903a69459fc178e4d2802f4241e0f",
-  "pin_class": "final_candidate",
+  "protocol_source_commit": "83d07d03f27cec0c245cf836c042e5378733b0a2",
+  "pin_class": "public_release",
   "final_candidate_pin_pending": false,
   "release_target_bundle": "urn:nomue:bundle:itgc-guarantee:0.2.1-draft.1",
-  "protocol_release_status": "release_candidate",
+  "protocol_release_status": "public_release",
+  "protocol_release_tag": "release-1",
+  "release_decision_commit": "5db97826e0905a72e0fed14536d820e77af9be95",
+  "signed_release_source_commit": "47eeafb0b2b096658cacf219bf5af867b687c6a7",
+  "protocol_snapshot_hash": "sha256:fc26c770538abe3598fc27a571ca6e99cc29763e0a25859a80c267ee2d80ab06",
   "packaging_version": "0.2.1-rc.0",
+  "previous_final_candidate_source_commit": "8833ee02664903a69459fc178e4d2802f4241e0f",
   "previous_august_demo_source_commit": "87bb911b565892e626a1e891560adebd60779a2f",
   "historical_extraction_manifest_digest": "sha256:85770b2b50ac09548a189f0b365be8924b5523546d4e0bc784e96c1cc2d38faf",
-  "aligned_at": "2026-08-23T07:09:50.759Z",
-  "note": "Final Release 1 candidate pin. protocol_source_commit identifies frozen Candidate C3; this pin does not by itself assert that nomue Protocol Release 1 has been publicly released."
+  "aligned_at": "2026-08-24T03:27:00Z",
+  "note": "Public Release 1 pin. protocol_source_commit identifies final candidate content C8; release_decision_commit is the release-1 tag target D, and signed_release_source_commit identifies the KMS-signed source R. The verifier package remains experimental and retains package version 0.2.1-rc.0."
 }
