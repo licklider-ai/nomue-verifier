@@ -1,4 +1,4 @@
-nomue August Experimental Category Demo
+nomue verifier — Release 1 verifier package
 
 Copyright 2026 Licklider
 
@@ -6,7 +6,8 @@ This product includes software developed by Licklider and distributed under
 the Apache License, Version 2.0 (see LICENSE).
 
 This product depends on third-party open-source software. The following
-notices apply to those dependencies when distributed as part of this demo:
+notices apply to those dependencies when distributed as part of this verifier
+package:
 
 Apache License 2.0
   @stdlib/stats-base-dists-t-cdf
