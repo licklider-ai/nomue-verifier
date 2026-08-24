@@ -1,19 +1,19 @@
 # Security Policy
 
-This repository is the **August Experimental Category Demo**: a local,
-offline verifier for synthetic nomue Records. It is **not** a production
-protocol release.
+This repository contains the experimental verifier package aligned to the published
+**nomue Protocol Release 1 Public Draft**. It runs locally against nomue Records and
+is not a server-side verification service.
 
 ## Reporting a vulnerability
 
-Report security issues in this demo privately via:
+Report security issues in this verifier privately via:
 
 **https://licklider.ai**
 
 Please do not open a public GitHub issue for security-sensitive findings.
 
-For non-security demo packaging defects (broken `verify` commands, unclear
-README instructions), GitHub Issues are welcome as described in
+For non-security packaging defects (broken `verify` commands, unclear README
+instructions), GitHub Issues are welcome as described in
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Scope
@@ -21,19 +21,23 @@ README instructions), GitHub Issues are welcome as described in
 **In scope**
 
 - The verifier CLI and reference implementation in this repository
-- Schemas and registries shipped here
-- The two synthetic example Records in `records/`
+- Schemas and registries shipped with this verifier package
+- The synthetic example Records in `records/`
+- Package behavior against the exact Release 1 support target recorded in
+  `SOURCE-PIN.json`
 
 **Out of scope**
 
-- The unpublished nomue Record Specification
-- Production attestation, signing, or trust-root operations
-- Any nomue server or API (this demo does not call one)
+- Protocol release-signing, KMS, or trust-root operations; those belong to the
+  canonical [nomue Protocol](https://github.com/licklider-ai/nomue-protocol) project
+- Production attestation, which Release 1 does not support
+- Any nomue server or API; this verifier does not call one
 
-After `npm install`, verification is designed to run locally and not to
+After dependencies are installed, verification is designed to run locally and not to
 dereference Record-supplied identifiers over the network.
 
 ## Supported versions
 
-Only the published `main` branch of this experimental demo is in scope.
-There is no stable release line.
+The published `main` branch is the supported verifier-package line. The package remains
+experimental and currently retains version `0.2.1-rc.0`; this does not alter the
+published status of nomue Protocol Release 1.
