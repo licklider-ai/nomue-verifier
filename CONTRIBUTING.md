@@ -1,49 +1,49 @@
-# Contributing to the August Experimental Category Demo
+# Contributing to nomue verifier
 
-This repository is an **experimental demonstration** of scoped local Record
-verification. It is **not** Release 1 of the nomue Record Specification and
-**not** a normative specification repository.
+This repository contains the experimental verifier package aligned to the published
+**nomue Protocol Release 1 Public Draft**. It is not the normative specification
+repository; Protocol authority lives in
+[licklider-ai/nomue-protocol](https://github.com/licklider-ai/nomue-protocol).
 
 ## What is not accepted
 
-External **code** and **specification** contributions are **not currently
-accepted** in this repository. This boundary avoids contribution and IP
-ambiguity before September Release 1 contribution terms are finalized on the
-master nomue-protocol repository.
+External **code** and **specification** contributions are **not currently accepted**
+in this verifier repository. This keeps verifier-packaging changes separate from
+Protocol authority and contribution terms.
 
-Do not open pull requests that change verifier semantics, schemas, registries,
-or demo Record fixtures unless you are an authorized steward performing the
-packaging release.
+Do not open pull requests that change verifier semantics, schemas, registries, or
+Record fixtures unless you are an authorized steward performing a coordinated
+Protocol/verifier update.
 
 ## What remains welcome
 
-- **Issues** reporting demo packaging defects, unclear README instructions, or
-  broken verify commands in the distributed artifact.
-- **Discussion** and critique of the demonstration's category framing
-  (scoped verification vs overall "verified" claims).
+- **Issues** reporting verifier packaging defects, unclear README instructions, or
+  broken verify commands in the distributed package.
+- **Discussion and critique** of scoped verification behavior and the documented
+  guarantee boundary.
 - **Forks** for private experimentation, subject to the LICENSE.
 
 ## Feedback on the broader specification
 
-Questions and critique about the nomue Record Specification itself belong to
-the master nomue-protocol project once that repository is publicly released.
-Until then, contact [https://licklider.ai](https://licklider.ai).
+Questions and critique about the nomue Protocol or nomue Record Specification belong
+in the public Protocol project:
 
-Security issues in this demo should be reported privately via the same
-address; see [SECURITY.md](SECURITY.md).
+https://github.com/licklider-ai/nomue-protocol
+
+Security issues in this verifier should be reported privately as described in
+[SECURITY.md](SECURITY.md).
 
 ## No contributor agreement in this repository
 
-This demo repository does not operate a CLA, DCO, or separate patent
-agreement. The Apache License 2.0 applies to distributed artifacts as stated
-in LICENSE.
+This verifier repository does not operate a CLA, DCO, or separate patent agreement.
+The Apache License 2.0 applies to distributed artifacts as stated in LICENSE.
 
-## Demonstration-only scope
+## Scope boundary
 
 This repository does not claim:
 
-- patent freedom beyond the Apache-2.0 license grant on distributed code
-- that all implementations of the full nomue protocol are patent-safe
-- royalty-free implementation of the full nomue protocol
+- patent freedom beyond the Apache-2.0 license grant on distributed code;
+- that all implementations of the full nomue Protocol are patent-safe; or
+- royalty-free implementation of the full nomue Protocol.
 
-See NON-CLAIMS.md and EXPERIMENTAL-NOTICE.md.
+See [NON-CLAIMS.md](NON-CLAIMS.md) and [EXPERIMENTAL-NOTICE.md](EXPERIMENTAL-NOTICE.md).

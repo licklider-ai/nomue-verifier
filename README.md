@@ -1,23 +1,29 @@
-# nomue verifier — Release 1 candidate package
+# nomue verifier — Release 1 verifier package
 
 Issuer-independent local verification of scoped nomue Record properties.
 
 ## Status
 
-This repository is aligned to frozen **nomue Protocol Release 1 Candidate C3** for
-the following support target:
+This repository is aligned to the published **nomue Protocol Release 1 Public Draft**
+for the following support target:
 
 ```text
 urn:nomue:bundle:itgc-guarantee:0.2.1-draft.1
 ```
 
+Protocol Release 1 identities:
+
+- candidate content C8: `83d07d03f27cec0c245cf836c042e5378733b0a2`
+- signed release source R: `47eeafb0b2b096658cacf219bf5af867b687c6a7`
+- release-decision D / `release-1` tag target: `5db97826e0905a72e0fed14536d820e77af9be95`
+- Protocol snapshot: `sha256:fc26c770538abe3598fc27a571ca6e99cc29763e0a25859a80c267ee2d80ab06`
+
 Package version: **`0.2.1-rc.0`**.
 
-This is still **pre-release**. The Protocol has not yet published Release 1.
-`SOURCE-PIN.json` now pins frozen Candidate C3
-`8833ee02664903a69459fc178e4d2802f4241e0f` and records that the final candidate pin
-is complete. This pin identifies the exact Protocol source used by this package; it
-does not by itself assert that the Protocol has been publicly released.
+The Protocol release is published; this verifier package remains experimental and
+retains its existing release-candidate package version. The package version is a
+verifier-packaging identity and does not change the published Protocol Release 1
+status. `SOURCE-PIN.json` records the exact C/R/D/tag/snapshot relationship.
 
 Release 1 is intentionally narrow: independent two-group continuous outcomes under
 the registered ITGC Profile, with the two-sided Welch two-sample t procedure and the
@@ -103,20 +109,25 @@ See [NON-CLAIMS.md](NON-CLAIMS.md) for the package boundary.
 ## Exact version dispatch
 
 The verifier dispatches only on an exact registered `interpretation_bundle_id`. There
-is no default bundle and no inference from version proximity. The planned Release 1
-target is the exact `0.2.1-draft.1` bundle above; the older 0.1 and 0.2.0 bundles are
-historical/development surfaces, not aliases for Release 1.
+is no default bundle and no inference from version proximity. The Release 1 public
+support target is the exact `0.2.1-draft.1` bundle above; the older 0.1 and 0.2.0
+bundles are historical/development surfaces, not aliases for Release 1.
 
 ## Source provenance
 
-`SOURCE-PIN.json` identifies the Protocol source commit used for this package state.
-The current pin is the final frozen Candidate C3 commit, and
-`final_candidate_pin_pending` is `false`. Release 1 publication remains a separate
-Founder/Steward decision in the Protocol repository.
+`SOURCE-PIN.json` identifies the final Protocol candidate content commit used for this
+package and records the corresponding published release identities. The content pin is
+C8 `83d07d03f27cec0c245cf836c042e5378733b0a2`; the KMS-signed Release 1 source is R
+`47eeafb0b2b096658cacf219bf5af867b687c6a7`; the `release-1` tag points to release-
+decision D `5db97826e0905a72e0fed14536d820e77af9be95`. The published Protocol snapshot is
+`sha256:fc26c770538abe3598fc27a571ca6e99cc29763e0a25859a80c267ee2d80ab06`.
 
 `EXTRACTION-MANIFEST.json` records the earlier August-demo extraction boundary and is
-retained as historical packaging evidence; it is not the final Release 1 candidate
+retained as historical packaging evidence; it is not the Release 1 public-release
 identity.
+
+The canonical Protocol repository and Release 1 assets are published at
+[licklider-ai/nomue-protocol](https://github.com/licklider-ai/nomue-protocol).
 
 ## Contributing
 
