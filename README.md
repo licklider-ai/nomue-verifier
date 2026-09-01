@@ -69,7 +69,9 @@ entry point.
 The npm package is configured for public distribution and carries the exact package,
 Protocol, and bundle identities described in this document. Installing it does not call
 a nomue service; Record verification remains local after npm has installed the package
-dependencies.
+dependencies. Direct runtime dependency versions are pinned exactly in the package
+manifest; the repository lockfile records the complete dependency tree used for release
+testing and rebuild evidence.
 
 ## CLI
 

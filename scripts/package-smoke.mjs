@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -9,8 +9,18 @@ const npmCli = process.env.npm_execpath;
 const temporaryRoot = mkdtempSync(join(tmpdir(), "nomue-verifier-package-smoke-"));
 const packDirectory = join(temporaryRoot, "pack");
 const installDirectory = join(temporaryRoot, "install");
+const globalDirectory = join(temporaryRoot, "global");
+const execDirectory = join(temporaryRoot, "exec");
+const inputDirectory = join(temporaryRoot, "input records");
 const expectedPackageName = "@licklider/nomue-verifier";
 const expectedBundle = "urn:nomue:bundle:itgc-guarantee:0.2.1-draft.1";
+const expectedRuntimeDependencies = {
+  "@stdlib/stats-base-dists-t-cdf": "0.2.3",
+  "@stdlib/stats-base-dists-t-quantile": "0.2.3",
+  ajv: "8.20.0",
+  tsx: "4.23.12",
+  yaml: "2.9.0",
+};
 const childEnvironment = { ...process.env };
 
 // `npm publish --dry-run` exports its dry-run setting to lifecycle scripts. This
@@ -21,6 +31,9 @@ delete childEnvironment.NPM_CONFIG_DRY_RUN;
 
 mkdirSync(packDirectory, { recursive: true });
 mkdirSync(installDirectory, { recursive: true });
+mkdirSync(globalDirectory, { recursive: true });
+mkdirSync(execDirectory, { recursive: true });
+mkdirSync(inputDirectory, { recursive: true });
 
 function fail(message, result) {
   console.error(message);
@@ -45,11 +58,34 @@ function runNpm(args, options = {}) {
   return run(process.execPath, [npmCli, ...args], options);
 }
 
+function runCli(command, args, options = {}) {
+  if (process.platform === "win32") {
+    const commandParts = [command, ...args];
+    if (commandParts.some((part) => part.includes('"'))) {
+      fail("Windows package-smoke command contains an unsupported quote character");
+    }
+    const commandLine = commandParts.map((part) => `"${part}"`).join(" ");
+    return run(commandLine, [], { shell: true, ...options });
+  }
+  return run(command, args, options);
+}
+
 function parseJson(label, text) {
   try {
     return JSON.parse(text);
   } catch (error) {
     fail(`${label}: expected JSON output (${error.message})`, { stdout: text });
+  }
+}
+
+function assertValid(label, result, { allowNpmStderr = false } = {}) {
+  if (result.status !== 0) fail(`${label}: expected exit 0, got ${result.status}`, result);
+  if (!allowNpmStderr && result.stderr !== "") {
+    fail(`${label}: emitted stderr in JSON mode`, result);
+  }
+  const report = parseJson(label, result.stdout);
+  if (report.interpretation_bundle_id !== expectedBundle) {
+    fail(`${label}: did not use the exact Release 1 bundle`, result);
   }
 }
 
@@ -69,6 +105,10 @@ try {
   }
   const tarball = join(packDirectory, filename);
   if (!existsSync(tarball)) fail(`packed tarball is missing: ${tarball}`);
+  const packedBin = packOutput?.[0]?.files?.find((file) => file.path === "bin/nomue.cjs");
+  if (process.platform !== "win32" && packedBin?.mode !== 0o755) {
+    fail(`packed nomue launcher mode mismatch: expected 0755, got ${String(packedBin?.mode)}`);
+  }
 
   const installResult = runNpm(
     [
@@ -99,32 +139,41 @@ try {
       `installed package name mismatch: expected ${expectedPackageName}, got ${String(installedPackage.name)}`,
     );
   }
+  for (const [name, expectedVersion] of Object.entries(expectedRuntimeDependencies)) {
+    const actualVersion = installedPackage.dependencies?.[name];
+    if (actualVersion !== expectedVersion) {
+      fail(
+        `runtime dependency is not exactly pinned: ${name} expected ${expectedVersion}, got ${String(actualVersion)}`,
+      );
+    }
+  }
 
   const shimName = process.platform === "win32" ? "nomue.cmd" : "nomue";
   const shimPath = join(installDirectory, "node_modules", ".bin", shimName);
   if (!existsSync(shimPath)) fail(`nomue executable shim is missing: ${shimPath}`);
 
-  const launcher = join(installedRoot, "bin", "nomue.cjs");
-  const executable = process.platform === "win32" ? process.execPath : shimPath;
-  const launcherArgs = process.platform === "win32" ? [launcher] : [];
-  const validRecord = join(root, "records", "valid.json");
-  const invalidRecord = join(root, "records", "invalid-result-mismatch.json");
+  const validRecord = join(inputDirectory, "valid record.json");
+  const invalidRecord = join(inputDirectory, "invalid result mismatch.json");
+  copyFileSync(join(root, "records", "valid.json"), validRecord);
+  copyFileSync(join(root, "records", "invalid-result-mismatch.json"), invalidRecord);
 
-  const valid = run(
-    executable,
-    [...launcherArgs, "verify", validRecord, "--format", "json-compact"],
-    { cwd: installDirectory },
-  );
-  if (valid.status !== 0) fail(`packed valid Record: expected exit 0, got ${valid.status}`, valid);
-  if (valid.stderr !== "") fail("packed valid Record emitted stderr in JSON mode", valid);
-  const validReport = parseJson("packed valid Record", valid.stdout);
-  if (validReport.interpretation_bundle_id !== expectedBundle) {
-    fail("packed valid Record did not use the exact Release 1 bundle", valid);
+  const usage = runCli(shimPath, [], { cwd: installDirectory });
+  if (usage.status !== 5) fail(`packed usage error: expected exit 5, got ${usage.status}`, usage);
+  if (usage.stdout !== "") fail("packed usage error emitted stdout", usage);
+  if (!usage.stderr.startsWith("usage: nomue ")) {
+    fail("packed usage error did not name the public nomue command", usage);
   }
 
-  const invalid = run(
-    executable,
-    [...launcherArgs, "verify", invalidRecord, "--format", "json-compact"],
+  const valid = runCli(
+    shimPath,
+    ["verify", validRecord, "--format", "json-compact"],
+    { cwd: installDirectory },
+  );
+  assertValid("packed local-shim valid Record", valid);
+
+  const invalid = runCli(
+    shimPath,
+    ["verify", invalidRecord, "--format", "json-compact"],
     { cwd: installDirectory },
   );
   if (invalid.status !== 2) {
@@ -135,6 +184,52 @@ try {
   if (!JSON.stringify(invalidReport).includes("NRS-DECLARED-RESULT-MISMATCH")) {
     fail("packed mismatched Record omitted NRS-DECLARED-RESULT-MISMATCH", invalid);
   }
+
+  const globalInstall = runNpm(
+    [
+      "install",
+      "--global",
+      "--ignore-scripts",
+      "--no-audit",
+      "--no-fund",
+      "--prefix",
+      globalDirectory,
+      tarball,
+    ],
+    { cwd: globalDirectory },
+  );
+  if (globalInstall.status !== 0) fail("global tarball installation failed", globalInstall);
+
+  const globalShim =
+    process.platform === "win32"
+      ? join(globalDirectory, "nomue.cmd")
+      : join(globalDirectory, "bin", "nomue");
+  if (!existsSync(globalShim)) fail(`global nomue executable shim is missing: ${globalShim}`);
+  assertValid(
+    "packed global-shim valid Record",
+    runCli(globalShim, ["verify", validRecord, "--format", "json-compact"], {
+      cwd: globalDirectory,
+    }),
+  );
+
+  assertValid(
+    "packed npm-exec valid Record",
+    runNpm(
+      [
+        "exec",
+        "--yes",
+        `--package=${tarball}`,
+        "--",
+        "nomue",
+        "verify",
+        validRecord,
+        "--format",
+        "json-compact",
+      ],
+      { cwd: execDirectory },
+    ),
+    { allowNpmStderr: true },
+  );
 
   console.log("package-smoke: OK");
 } finally {

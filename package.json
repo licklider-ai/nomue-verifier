@@ -39,14 +39,14 @@
     "rebuild:evidence": "node scripts/rebuild-evidence.mjs"
   },
   "dependencies": {
-    "ajv": "^8.20.0",
-    "yaml": "^2.9.0",
-    "@stdlib/stats-base-dists-t-cdf": "^0.2.3",
-    "@stdlib/stats-base-dists-t-quantile": "^0.2.3",
-    "tsx": "^4.23.11"
+    "ajv": "8.20.0",
+    "yaml": "2.9.0",
+    "@stdlib/stats-base-dists-t-cdf": "0.2.3",
+    "@stdlib/stats-base-dists-t-quantile": "0.2.3",
+    "tsx": "4.23.12"
   },
   "devDependencies": {
-    "@types/node": "^26.2.0",
-    "typescript": "^7.0.2"
+    "@types/node": "26.2.0",
+    "typescript": "7.0.2"
   }
 }
