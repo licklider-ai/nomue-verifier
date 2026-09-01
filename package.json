@@ -1,5 +1,5 @@
 {
-  "name": "nomue-verifier",
+  "name": "@licklider/nomue-verifier",
   "version": "0.2.1-rc.0",
   "description": "nomue verifier — Release 1 verifier aligned to the 0.2.1 ITGC Welch bundle",
   "license": "Apache-2.0",
@@ -12,6 +12,9 @@
     "url": "git+https://github.com/licklider-ai/nomue-verifier.git"
   },
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "engines": {
     "node": ">=20"
@@ -27,10 +30,12 @@
     "SECURITY.md"
   ],
   "bin": {
-    "nomue": "./bin/nomue.cjs"
+    "nomue": "bin/nomue.cjs"
   },
   "scripts": {
-    "test": "tsx tests/smoke.ts && tsx tests/boundary.ts && tsx tests/reason-metadata.test.ts",
+    "test": "node --import tsx tests/smoke.ts && node --import tsx tests/boundary.ts && node --import tsx tests/reason-metadata.test.ts",
+    "test:package": "node scripts/package-smoke.mjs",
+    "prepublishOnly": "npm test && npm run test:package",
     "rebuild:evidence": "node scripts/rebuild-evidence.mjs"
   },
   "dependencies": {
