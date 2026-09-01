@@ -5,7 +5,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
+const npmCli = process.env.npm_execpath;
 const temporaryRoot = mkdtempSync(join(tmpdir(), "nomue-verifier-package-smoke-"));
 const packDirectory = join(temporaryRoot, "pack");
 const installDirectory = join(temporaryRoot, "install");
@@ -24,6 +24,7 @@ mkdirSync(installDirectory, { recursive: true });
 
 function fail(message, result) {
   console.error(message);
+  if (result?.error) console.error(result.error);
   if (result?.stdout) console.error(result.stdout);
   if (result?.stderr) console.error(result.stderr);
   process.exitCode = 1;
@@ -39,6 +40,11 @@ function run(command, args, options = {}) {
   });
 }
 
+function runNpm(args, options = {}) {
+  if (!npmCli) fail("npm_execpath is unavailable; run this check through npm");
+  return run(process.execPath, [npmCli, ...args], options);
+}
+
 function parseJson(label, text) {
   try {
     return JSON.parse(text);
@@ -48,7 +54,7 @@ function parseJson(label, text) {
 }
 
 try {
-  const packResult = run(npmCommand, [
+  const packResult = runNpm([
     "pack",
     "--json",
     "--pack-destination",
@@ -64,8 +70,7 @@ try {
   const tarball = join(packDirectory, filename);
   if (!existsSync(tarball)) fail(`packed tarball is missing: ${tarball}`);
 
-  const installResult = run(
-    npmCommand,
+  const installResult = runNpm(
     [
       "install",
       "--ignore-scripts",
