@@ -17,16 +17,27 @@ Protocol/verifier update.
 
 ## What remains welcome
 
-- **Issues** reporting verifier packaging defects, unclear README instructions, or
-  broken verify commands in the distributed package.
-- **Discussion and critique** of scoped verification behavior and the documented
-  guarantee boundary.
+- **Issues** reporting verifier packaging defects, unclear instructions, broken
+  commands, questions, or behavior that did not meet your expectations.
+- **Feedback and critique** of scoped verification behavior and the documented
+  guarantee boundary. If you are unsure whether an issue concerns packaging or the
+  Protocol, start here and maintainers will route it.
 - **Forks** for private experimentation, subject to the LICENSE.
+
+Use the guided issue forms at:
+
+https://github.com/licklider-ai/nomue-verifier/issues/new/choose
+
+Before posting, remove private Records, unpublished data, credentials, access tokens,
+and other sensitive information. A small synthetic reproduction is preferred when
+possible. This experimental project provides support on a best-effort basis and does
+not promise a response time.
 
 ## Feedback on the broader specification
 
 Questions and critique about the nomue Protocol or nomue Record Specification belong
-in the public Protocol project:
+to the public Protocol project. You may nevertheless start with a verifier feedback
+issue when the correct destination is unclear:
 
 https://github.com/licklider-ai/nomue-protocol
 
