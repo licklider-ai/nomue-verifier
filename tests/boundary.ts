@@ -15,6 +15,7 @@ const historicalExtractionFiles = new Set(manifest.files.map((f) => f.destinatio
 const postExtractionOperationalFiles = new Set([
   "REBUILD.md",
   "scripts/rebuild-evidence.mjs",
+  "scripts/package-smoke.mjs",
   "OFFLINE-VERIFICATION.md",
   "offline/Dockerfile",
   "offline/network-probe.mjs",

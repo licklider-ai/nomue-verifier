@@ -32,6 +32,21 @@ bundle.
 
 ## Quick start
 
+Run the verifier without installing it globally:
+
+```bash
+npx --yes @licklider/nomue-verifier verify ./record.json --format json
+```
+
+Or install the `nomue` command:
+
+```bash
+npm install --global @licklider/nomue-verifier
+nomue verify ./record.json --format json
+```
+
+To try the repository's valid and intentionally mismatched examples:
+
 ```bash
 git clone https://github.com/licklider-ai/nomue-verifier.git
 cd nomue-verifier
@@ -50,6 +65,11 @@ Machine-readable verifier output is JSON on stdout. With `--format json` or
 command invokes the same reference CLI implementation carried by the Protocol-derived
 verifier code; the old August PASS/FAIL presentation wrapper is no longer the package
 entry point.
+
+The npm package is configured for public distribution and carries the exact package,
+Protocol, and bundle identities described in this document. Installing it does not call
+a nomue service; Record verification remains local after npm has installed the package
+dependencies.
 
 ## CLI
 
