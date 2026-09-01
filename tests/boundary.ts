@@ -13,6 +13,10 @@ const historicalExtractionFiles = new Set(manifest.files.map((f) => f.destinatio
 // extraction. Release 1 operational/rebuild/offline-evidence files added later are
 // authorized here explicitly instead of rewriting that historical manifest.
 const postExtractionOperationalFiles = new Set([
+  ".github/ISSUE_TEMPLATE/bug.yml",
+  ".github/ISSUE_TEMPLATE/config.yml",
+  ".github/ISSUE_TEMPLATE/documentation.yml",
+  ".github/ISSUE_TEMPLATE/feedback.yml",
   "REBUILD.md",
   "scripts/rebuild-evidence.mjs",
   "scripts/package-smoke.mjs",

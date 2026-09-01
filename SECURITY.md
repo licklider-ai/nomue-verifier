@@ -6,11 +6,14 @@ is not a server-side verification service.
 
 ## Reporting a vulnerability
 
-Report security issues in this verifier privately via:
+Report suspected vulnerabilities privately through GitHub's private vulnerability
+reporting form:
 
-**https://licklider.ai**
+**https://github.com/licklider-ai/nomue-verifier/security/advisories/new**
 
-Please do not open a public GitHub issue for security-sensitive findings.
+Please do not open a public GitHub issue for security-sensitive findings. Do not
+include credentials, private Records, unpublished data, or exploit details in a public
+issue.
 
 For non-security packaging defects (broken `verify` commands, unclear README
 instructions), GitHub Issues are welcome as described in

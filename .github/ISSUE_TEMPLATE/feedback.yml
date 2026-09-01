@@ -1,0 +1,47 @@
+name: Question, feedback, or feature request
+description: Share a question, unmet need, criticism, or improvement request.
+title: "[Feedback]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You do not need to decide whether this belongs to the verifier package or the broader Protocol. Start here and maintainers will route it if necessary. Do not include private Records, unpublished data, credentials, or security-sensitive details.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type of feedback
+      options:
+        - Question
+        - Unmet need or usability problem
+        - Feature request
+        - Criticism of verification behavior or boundaries
+        - Other feedback
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: What were you trying to do?
+      description: Describe the goal and where the verifier did not help as expected.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What outcome would be useful?
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Additional context
+      description: Add safe examples or links. A maintainer will route Protocol questions when needed.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-data check
+      options:
+        - label: I removed credentials, private Records, unpublished data, and security-sensitive details.
+          required: true
+        - label: This is not a suspected security vulnerability.
+          required: true

@@ -1,0 +1,71 @@
+name: Bug report
+description: Report a broken install, command, output, or packaged verifier behavior.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a problem. Do not include private Records, unpublished data, credentials, access tokens, or security-sensitive details. Use a small synthetic Record when possible. Report suspected vulnerabilities through the private security link on the issue chooser.
+  - type: input
+    id: version
+    attributes:
+      label: Verifier version
+      description: Run `nomue --version` if available, or provide the installed npm package version.
+      placeholder: 0.2.1-rc.0
+    validations:
+      required: true
+  - type: dropdown
+    id: installation
+    attributes:
+      label: How did you run it?
+      options:
+        - npx
+        - Global npm install
+        - Repository checkout
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, Node.js version, and npm version.
+      placeholder: Windows 11; Node.js 22.x; npm 10.x
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command
+      description: Paste the exact command after removing secrets and private paths.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead? Include the exit code and sanitized output when available.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Provide the smallest safe steps or synthetic Record that reproduces the problem.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-data check
+      options:
+        - label: I removed credentials, private Records, unpublished data, and security-sensitive details.
+          required: true
+        - label: This is not a suspected security vulnerability.
+          required: true

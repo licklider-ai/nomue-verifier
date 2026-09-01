@@ -30,6 +30,18 @@ the registered ITGC Profile, with the two-sided Welch two-sample t procedure and
 exact 0.2.1 numerical check versions. Production attestation is not supported by this
 bundle.
 
+## Feedback and support
+
+Found a broken command, unclear instruction, or behavior that did not meet your
+expectations? [Open a GitHub issue](https://github.com/licklider-ai/nomue-verifier/issues/new/choose).
+You do not need to decide whether the problem belongs to the verifier package or the
+broader Protocol before reporting it; maintainers will route it if necessary.
+
+Do not include private Records, unpublished data, credentials, or security-sensitive
+details in a public issue. Report suspected vulnerabilities privately as described in
+[SECURITY.md](SECURITY.md). This package is experimental, and support is provided on a
+best-effort basis without a response-time guarantee.
+
 ## Quick start
 
 Run the verifier without installing it globally:
@@ -155,7 +167,8 @@ The canonical Protocol repository and Release 1 assets are published at
 
 External code and specification contributions are not currently accepted through this
 repository. Protocol contribution rules are governed separately by the Protocol
-project.
+project. Bug reports, documentation problems, questions, and other feedback remain
+welcome through [GitHub Issues](https://github.com/licklider-ai/nomue-verifier/issues/new/choose).
 
 ## Security
 
