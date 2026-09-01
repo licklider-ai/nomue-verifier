@@ -59,10 +59,15 @@ function runNpm(args, options = {}) {
 }
 
 function runCli(command, args, options = {}) {
-  return run(command, args, {
-    shell: process.platform === "win32",
-    ...options,
-  });
+  if (process.platform === "win32") {
+    const commandParts = [command, ...args];
+    if (commandParts.some((part) => part.includes('"'))) {
+      fail("Windows package-smoke command contains an unsupported quote character");
+    }
+    const commandLine = commandParts.map((part) => `"${part}"`).join(" ");
+    return run(commandLine, [], { shell: true, ...options });
+  }
+  return run(command, args, options);
 }
 
 function parseJson(label, text) {
