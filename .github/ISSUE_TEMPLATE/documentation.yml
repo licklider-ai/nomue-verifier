@@ -1,0 +1,41 @@
+name: Documentation problem
+description: Report instructions that are missing, unclear, or incorrect.
+title: "[Docs]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tell us where the documentation caused confusion. Do not include private Records, unpublished data, credentials, or security-sensitive details.
+  - type: input
+    id: location
+    attributes:
+      label: Page or section
+      description: Link to the page or name the file and section.
+      placeholder: README.md — Quick start
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What was unclear or incorrect?
+    validations:
+      required: true
+  - type: textarea
+    id: expectation
+    attributes:
+      label: What did you need to know?
+      description: Describe the answer or next step you were looking for.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+      description: Optional wording or example that would have helped.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-data check
+      options:
+        - label: I removed credentials, private Records, unpublished data, and security-sensitive details.
+          required: true
