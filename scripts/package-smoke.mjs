@@ -99,6 +99,16 @@ try {
   if (packResult.status !== 0) fail("npm pack failed", packResult);
 
   const packOutput = parseJson("npm pack", packResult.stdout);
+  const unreleasedModules = ["approval.ts", "attestation.ts", "lifecycle.ts"];
+  const packedPaths = packOutput?.[0]?.files?.map((file) => file.path) ?? [];
+  for (const name of unreleasedModules) {
+    if (packedPaths.includes(`reference/verifier/src/${name}`)) {
+      fail(`unreleased source entered the Release 1 package: ${name}`);
+    }
+  }
+  if (packedPaths.some((path) => path.startsWith("reference/spikes/"))) {
+    fail("unreleased paired-t spike entered the Release 1 package");
+  }
   const filename = packOutput?.[0]?.filename;
   if (typeof filename !== "string" || filename.length === 0) {
     fail("npm pack did not return a tarball filename", packResult);

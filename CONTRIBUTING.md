@@ -30,8 +30,8 @@ contractual, and evidentiary identifiers.
 ## What is not accepted
 
 External **code** and **specification** contributions are **not currently accepted**
-in this verifier repository. This keeps verifier-packaging changes separate from
-Protocol authority and contribution terms.
+in this verifier repository. This preserves the existing contribution terms; reference implementation
+development here does not confer Protocol semantic authority.
 
 Do not open pull requests that change verifier semantics, schemas, registries, or
 Record fixtures unless you are an authorized steward performing a coordinated

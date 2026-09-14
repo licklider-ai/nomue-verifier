@@ -1,0 +1,116 @@
+{
+  "kind": "reference-source-ownership-transfer",
+  "date": "2026-09-14",
+  "source_repository": "licklider-ai/nomue-protocol",
+  "source_commit": "4a62f8e1768049560cb0ce8f09ef1676cb42130b",
+  "implementation_owner": "licklider-ai/nomue-verifier",
+  "note": "Historical byte-preserving intake inventory, not a permanent freeze of future Verifier development or a support declaration. SOURCE-PIN.json retains the original released semantic/source provenance.",
+  "files": [
+    {
+      "path": "reference/spikes/paired-t.ts",
+      "sha256": "8848619acc8f1268737a412518324729409721573a4b74beb0b245b19e642b1e"
+    },
+    {
+      "path": "reference/stats-kernel/src/kernel.ts",
+      "sha256": "360a2306b340e6959e2eea85fe21d3a89cd4f57c5f4b56b65a96dbf3f5dcbbcb"
+    },
+    {
+      "path": "reference/stats-kernel/src/t-distribution.ts",
+      "sha256": "dea980acb7687382305d5467ece7db0758041f41f2cd1f3daa33f69bf6177089"
+    },
+    {
+      "path": "reference/verifier/src/approval.ts",
+      "sha256": "b2353a26dccf5cdc186733932ddbf1009eee2fed548a803df0a57038431405fb"
+    },
+    {
+      "path": "reference/verifier/src/attestation.ts",
+      "sha256": "6df3189d4ac185031dfe5efa06218e04639e83d93b39910401647ebe69d197ec"
+    },
+    {
+      "path": "reference/verifier/src/cli.ts",
+      "sha256": "d12f5c233a2cd72fad8f3c284834b42eb5075e6acc0722f915a92148a25f8483"
+    },
+    {
+      "path": "reference/verifier/src/digest.ts",
+      "sha256": "e1a9a8e9399c0a568d4c68c8c1cce7dc446ed313ae77760ba700b76628594b0e"
+    },
+    {
+      "path": "reference/verifier/src/ingress.ts",
+      "sha256": "934e78d6a30d4f3f54b2ba7ea064c4e50731c1f623a00518dcd9ca9278859719"
+    },
+    {
+      "path": "reference/verifier/src/jcs.ts",
+      "sha256": "47503c50dbd009bae33807aac1994d26c6adb8e1cfadb90d711347ab8f2198a7"
+    },
+    {
+      "path": "reference/verifier/src/lifecycle.ts",
+      "sha256": "2e1b75f229ec18e227300b7bd50617da34b5672f4d9ce7b91b8c705bba8cf483"
+    },
+    {
+      "path": "reference/verifier/src/limits.ts",
+      "sha256": "1309fac987b7ea787cdc7ce30b086111c1414e5f74beef78d8f80dbff44b9bc2"
+    },
+    {
+      "path": "reference/verifier/src/numerical-comparison.ts",
+      "sha256": "2ee3ffe91f9c67d1234912bd9716e8fb977c6a09debdfe20826f170e643e73da"
+    },
+    {
+      "path": "reference/verifier/src/projection.ts",
+      "sha256": "e7055c8e790f7deb56d8c83dcb3a442191816aba818a65a40efb1fc2964f5763"
+    },
+    {
+      "path": "reference/verifier/src/record-types-2a.ts",
+      "sha256": "33ab2a9dfb73153d51822e401eedaaf6be6593ce83f8d49a6e344ed8f1af4292"
+    },
+    {
+      "path": "reference/verifier/src/record-types.ts",
+      "sha256": "ff3cea74fc79cbb129e562ac6a5a2faed193236a5d6713acfda3ebaa76c0fcda"
+    },
+    {
+      "path": "reference/verifier/src/refusal.ts",
+      "sha256": "897ab84b6a5b2b60cedc0982856c9b7b5743db380b6069dca4789c9292b8e1bd"
+    },
+    {
+      "path": "reference/verifier/src/report-types.ts",
+      "sha256": "d4021a41d878b983130c92c5ac792e5cccf437427f174f542c6af4371787bf0c"
+    },
+    {
+      "path": "reference/verifier/src/semantic-2a.ts",
+      "sha256": "d0b8dd6f61973f034a10d6d755bb4d65741dbb7397d64f2e70a11f97ca1a098a"
+    },
+    {
+      "path": "reference/verifier/src/semantic.ts",
+      "sha256": "465abdad01bd64fb8da7726546c4af5bee62a763bbe519f5788024d9743bfd93"
+    },
+    {
+      "path": "reference/verifier/src/strict-json.ts",
+      "sha256": "e7ed609f7e3b754f484e0f07b9ba0b3c33e63d5869de082a2583a0bc26a8dd56"
+    },
+    {
+      "path": "reference/verifier/src/verify-phase1.ts",
+      "sha256": "84a99895c4550c0489d1f8ee3601f5a0f7e339803b756f39a8bef21550bf1ece"
+    },
+    {
+      "path": "reference/verifier/src/verify-phase2a-021.ts",
+      "sha256": "dd79e60e7928bf0c8fbc4a4d53f497cd9f89bb20ecbe45469454e3d8b7989cf2"
+    },
+    {
+      "path": "reference/verifier/src/verify-phase2a.ts",
+      "sha256": "617951c5590dcb9c10402620c06e43911d7cfd5ed702f130a80e8742a65ab6b6"
+    },
+    {
+      "path": "reference/verifier/src/verify.ts",
+      "sha256": "19700f2138ca367c04b65b5b41fb83651bd4fa6e0070a092c0999b79af776e80"
+    }
+  ],
+  "excluded_adapter": {
+    "path": "reference/verifier/src/resources.ts",
+    "reason": "Repository/package resource lookup and source-identity adaptation differ; each repository retains its existing adapter."
+  },
+  "unreleased_files": [
+    "reference/spikes/paired-t.ts",
+    "reference/verifier/src/approval.ts",
+    "reference/verifier/src/attestation.ts",
+    "reference/verifier/src/lifecycle.ts"
+  ]
+}

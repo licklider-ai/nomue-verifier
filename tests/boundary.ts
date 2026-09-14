@@ -23,6 +23,17 @@ const postExtractionOperationalFiles = new Set([
   "OFFLINE-VERIFICATION.md",
   "offline/Dockerfile",
   "offline/network-probe.mjs",
+  // Founder-authorized reference source ownership transfer (2026-09-14).
+  // These exact files do not broaden the npm runtime or supported bundles.
+  ".gitattributes",
+  "AGENTS.md",
+  "REFERENCE-ORIGIN.json",
+  "REFERENCE-OWNERSHIP.md",
+  "reference/spikes/paired-t.ts",
+  "reference/verifier/src/.npmignore",
+  "reference/verifier/src/approval.ts",
+  "reference/verifier/src/attestation.ts",
+  "reference/verifier/src/lifecycle.ts",
 ]);
 const currentAllowlist = new Set([
   ...historicalExtractionFiles,

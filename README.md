@@ -147,6 +147,13 @@ is no default bundle and no inference from version proximity. The Release 1 publ
 support target is the exact `0.2.1-draft.1` bundle above; the older 0.1 and 0.2.0
 bundles are historical/development surfaces, not aliases for Release 1.
 
+## Implementation development
+
+The public reference implementation is developed in this repository. Protocol
+retains specification, check-version and conformance authority. See
+[REFERENCE-OWNERSHIP.md](REFERENCE-OWNERSHIP.md) for the byte-preserving intake,
+Protocol consumer copies and unchanged experimental support boundary.
+
 ## Source provenance
 
 `SOURCE-PIN.json` identifies the final Protocol candidate content commit used for this
