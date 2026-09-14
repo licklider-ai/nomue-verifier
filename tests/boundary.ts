@@ -27,6 +27,8 @@ const postExtractionOperationalFiles = new Set([
   // These exact files do not broaden the npm runtime or supported bundles.
   ".gitattributes",
   "AGENTS.md",
+  // Owner-approved instruction import; not part of the published runtime.
+  "CLAUDE.md",
   "REFERENCE-ORIGIN.json",
   "REFERENCE-OWNERSHIP.md",
   "reference/spikes/paired-t.ts",

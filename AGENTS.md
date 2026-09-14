@@ -26,3 +26,14 @@ Run npm test and npm run test:package for runtime or packaging changes. Use
 the corresponding pinned Protocol conformance/oracle tests for reference
 changes. Preserve Linux, Windows and macOS coverage. Follow CONTRIBUTING.md
 for artifact naming, attribution and material process disclosure.
+
+## Public implementation boundary
+
+Steward direction adopted 2026-09-14: maintain the public reference checker for
+continued public Protocol scopes. Keep its promised numerical checking correct.
+Production-only optimization, orchestration, session handling and private runtime
+data do not belong here merely because the commercial product uses them.
+Before any public push or PR, inspect the actual outgoing files and text for
+unnecessary production detail. Use public or explicitly publication-cleared inputs.
+The public checker is not intentionally degraded to create a paid-product gap.
+Preserve the methodology and evidence needed to reproduce covered checks.
