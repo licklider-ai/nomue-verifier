@@ -17,6 +17,13 @@ export function studentTCdf(x: number, df: number): number {
   if (!Number.isFinite(x) || !Number.isFinite(df) || df <= 0) {
     throw new RangeError(`studentTCdf: invalid input x=${x}, df=${df}`);
   }
+  // The df=1 distribution has an exact Cauchy closed form.  Use it around
+  // the center, where the dependency path can round 1 - z to one and erase
+  // small, representable departures from 0.5 (SciPy #25667).  Retain the
+  // dependency's tail path outside this interval to avoid subtractive loss.
+  if (df === 1 && Math.abs(x) <= 1) {
+    return 0.5 + Math.atan(x) / Math.PI;
+  }
   return tCdf(x, df);
 }
 
