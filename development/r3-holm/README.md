@@ -1,4 +1,4 @@
-# Unissued Holm D1 successor inner call
+# Unissued Holm D1 successor development
 
 Date: 2026-09-18 UTC. **Component implementation checkpoint; D1 remains open.**
 This directory is outside the npm allowlist, released CLI, registered dispatcher,
@@ -15,9 +15,11 @@ are produced; no supported capability is added. The package remains Release 1 on
   Eight schema/fixture artifacts are copied byte-for-byte under `fixtures/`,
   pinned in `PROVENANCE.json`. The D0 relation algorithm is extracted into
   `d0-relations.ts`; see the current handoff for its exact source and adaptations.
-  The next checkpoint also retains the numerical kernel, worker and independent
-  oracle byte-for-byte in `numerics/`, with their own provenance manifest.
-  The legacy envelope and supervisor are not imported.
+  The numerical worker and oracle retain their source bytes; the later B-2
+  checkpoint wires the preserved bounded-sort repair into `numerics/candidate.py`.
+  Numerical provenance manifests identify both origins. The controlled-call
+  checkpoint adapts the historical supervisor into `outer-supervisor.py`; the
+  legacy envelope is not used as the new invocation contract.
 
 This step connects actual S/K/D/H/I/C evaluations to the unchanged numerical
 worker A and versioned development output. Source/IEEE/Holm numerical evidence
@@ -105,7 +107,7 @@ For the actual numerical child, use Linux x64 / Python 3.12.14 and set
 `NOMUE_TEST_PYTHON` to its absolute executable path before the test command above.
 Then run `python3 development/r3-holm/numerics/test_worker.py` with that interpreter.
 The dedicated CI job uses Node 24.19.0 / Python 3.12.14. Without the explicit
-interpreter the one actual-child test is skipped, not treated as passing evidence.
+interpreter the tests requiring the actual child are skipped, not treated as passing evidence.
 
 `evaluateInner` and `evaluateInnerFiles` are development-only inner compositions.
 They produce either a scoped candidate.5 report or a verifier-selected refusal,
@@ -127,7 +129,7 @@ or independent researcher review is claimed for these author tests.
 `tests/boundary.ts` names every file in this directory in its existing
 repository inventory; it does not use a wildcard or edit historical extraction
 evidence. `scripts/package-smoke.mjs` additionally rejects any `development/`
-entry in the actual npm tarball. See [current handoff](OUTER-CALL-HANDOFF.md) for coverage, self-review,
+entry in the actual npm tarball. See [current handoff](ORACLES-HANDOFF.md) for coverage, self-review,
 remaining work and the bounded independent implementation-review request.
 
 Prepared with OpenAI Codex assistance in the continuing author/coordinator
@@ -157,10 +159,10 @@ resource and unexpected host failures still refuse the invocation. Candidate.5
 uses `p_generation: not_asserted`; p generation remains outside the checked scope.
 The versioned vocabulary change needs D3 schema/public-surface disposition.
 
-The next bounded expansion and review request is [EXPANSION-HANDOFF.md](EXPANSION-HANDOFF.md).
+The earlier bounded expansion is recorded in [EXPANSION-HANDOFF.md](EXPANSION-HANDOFF.md).
 It distinguishes ordinary controlled-call variants from trusted fault-entry runs.
 
-The current numerical review intake and bounded-sort wiring are in
+The earlier numerical review intake and bounded-sort wiring are in
 [B2-INTEGRATION-HANDOFF.md](B2-INTEGRATION-HANDOFF.md). Replay the retained
 independent expectations with `python -B development/r3-holm/numerics/replay_b2.py`.
 Earlier checkpoint records remain historical evidence, not approvals of later heads.
