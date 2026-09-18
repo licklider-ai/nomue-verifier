@@ -25,6 +25,7 @@
     "reference/stats-kernel/src/",
     "schemas/",
     "registries/",
+    "NOTICE",
     "NON-CLAIMS.md",
     "SOURCE-PIN.json",
     "SECURITY.md"

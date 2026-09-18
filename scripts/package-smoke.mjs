@@ -102,6 +102,7 @@ try {
   const packOutput = parseJson("npm pack", packResult.stdout);
   const unreleasedModules = ["approval.ts", "attestation.ts", "lifecycle.ts"];
   const packedPaths = packOutput?.[0]?.files?.map((file) => file.path) ?? [];
+  if (!packedPaths.includes("NOTICE")) fail("third-party NOTICE is missing from the package");
   for (const name of unreleasedModules) {
     if (packedPaths.includes(`reference/verifier/src/${name}`)) {
       fail(`unreleased source entered the Release 1 package: ${name}`);

@@ -2,7 +2,7 @@
  * This is an implementation repair, not a tolerance or supported-method change.
  * No independently certified error enclosure is claimed.
  */
-import Decimal from "decimal.js";
+import { Decimal } from "decimal.js";
 
 // Private context: consumers changing Decimal's defaults cannot change this path.
 const D = Decimal.clone({ precision: 80, rounding: Decimal.ROUND_HALF_EVEN });

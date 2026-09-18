@@ -229,7 +229,9 @@ export function welchTwoSampleTTestWithCi(
   // Dimensionless trigger: lost digits near either endpoint require guard digits
   // throughout moments, df, quantile and subtraction, not just a compensated sum.
   const size = Math.max(Math.abs(base.mean_difference), Math.abs(criticalValue * base.standard_error));
-  if (Math.min(Math.abs(lower), Math.abs(upper)) / size < 1e-6) {
+  // Include the band just above 1e-6 where binary64 error can still exceed
+  // the registered endpoint tolerance; 1e-4 leaves additional guard margin.
+  if (Math.min(Math.abs(lower), Math.abs(upper)) / size < 1e-4) {
     try {
       const r = preciseWelchInterval(group1.values, group2.values, confidenceLevel, criticalValue);
       const p = twoSidedPValue(r.t, r.df);

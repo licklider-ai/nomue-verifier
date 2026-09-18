@@ -48,4 +48,14 @@ for n,m in [(5,7),(3,4),(2,2),(9,13)]:
         for exponent in [-20,0,20]:
             aa=[x*2**exponent for x in shifted]; bb=[x*2**exponent for x in b]
             rows.append(dict(name=f'{n}-{m}/{offset}/{exponent}',a=aa,b=bb,expected=reference(aa,bb)))
+    # Old-trigger missed band, then either side of the new 1e-4 trigger.
+    # Requested ratios are approximate: reference the actual rounded inputs.
+    for ratio in [2e-6, 9e-5, 1.1e-4]:
+        for sign in [-1, 1]:
+            shifted=[x+shift+sign*shift*ratio for x in a]
+            for exponent in [-20,0,20]:
+                aa=[x*2**exponent for x in shifted]; bb=[x*2**exponent for x in b]
+                rows.append(dict(name=f'{n}-{m}/ratio-{sign*ratio}/{exponent}',
+                                 a=aa,b=bb,expected_refinement=ratio < 1e-4,
+                                 expected=reference(aa,bb)))
 print(json.dumps(dict(provenance='mpmath 1.3.0, 100 digits; Fraction binary64 moments; beta inversion checked by density quadrature',rows=rows),indent=2))
