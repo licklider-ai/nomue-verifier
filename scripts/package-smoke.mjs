@@ -18,6 +18,7 @@ const expectedRuntimeDependencies = {
   "@stdlib/stats-base-dists-t-cdf": "0.2.3",
   "@stdlib/stats-base-dists-t-quantile": "0.2.3",
   ajv: "8.20.0",
+  "decimal.js": "10.6.0",
   tsx: "4.23.12",
   yaml: "2.9.0",
 };
@@ -101,6 +102,7 @@ try {
   const packOutput = parseJson("npm pack", packResult.stdout);
   const unreleasedModules = ["approval.ts", "attestation.ts", "lifecycle.ts"];
   const packedPaths = packOutput?.[0]?.files?.map((file) => file.path) ?? [];
+  if (!packedPaths.includes("NOTICE")) fail("third-party NOTICE is missing from the package");
   for (const name of unreleasedModules) {
     if (packedPaths.includes(`reference/verifier/src/${name}`)) {
       fail(`unreleased source entered the Release 1 package: ${name}`);
