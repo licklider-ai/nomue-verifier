@@ -3,6 +3,8 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { parse as parseYaml } from "yaml";
+import { studentTCdf, twoSidedPValue } from "../reference/stats-kernel/src/t-distribution.js";
+import { withinPValueTolerance021 } from "../reference/verifier/src/numerical-comparison.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const nomue = join(root, "bin", "nomue.cjs");
@@ -117,6 +119,26 @@ if (!invalid.stdout.includes(RECOMPUTE_021)) {
 if (!invalid.stdout.includes("NRS-DECLARED-RESULT-MISMATCH")) {
   console.error("invalid 0.2.1 hero: expected declared-result mismatch reason code");
   process.exit(1);
+}
+
+// Regression for the df=1 center quantization reported in SciPy #25667.
+// These decimal expectations come from the exact Cauchy closed form, not the
+// reference dependency under test.
+const centerT = 7.45e-9;
+const expectedCenterCdf = 0.5000000023714086;
+const expectedCenterP = 0.9999999952571827;
+const centerCdf = studentTCdf(centerT, 1);
+const centerP = twoSidedPValue(centerT, 1).p_value;
+if (centerCdf !== expectedCenterCdf || centerP !== expectedCenterP) {
+  fail(
+    `df=1 center regression: expected CDF ${expectedCenterCdf} and p ${expectedCenterP}, got ${centerCdf} and ${centerP}`,
+  );
+}
+if (studentTCdf(centerT, 1) + studentTCdf(-centerT, 1) !== 1) {
+  fail("df=1 center regression: positive/negative CDF symmetry was not preserved");
+}
+if (withinPValueTolerance021(centerP, 1, 1e-10)) {
+  fail("df=1 center regression: a quantized p=1 claim must be rejected");
 }
 
 console.log("smoke: OK");
