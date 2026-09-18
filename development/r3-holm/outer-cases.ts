@@ -2,6 +2,7 @@
 import { readFileSync, writeFileSync, mkdirSync, symlinkSync } from "node:fs";
 import { resolve, join } from "node:path";
 import { baseRecord, seal, context } from "./outer-fixtures.ts";
+import { contextMatrix } from "./context-matrix.ts";
 import { jcsCanonicalize } from "../../reference/verifier/src/jcs.ts";
 const dir = resolve(process.argv[2]);
 mkdirSync(dir, { recursive: true });
@@ -460,6 +461,17 @@ for (const v of oracle.full_call_vectors) {
     reference_digest: v.digest,
     projection_utf8: v.projection,
   });
+}
+// Full context/Record cross-product, with all seven expected rows fixed before calls.
+for (const c of contextMatrix()) {
+  add(
+    c.id,
+    c.bytes,
+    c.expected,
+    Object.fromEntries(c.rows.map((r) => [r.stage, r.outcome ?? r.execution])),
+    undefined,
+    { forward: c.forward, expected_rows: c.rows },
+  );
 }
 // Persist expectations before running any candidate; the runner never rewrites these.
 writeFileSync(join(dir, "cases.json"), JSON.stringify(rows, null, 2) + "\n");

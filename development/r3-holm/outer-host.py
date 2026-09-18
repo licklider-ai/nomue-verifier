@@ -62,6 +62,12 @@ def tests(delegation, artifact):
                 assert output['kind']=='refusal' and output['refusal_kind']==case['refusal'],output
             else:
                 assert output['kind']=='report',output
+                if 'expected_rows' in case:
+                    # Compare complete rows, including absence of outcome on
+                    # error/not_run, blocker order and transitive reason union.
+                    project=lambda row:{k:v for k,v in row.items() if k!='scope'}
+                    assert list(map(project,output['conformance']))==case['expected_rows'][:4],output
+                    assert list(map(project,output['verification']))==case['expected_rows'][4:],output
                 by_stage={row['stage']:row for row in output['conformance']+output['verification']}
                 for stage,want in case['checks'].items():
                     row=by_stage[stage]
