@@ -171,10 +171,15 @@ The earlier [D1 oracle checkpoint](ORACLES-HANDOFF.md) follows the independent
 B-2 integration receipt. It repairs retained-result comparison and adds raw-byte
 and component-boundary evidence; D1 remains open. Earlier handoffs are chronology.
 
-The current [context cross-product checkpoint](CONTEXT-MATRIX-HANDOFF.md) adds
+The [context cross-product checkpoint](CONTEXT-MATRIX-HANDOFF.md) adds
 105 ordinary cases and 14 callback-only error cases. It tests independent Record
 results, exact blocker/reason propagation and context binding without changing
 runtime behavior. The earlier oracle delta's independent review remains pending.
+
+The current [helper failure checkpoint](HELPER-FAULTS-HANDOFF.md) repairs projection
+and digest exception classification and adds isolated source-copy fault tests.
+Independent review is required before merging this runtime repair or relying on
+its evidence. D1 remains open; cleanup failure and supervisor loss remain separate.
 
 ## Main integration before development merge
 

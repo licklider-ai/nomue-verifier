@@ -60,6 +60,13 @@ jobs:
           python -B development/r3-holm/oracles/generate.py
           python -B development/r3-holm/outer-supervisor.test.py
           node development/r3-holm/context-sensitivity.mjs
+          python -B development/r3-holm/helper-faults.py --output "$RUNNER_TEMP/r3-helper-inner"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r3-helper-inner-evidence
+          path: ${{ runner.temp }}/r3-helper-inner/
+          if-no-files-found: error
 
   r3-controlled-host:
     name: unissued R3 controlled-host regression (not adoption)

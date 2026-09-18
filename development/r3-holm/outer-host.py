@@ -155,6 +155,15 @@ def tests(delegation, artifact):
         assert all(r['evidence']['cleanup'].values()),r
         return {'category':r['category']}
     check('host-cancellation',cancellation)
+    # Mutants are separate test copies with separate inventories and receipts.
+    # Keep them out of the ordinary/fault-entry receipt count for the candidate.
+    import importlib.util
+    spec=importlib.util.spec_from_file_location('helper_faults',HERE/'helper-faults.py')
+    helpers=importlib.util.module_from_spec(spec);spec.loader.exec_module(helpers)
+    result=helpers.exercise(delegation,artifact/'helper-faults',NODE,PYTHON)
+    for row in result['rows']:
+        rows.append({**row,'name':'helper-'+row['name'],
+                     'evidence_class':'disposable source copy; see helper-faults/RESULTS.json'})
 
 
 def main():

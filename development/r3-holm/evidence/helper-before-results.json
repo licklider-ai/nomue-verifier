@@ -1,0 +1,86 @@
+{
+  "status": "author disposable-source fault evidence, not candidate or host qualification",
+  "lane": "inner-only",
+  "passed": 8,
+  "total": 14,
+  "rows": [
+    {
+      "name": "00-baseline-R3D-01",
+      "pass": true,
+      "mode": "baseline",
+      "repin": true
+    },
+    {
+      "name": "01-baseline-R3D-07",
+      "pass": true,
+      "mode": "baseline",
+      "repin": true
+    },
+    {
+      "name": "02-baseline-R3D-14",
+      "pass": true,
+      "mode": "baseline",
+      "repin": true
+    },
+    {
+      "name": "03-canonicalizer-throws-R3D-01",
+      "pass": true,
+      "mode": "canonicalizer-throws",
+      "repin": true
+    },
+    {
+      "name": "04-canonicalizer-throws-R3D-07",
+      "pass": true,
+      "mode": "canonicalizer-throws",
+      "repin": true
+    },
+    {
+      "name": "05-canonicalizer-throws-R3D-14",
+      "pass": true,
+      "mode": "canonicalizer-throws",
+      "repin": true
+    },
+    {
+      "name": "06-projection-throws-R3D-01",
+      "pass": false,
+      "error": "AssertionError({'protocol': 'unissued-holm-output/0.3.0-candidate.5', 'kind': 'refusal', 'refusal_kind': 'internal_error', 'reason': 'candidate:holm:invocation_internal_error'})"
+    },
+    {
+      "name": "07-projection-throws-R3D-07",
+      "pass": false,
+      "error": "AssertionError({'protocol': 'unissued-holm-output/0.3.0-candidate.5', 'kind': 'refusal', 'refusal_kind': 'internal_error', 'reason': 'candidate:holm:invocation_internal_error'})"
+    },
+    {
+      "name": "08-projection-throws-R3D-14",
+      "pass": false,
+      "error": "AssertionError({'protocol': 'unissued-holm-output/0.3.0-candidate.5', 'kind': 'refusal', 'refusal_kind': 'internal_error', 'reason': 'candidate:holm:invocation_internal_error'})"
+    },
+    {
+      "name": "09-digest-throws-R3D-01",
+      "pass": false,
+      "error": "AssertionError({'protocol': 'unissued-holm-output/0.3.0-candidate.5', 'kind': 'refusal', 'refusal_kind': 'internal_error', 'reason': 'candidate:holm:invocation_internal_error'})"
+    },
+    {
+      "name": "10-digest-throws-R3D-07",
+      "pass": false,
+      "error": "AssertionError({'protocol': 'unissued-holm-output/0.3.0-candidate.5', 'kind': 'refusal', 'refusal_kind': 'internal_error', 'reason': 'candidate:holm:invocation_internal_error'})"
+    },
+    {
+      "name": "11-digest-throws-R3D-14",
+      "pass": false,
+      "error": "AssertionError({'protocol': 'unissued-holm-output/0.3.0-candidate.5', 'kind': 'refusal', 'refusal_kind': 'internal_error', 'reason': 'candidate:holm:invocation_internal_error'})"
+    },
+    {
+      "name": "12-projection-disagreement-R3D-01",
+      "pass": true,
+      "mode": "projection-disagreement",
+      "repin": true
+    },
+    {
+      "name": "13-guard-disabled-control-R3D-01",
+      "pass": true,
+      "mode": "guard-disabled-control",
+      "repin": true
+    }
+  ]
+}

@@ -182,7 +182,7 @@ test("budget failures propagate unchanged at early and late checkpoints", () => 
   inspectStoredBytes(input, () => {
     total++;
   });
-  for (const stop of [1, total]) {
+  for (const stop of Array.from({ length: total }, (_, i) => i + 1)) {
     const sentinel = new StoredInputError(
       "resource_limit",
       "processing_timeout",
@@ -195,5 +195,25 @@ test("budget failures propagate unchanged at early and late checkpoints", () => 
         }),
       (e) => e === sentinel,
     );
+  }
+});
+test("projection checkpoints preserve even untyped cancellation sentinels", () => {
+  const input = Buffer.from('{"a":1,"integrity":{}}');
+  let total = 0;
+  inspectStoredBytes(input, () => total++);
+  for (const sentinel of [new Error("cancelled"), undefined]) {
+    for (let stop = 1; stop <= total; stop++) {
+      let seen = 0,
+        caught = false;
+      try {
+        inspectStoredBytes(input, () => {
+          if (++seen === stop) throw sentinel;
+        });
+      } catch (error) {
+        caught = true;
+        assert.equal(error, sentinel);
+      }
+      assert.equal(caught, true);
+    }
   }
 });

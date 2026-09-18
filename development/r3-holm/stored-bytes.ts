@@ -195,19 +195,39 @@ export function inspectParsedBytes(
     );
   }
   checkpoint();
-  const projected = projection(original, checkpoint);
+  let projected: Buffer;
+  let checkpointFailed = false;
+  try {
+    projected = projection(original, () => {
+      try {
+        checkpoint();
+      } catch (error) {
+        checkpointFailed = true;
+        throw error;
+      }
+    });
+  } catch (error) {
+    // Budget/cancellation failures retain their original owner and precedence.
+    if (checkpointFailed || error instanceof StoredInputError) throw error;
+    throw new StoredInputError("canonicalization_failure", "record_projection");
+  }
   const canonicalStorage = original.equals(canonical);
   if (canonicalStorage && !projected.equals(canonicalProjection))
     throw new StoredInputError(
       "canonicalization_failure",
       "projection_disagreement",
     );
-  const referenceDigest =
-    "sha256:" +
-    createHash("sha256")
-      .update("nomue/record-content/v1\n")
-      .update(projected)
-      .digest("hex");
+  let referenceDigest: string;
+  try {
+    referenceDigest =
+      "sha256:" +
+      createHash("sha256")
+        .update("nomue/record-content/v1\n")
+        .update(projected)
+        .digest("hex");
+  } catch {
+    throw new StoredInputError("canonicalization_failure", "record_digest");
+  }
   checkpoint();
   return {
     original,
