@@ -2,6 +2,12 @@
   "status": "implementation accounting, not adoption or executed-host evidence",
   "design_source": "Protocol 1eb6b93 D0 ACCEPTANCE.md, 44 locators",
   "ordinary_case_count": 163,
+  "helper_fault_copies": {
+    "source": "helper-faults.py",
+    "inner_case_count": 20,
+    "host_case_count": 21,
+    "accounting": "Separate explicitly identified test-copy inventories; two negative sensitivity controls; one host-only unpinned source-drift control. Not additional ordinary candidate calls or independent clearance."
+  },
   "context_matrix": {
     "source": "context-matrix.ts",
     "ordinary_case_count": 105,
@@ -386,14 +392,14 @@
       "status": "partial; no whole-row closure claimed",
       "ordinary_variants": ["R3D-43"],
       "controlled_fault_entry": [],
-      "remaining": "Nonfinite canonicalization refusal covered; forced extraction/digest failures remain."
+      "remaining": "Forced canonicalizer/projection/digest failures now tested across valid/S-fail/K-fail in separate source copies. Independent review and full locator disposition remain."
     },
     {
       "locator": "R3D-44",
       "status": "partial; no whole-row closure claimed",
       "ordinary_variants": [],
       "controlled_fault_entry": [],
-      "remaining": "Full-path canonicalizer/projection-helper corruption; existing helper evidence is not full-call evidence.",
+      "remaining": "Separate source-copy projection disagreement and guard/remarshal sensitivity controls added. Independent review, broader corruption combinations and whole-row disposition remain.",
       "component_evidence": [
         "oracles.test.ts: 324 constructed byte vectors and 10 Record vectors, fixed hashlib digests; not helper-corruption evidence"
       ]

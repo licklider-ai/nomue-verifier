@@ -60,6 +60,7 @@ export function parsedBounds(
 
 /** Scan UTF-8 byte offsets, only after strict syntax/eligibility and bounds. */
 function projection(bytes: Buffer, checkpoint: Checkpoint): Buffer {
+  // Never catch checkpoint exceptions: the caller preserves their original owner.
   const ws = (n: number) => n === 32 || n === 9 || n === 10 || n === 13;
   const tick = (i: number) => {
     if ((i & 255) === 0) checkpoint();
@@ -195,19 +196,42 @@ export function inspectParsedBytes(
     );
   }
   checkpoint();
-  const projected = projection(original, checkpoint);
+  let projected: Buffer;
+  let checkpointFailed = false;
+  try {
+    projected = projection(original, () => {
+      try {
+        checkpoint();
+      } catch (error) {
+        checkpointFailed = true;
+        throw error;
+      }
+    });
+  } catch (error) {
+    // Budget/cancellation failures retain their original owner and precedence.
+    if (checkpointFailed || error instanceof StoredInputError) throw error;
+    throw new StoredInputError("canonicalization_failure", "record_projection");
+  }
+  if (!Buffer.isBuffer(projected))
+    throw new StoredInputError("canonicalization_failure", "record_projection");
   const canonicalStorage = original.equals(canonical);
   if (canonicalStorage && !projected.equals(canonicalProjection))
     throw new StoredInputError(
       "canonicalization_failure",
       "projection_disagreement",
     );
-  const referenceDigest =
-    "sha256:" +
-    createHash("sha256")
-      .update("nomue/record-content/v1\n")
-      .update(projected)
-      .digest("hex");
+  let referenceDigest: string;
+  try {
+    referenceDigest =
+      "sha256:" +
+      createHash("sha256")
+        .update("nomue/record-content/v1\n")
+        .update(projected)
+        .digest("hex");
+  } catch (error) {
+    if (error instanceof StoredInputError) throw error;
+    throw new StoredInputError("canonicalization_failure", "record_digest");
+  }
   checkpoint();
   return {
     original,
