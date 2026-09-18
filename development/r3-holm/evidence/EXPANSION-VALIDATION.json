@@ -1,0 +1,46 @@
+{
+  "status": "author regression evidence; no local cgroup enforcement or independent clearance",
+  "parent": "3c51172a66d2c13ebec99e2dbe7c4ab892888af9",
+  "environment": {
+    "node": "v24.19.0",
+    "python": "Python 3.12.14",
+    "platform": "Linux x64; read-only cgroup mount"
+  },
+  "checks": {
+    "typescript_tests": {
+      "passed": 91,
+      "skipped": 0,
+      "raw": "expansion-tests.tap"
+    },
+    "strict_typecheck": "pass",
+    "inner_file_cases": {
+      "passed": 47,
+      "total": 47,
+      "source": "outer-cases.ts",
+      "cgroup": false
+    },
+    "native_fault_entries": {
+      "passed": 14,
+      "total": 14,
+      "actual_python_when_eligible": true,
+      "cgroup": false
+    },
+    "python_supervisor_tests": "5/5",
+    "independent_numeric_vectors": 86,
+    "npm_test": "pass",
+    "package_test": "pass"
+  },
+  "hashes": {
+    "outer-runtime.json": "916f57d17cd445128b067dbf52cd70a71b14e34313de56591cea0e9469631886",
+    "outer-cases.ts": "83b22c58c5c5fae3e766e17b4b31b264d7dd459d3fd80e94c878e8a28a3720e4",
+    "fault-injections.ts": "d634d4c333cfc2529d926dfd212693145b829ddbeab762a748a603cedeaa50a8",
+    "evidence/expansion-tests.tap": "a0c7f1564ae1e5dd64be0154f2df5172d443078f7397a437d48a4eecce986fe8"
+  },
+  "not_run": [
+    "Local actual cgroup controls/cleanup",
+    "Full 44-row parameterized acceptance",
+    "D2 dispatcher and legacy argument behavior",
+    "Actual cleanup failure or supervisor loss recovery",
+    "Full-path projection/digest helper corruption"
+  ]
+}

@@ -31,7 +31,11 @@
     },
     {
       "path": "development/r3-holm/execution.ts",
-      "sha256": "c4778d40cc34f467c40403c90ae90091e92396393dbb1b3ff60cbacbc9cf86d8"
+      "sha256": "b3439bcf6c6123bd16d5c3cf1c1704b8354ff8e58fab72e13bb8500a984bf365"
+    },
+    {
+      "path": "development/r3-holm/fault-injections.ts",
+      "sha256": "d634d4c333cfc2529d926dfd212693145b829ddbeab762a748a603cedeaa50a8"
     },
     {
       "path": "development/r3-holm/fixtures/declaration-shapes.json",
@@ -51,7 +55,7 @@
     },
     {
       "path": "development/r3-holm/inner-call.ts",
-      "sha256": "c7a53d8a8dc117294bcc14669e721a3c759ae709a03a478d54235e12b20ed9c0"
+      "sha256": "b5c72f23b1b7a9fec23b7f359dbef7b9029f9047eb09cf0010de7c8afbbed7e7"
     },
     {
       "path": "development/r3-holm/local-checks.ts",
@@ -82,6 +86,10 @@
       "sha256": "3791b3c989760302f05c937894c6ee3a7482ed200054c53557fd854c03aee55c"
     },
     {
+      "path": "development/r3-holm/outer-fault-entry.mjs",
+      "sha256": "170cf5f9e7ce6d4e0d8bc9169dd7e4403a3d722c62a39239c6ff0d5776acb719"
+    },
+    {
       "path": "development/r3-holm/outer-probes.mjs",
       "sha256": "d8bed0fa85e0ca792056614bca8057fab6fb093dd7515b82279337c2bdd7f455"
     },
@@ -91,7 +99,7 @@
     },
     {
       "path": "development/r3-holm/outer-supervisor.py",
-      "sha256": "2741e04b732fb5906a14602e0183029f42f99609759aee923313db5318b15f9e"
+      "sha256": "8a216c57b8eb1ebcbbfed242915e5bf5d7fd17f25e117be789baa30393c04ac4"
     },
     {
       "path": "development/r3-holm/output.ts",
@@ -100,6 +108,10 @@
     {
       "path": "development/r3-holm/stored-bytes.ts",
       "sha256": "09fd575a08c1ca7d5014f38e59f9393107a552eafa945d7ee111edc8551dd94f"
+    },
+    {
+      "path": "development/r3-holm/tsconfig.json",
+      "sha256": "4b0c8f0d51f52e0120b2e1323272652e192df28ce001cea912fc9b72ce1be722"
     },
     {
       "path": "package-lock.json",

@@ -49,7 +49,7 @@ def tests(delegation, artifact):
         def evaluate(case=case):
             name=case['id']; receipt=artifact/(name+'.receipt.json')
             p=run_checked([NODE,str(HERE/'outer-run.mjs'),str(delegation),PYTHON,
-                           case['record'],case['expected'],str(receipt)])
+                           case['record'],case['expected'] if case['expected'] is not None else '-',str(receipt)])
             assert p.returncode==0,p.stderr
             result=json.loads(p.stdout);(artifact/(name+'.result.json')).write_bytes(p.stdout)
             r=json.loads(receipt.read_text())
@@ -66,12 +66,60 @@ def tests(delegation, artifact):
                 for stage,want in case['checks'].items():
                     row=by_stage[stage]
                     assert (row.get('outcome') if row['execution']=='completed' else row['execution'])==want,(stage,row,want)
+                for stage,want in case.get('reasons',{}).items():
+                    assert by_stage[stage]['reasons']==want,(stage,by_stage[stage],want)
+                if case['id']=='R3D-42':
+                    # Fixed prerequisite order and union, independent of dependency implementation.
+                    ids=lambda names:['candidate:holm:0.3.0-candidate.5:'+n for n in names]
+                    assert by_stage['H']['blockers']==ids(['D'])
+                    assert by_stage['I']['blockers']==ids(['K'])
+                    assert by_stage['A']['blockers']==ids(['K','D','H','I','C'])
+                    expected_reasons=list(dict.fromkeys(by_stage['K']['reasons']+by_stage['D']['reasons']+by_stage['C']['reasons']))
+                    assert by_stage['H']['reasons']==by_stage['D']['reasons']
+                    assert by_stage['I']['reasons']==by_stage['K']['reasons']
+                    assert by_stage['A']['reasons']==expected_reasons
             assert ('verified_record_base64' in result)==case['forward'],result
             if case['forward']:
                 assert base64.b64decode(result['verified_record_base64'],validate=True)==Path(case['record']).read_bytes()
             return {'receipt':receipt.name,'result':name+'.result.json','expectations':case['checks'],
                     'original_byte_forward':case['forward']}
         check(case['id'],evaluate)
+    # Retain the path setup description, not a cyclic link in the upload archive.
+    (inputs/'record-loop').unlink()
+    # These run the real file/inner/worker/output/lifecycle path with a trusted
+    # replacement entry. Probe receipts are never accepted by controlledCall.
+    fault_plan=[]
+    for mode in ['fault-a-pass','fault-s-pass','fault-swap','fault-duplicate','fault-omit',
+                 'fault-error-outcome','fault-notrun-outcome','fault-generic-reason',
+                 'fault-missing-blocker','fault-unrelated-blocker','fault-missing-reason',
+                 'fault-late-budget','fault-schema-budget','fault-worker-output']:
+        schema=mode in ['fault-s-pass','fault-schema-budget']
+        absent=mode in ['fault-a-pass','fault-error-outcome','fault-notrun-outcome','fault-generic-reason',
+                        'fault-missing-blocker','fault-unrelated-blocker','fault-missing-reason']
+        fault_plan.append({'mode':mode,'record':str(inputs/('R3D-07.record' if schema else 'R3D-01.record')),
+                           'expected':None if absent else str(inputs/'R3D-01.expected'),
+                           'refusal':'resource_limit' if 'budget' in mode else 'internal_error'})
+    (artifact/'fault-plan.json').write_text(json.dumps(fault_plan,indent=2)+'\n')
+    for plan in fault_plan:
+        def injection(plan=plan):
+            cmd=[PYTHON,'-I',str(HERE/'outer-supervisor.py'),'--delegation',str(delegation),
+                 '--node',NODE,'--python',PYTHON,'--nonce',NONCE,'--probe',plan['mode'],plan['record']]
+            if plan['expected'] is not None:cmd.append(plan['expected'])
+            p=run_checked(cmd);assert p.returncode==0,p.stderr
+            r=json.loads(p.stdout)
+            (artifact/(plan['mode']+'.receipt.json')).write_bytes(p.stdout)
+            assert r['category']=='completed_valid',r
+            assert r['evidence']['probe']==plan['mode']
+            assert all(r['evidence']['cleanup'].values()),r
+            assert not Path(r['evidence']['leaf']).exists()
+            assert not Path(r['evidence']['temporary']).exists()
+            assert set(r['result'])=={'output'},r
+            output=r['result']['output']
+            assert output['kind']=='refusal' and output['refusal_kind']==plan['refusal'],r
+            assert 'conformance' not in output and 'verification' not in output
+            return {'receipt':plan['mode']+'.receipt.json','refusal':plan['refusal'],
+                    'entry':'trusted fault injection; not normal controlledCall'}
+        check(plan['mode'],injection)
     expected=[('node-memory','memory_enforced',['--memory','67108864','--deadline','2']),
               ('worker-memory','memory_enforced',['--memory','67108864','--deadline','2']),
               ('cpu','deadline',['--deadline','2']),

@@ -119,6 +119,25 @@ export function readBounded(
   }
 }
 
+/** Shared path classification; resource and unexpected failures are not access errors. */
+export function isInputAccessError(error: unknown): boolean {
+  if (error instanceof InvocationError)
+    return (
+      error.kind === "input_access_error" &&
+      error.reason === "regular_file_required"
+    );
+  if (error === null || typeof error !== "object") return false;
+  return [
+    "ENOENT",
+    "EACCES",
+    "EPERM",
+    "ENOTDIR",
+    "EISDIR",
+    "ELOOP",
+    "ENAMETOOLONG",
+  ].includes((error as NodeJS.ErrnoException).code ?? "");
+}
+
 export function expectedFile(
   path: string | undefined,
   checkpoint: () => void,
@@ -129,20 +148,7 @@ export function expectedFile(
     try {
       bytes = readBounded(path, LIMITS.expectedBytes, checkpoint);
     } catch (e) {
-      if (
-        (e instanceof InvocationError &&
-          e.kind === "input_access_error" &&
-          e.reason === "regular_file_required") ||
-        [
-          "ENOENT",
-          "EACCES",
-          "EPERM",
-          "ENOTDIR",
-          "EISDIR",
-          "ELOOP",
-          "ENAMETOOLONG",
-        ].includes((e as NodeJS.ErrnoException).code ?? "")
-      )
+      if (isInputAccessError(e))
         throw new ExpectedContextAccessError("expected input inaccessible");
       throw e;
     }

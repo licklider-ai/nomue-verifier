@@ -273,6 +273,25 @@ test(
   },
 );
 
+test(
+  "Record symlink loop and overlong path are input access refusals",
+  { skip: process.platform === "win32" },
+  async () => {
+    const dir = mkdtempSync(join(tmpdir(), "holm-record-access-"));
+    try {
+      const loop = join(dir, "loop");
+      symlinkSync(loop, loop);
+      for (const path of [loop, join(dir, "x".repeat(300))]) {
+        const out = await prepareInnerFiles(path, undefined, options, harness);
+        assert.equal(out.output.refusal_kind, "input_access_error");
+        assert.equal(out.proposed_record_base64, undefined);
+      }
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  },
+);
+
 const python = process.env.NOMUE_TEST_PYTHON;
 test(
   "direct launcher rejects unavailable delegation before Record access",

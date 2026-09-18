@@ -41,6 +41,13 @@ const postExtractionOperationalFiles = new Set([
   "reference/verifier/src/lifecycle.ts",
   // Protocol PR #355 D0 GO permits these unissued D1 development assets.
   // Exact entries only: none is a supported bundle or npm runtime module.
+  "development/r3-holm/fault-injections.ts",
+  "development/r3-holm/fault-injections.test.ts",
+  "development/r3-holm/outer-fault-entry.mjs",
+  "development/r3-holm/EXPANSION-HANDOFF.md",
+  "development/r3-holm/ACCEPTANCE-COVERAGE.json",
+  "development/r3-holm/evidence/EXPANSION-VALIDATION.json",
+  "development/r3-holm/evidence/expansion-tests.tap",
   "development/r3-holm/OUTER-CALL-HANDOFF.md",
   "development/r3-holm/OUTER-PROVENANCE.json",
   "development/r3-holm/controlled-call.test.ts",

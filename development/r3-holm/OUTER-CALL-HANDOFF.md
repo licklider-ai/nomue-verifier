@@ -179,3 +179,6 @@ Prepared with OpenAI Codex assistance in the continuing author/coordinator conte
 using public source candidates and synthetic fixtures only. New runtime code is
 maintained in Verifier; Protocol receives documentation/receipts only. Self-review
 and author CI are not independent or human-expert clearance.
+
+Subsequent review intake, repairs and the next bounded scope are recorded in
+[EXPANSION-HANDOFF.md](EXPANSION-HANDOFF.md). This historical checkpoint is retained.

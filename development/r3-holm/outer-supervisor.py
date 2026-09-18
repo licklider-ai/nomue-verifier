@@ -237,7 +237,10 @@ def run(args):
         if args.expected is not None:
             command.append(args.expected)
         # Test-only replacement entry is a trusted CLI argument, never a Record field.
-        if args.probe:
+        if args.probe and args.probe.startswith("fault-"):
+            command = [args.node, str(HERE / "outer-fault-entry.mjs"), args.probe, args.record]
+            if args.expected is not None: command.append(args.expected)
+        elif args.probe:
             command = [args.node, str(HERE / "outer-probes.mjs"), args.probe]
         process = subprocess.Popen([args.python, "-I", str(HERE / "outer-supervisor.py"), "--bootstrap", str(leaf), *command],
                                    cwd=ROOT, env=env, stdin=subprocess.DEVNULL,
@@ -358,7 +361,7 @@ def main():
     p.add_argument("--tasks", type=int, default=64)
     p.add_argument("--deadline", type=float, default=30)
     p.add_argument("--cleanup", type=float, default=3)
-    p.add_argument("--probe", choices=["checkpoint-timeout", "node-memory", "worker-memory", "pids", "descendant", "stdout", "stderr", "hang", "cpu", "invalid", "environment", "valid-then-hang", "wrong-nonce", "corrupt-output"])
+    p.add_argument("--probe", choices=["fault-a-pass", "fault-s-pass", "fault-swap", "fault-duplicate", "fault-omit", "fault-error-outcome", "fault-notrun-outcome", "fault-generic-reason", "fault-missing-blocker", "fault-unrelated-blocker", "fault-missing-reason", "fault-late-budget", "fault-schema-budget", "fault-worker-output", "checkpoint-timeout", "node-memory", "worker-memory", "pids", "descendant", "stdout", "stderr", "hang", "cpu", "invalid", "environment", "valid-then-hang", "wrong-nonce", "corrupt-output"])
     p.add_argument("record")
     p.add_argument("expected", nargs="?")
     args = p.parse_args()

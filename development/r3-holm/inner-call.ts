@@ -13,6 +13,7 @@ import {
   runNumericWorker,
   readBounded,
   expectedFile,
+  isInputAccessError,
   InvocationError,
   EXECUTION,
   type Budget,
@@ -174,11 +175,7 @@ export async function prepareInnerFiles(
     try {
       bytes = readBounded(recordPath, LIMITS.bytes, () => budget.checkpoint());
     } catch (e) {
-      if (
-        ["ENOENT", "EACCES", "EPERM", "ENOTDIR"].includes(
-          (e as NodeJS.ErrnoException).code ?? "",
-        )
-      )
+      if (isInputAccessError(e))
         throw new InvocationError("input_access_error", "record_access");
       throw e;
     }

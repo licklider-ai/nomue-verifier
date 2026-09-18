@@ -91,7 +91,7 @@ one owner in `stored-bytes.ts`; legacy adapter size guards remain explicit.
 
 ```sh
 npm ci --ignore-scripts
-node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts
+node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts development/r3-holm/fault-injections.test.ts
 npx tsc --project development/r3-holm/tsconfig.json
 npm test
 npm run test:package
@@ -156,3 +156,6 @@ path failures, including directories/loops/overlong names, produce C error;
 resource and unexpected host failures still refuse the invocation. Candidate.5
 uses `p_generation: not_asserted`; p generation remains outside the checked scope.
 The versioned vocabulary change needs D3 schema/public-surface disposition.
+
+The next bounded expansion and review request is [EXPANSION-HANDOFF.md](EXPANSION-HANDOFF.md).
+It distinguishes ordinary controlled-call variants from trusted fault-entry runs.

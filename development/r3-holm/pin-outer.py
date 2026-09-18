@@ -9,6 +9,7 @@ FILES = [
     'reference/verifier/src/jcs.ts', 'reference/verifier/src/strict-json.ts',
 ]
 FILES += ['development/r3-holm/' + p for p in [
+    'tsconfig.json', 'fault-injections.ts', 'outer-fault-entry.mjs',
     'stored-bytes.ts', 'dependencies.ts', 'd0-relations.ts', 'local-checks.ts',
     'output.ts', 'inner-call.ts', 'execution.ts', 'controlled-call.ts',
     'outer-entry.mjs', 'outer-supervisor.py', 'outer-probes.mjs', 'outer-run.mjs',
