@@ -93,7 +93,7 @@ one owner in `stored-bytes.ts`; legacy adapter size guards remain explicit.
 
 ```sh
 npm ci --ignore-scripts
-node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts development/r3-holm/fault-injections.test.ts development/r3-holm/oracles.test.ts
+node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts development/r3-holm/fault-injections.test.ts development/r3-holm/oracles.test.ts development/r3-holm/context-matrix.test.ts
 npx tsc --project development/r3-holm/tsconfig.json
 npm test
 npm run test:package
@@ -129,7 +129,7 @@ or independent researcher review is claimed for these author tests.
 `tests/boundary.ts` names every file in this directory in its existing
 repository inventory; it does not use a wildcard or edit historical extraction
 evidence. `scripts/package-smoke.mjs` additionally rejects any `development/`
-entry in the actual npm tarball. See [current handoff](ORACLES-HANDOFF.md) for coverage, self-review,
+entry in the actual npm tarball. See [current handoff](CONTEXT-MATRIX-HANDOFF.md) for coverage, self-review,
 remaining work and the bounded independent implementation-review request.
 
 Prepared with OpenAI Codex assistance in the continuing author/coordinator
@@ -167,9 +167,14 @@ The earlier numerical review intake and bounded-sort wiring are in
 independent expectations with `python -B development/r3-holm/numerics/replay_b2.py`.
 Earlier checkpoint records remain historical evidence, not approvals of later heads.
 
-The current [D1 oracle checkpoint](ORACLES-HANDOFF.md) follows the independent
+The earlier [D1 oracle checkpoint](ORACLES-HANDOFF.md) follows the independent
 B-2 integration receipt. It repairs retained-result comparison and adds raw-byte
 and component-boundary evidence; D1 remains open. Earlier handoffs are chronology.
+
+The current [context cross-product checkpoint](CONTEXT-MATRIX-HANDOFF.md) adds
+105 ordinary cases and 14 callback-only error cases. It tests independent Record
+results, exact blocker/reason propagation and context binding without changing
+runtime behavior. The earlier oracle delta's independent review remains pending.
 
 ## Main integration before development merge
 

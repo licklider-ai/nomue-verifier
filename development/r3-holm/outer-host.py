@@ -20,6 +20,8 @@ NODE=shutil.which('node')
 PYTHON=sys.executable
 rows=[]
 NONCE='a'*64
+# D0 report partition: S/K/D/H, followed by I/C/A.
+CONFORMANCE_ROW_COUNT=4
 
 def run_checked(command, **kwargs):
     return subprocess.run(command,capture_output=True,cwd=ROOT,timeout=50,**kwargs)
@@ -62,6 +64,12 @@ def tests(delegation, artifact):
                 assert output['kind']=='refusal' and output['refusal_kind']==case['refusal'],output
             else:
                 assert output['kind']=='report',output
+                if 'expected_rows' in case:
+                    # Compare rows excluding scope: absence of outcome on
+                    # error/not_run, blocker order and transitive reason union.
+                    project=lambda row:{k:v for k,v in row.items() if k!='scope'}
+                    assert list(map(project,output['conformance']))==case['expected_rows'][:CONFORMANCE_ROW_COUNT],output
+                    assert list(map(project,output['verification']))==case['expected_rows'][CONFORMANCE_ROW_COUNT:],output
                 by_stage={row['stage']:row for row in output['conformance']+output['verification']}
                 for stage,want in case['checks'].items():
                     row=by_stage[stage]

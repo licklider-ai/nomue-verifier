@@ -21,7 +21,7 @@ jobs:
       - run: npm ci
       - run: npm test
       - name: Unissued R3 component regression (not runtime qualification)
-        run: node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts development/r3-holm/fault-injections.test.ts development/r3-holm/oracles.test.ts
+        run: node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts development/r3-holm/fault-injections.test.ts development/r3-holm/oracles.test.ts development/r3-holm/context-matrix.test.ts
       - name: Strict typecheck of unissued R3 components
         run: npx tsc --project development/r3-holm/tsconfig.json
       - name: Pack, install, and exercise the published CLI shape
@@ -37,6 +37,7 @@ jobs:
   r3-inner-numerical:
     name: unissued R3 inner numerical regression (not host qualification)
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -52,12 +53,13 @@ jobs:
         run: |
           set -euo pipefail
           export NOMUE_TEST_PYTHON="$(command -v python)"
-          node --import tsx --test development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts development/r3-holm/fault-injections.test.ts development/r3-holm/oracles.test.ts
+          node --import tsx --test development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts development/r3-holm/fault-injections.test.ts development/r3-holm/oracles.test.ts development/r3-holm/context-matrix.test.ts
           python development/r3-holm/numerics/test_worker.py
           python -B development/r3-holm/numerics/test_replay_b2.py
           python -B development/r3-holm/numerics/replay_b2.py
           python -B development/r3-holm/oracles/generate.py
           python -B development/r3-holm/outer-supervisor.test.py
+          node development/r3-holm/context-sensitivity.mjs
 
   r3-controlled-host:
     name: unissued R3 controlled-host regression (not adoption)

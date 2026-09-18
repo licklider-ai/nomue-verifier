@@ -1,7 +1,34 @@
 {
   "status": "implementation accounting, not adoption or executed-host evidence",
   "design_source": "Protocol 1eb6b93 D0 ACCEPTANCE.md, 44 locators",
-  "ordinary_case_count": 58,
+  "ordinary_case_count": 163,
+  "context_matrix": {
+    "source": "context-matrix.ts",
+    "ordinary_case_count": 105,
+    "callback_only_case_count": 14,
+    "expectations": "Seven rows excluding scope, with exact reasons and blockers; all four C comparison fields perturbed; author expectations, not whole-row closure",
+    "contributes_to_locators": [
+      "R3D-01",
+      "R3D-02",
+      "R3D-03",
+      "R3D-04",
+      "R3D-05",
+      "R3D-06",
+      "R3D-07",
+      "R3D-15",
+      "R3D-16",
+      "R3D-17",
+      "R3D-18",
+      "R3D-19",
+      "R3D-20",
+      "R3D-31",
+      "R3D-38",
+      "R3D-39",
+      "R3D-40",
+      "R3D-42"
+    ],
+    "accounting": "Earlier per-row variants below are retained; the cross-product is listed separately here. All rows remain partial."
+  },
   "access_regressions": ["ACCESS-loop", "ACCESS-overlong"],
   "rows": [
     {
