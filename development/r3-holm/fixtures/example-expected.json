@@ -1,0 +1,203 @@
+{
+  "record_id": "urn:example:record",
+  "revision_id": "urn:example:revision-1",
+  "declaration": {
+    "artifact_kind": "unissued-r3-declaration-body-v1",
+    "dataset": {
+      "dataset_id": "dataset-1",
+      "outcome_definition": "Single synthetic continuous endpoint in arbitrary units.",
+      "scale_declaration": "continuous",
+      "observations": [
+        { "observation_id": "o-0", "experimental_unit_id": "u-0", "group_id": "g-0", "value": 0 },
+        { "observation_id": "o-1", "experimental_unit_id": "u-1", "group_id": "g-1", "value": 1 },
+        { "observation_id": "o-2", "experimental_unit_id": "u-2", "group_id": "g-2", "value": 2 }
+      ]
+    },
+    "design": {
+      "design_id": "design-1",
+      "kind": "independent_one_way",
+      "experimental_unit_definition": "One separately identified synthetic unit.",
+      "independence_declared": true,
+      "not_flattened_declared": true,
+      "groups": [{ "group_id": "g-0" }, { "group_id": "g-1" }, { "group_id": "g-2" }],
+      "units": [
+        { "experimental_unit_id": "u-0", "group_id": "g-0" },
+        { "experimental_unit_id": "u-1", "group_id": "g-1" },
+        { "experimental_unit_id": "u-2", "group_id": "g-2" }
+      ]
+    },
+    "analyses": [
+      {
+        "analysis_id": "a-0",
+        "dataset_id": "dataset-1",
+        "design_id": "design-1",
+        "population": {
+          "definition": "All represented observations; no filtering.",
+          "observation_ids": ["o-0", "o-1", "o-2"]
+        },
+        "family_id": "f-0",
+        "procedure_selection": {
+          "relative_to_outcome_inspection": "before",
+          "statement": "Synthetic producer declaration; no timestamp proof."
+        },
+        "variance_model": {
+          "declaration": "not_declared",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          }
+        },
+        "assumption_statements": [],
+        "operation_kind": "multiplicity_adjustment"
+      },
+      {
+        "analysis_id": "a-1",
+        "dataset_id": "dataset-1",
+        "design_id": "design-1",
+        "population": {
+          "definition": "All represented observations; no filtering.",
+          "observation_ids": ["o-0", "o-1", "o-2"]
+        },
+        "family_id": "f-1",
+        "procedure_selection": {
+          "relative_to_outcome_inspection": "before",
+          "statement": "Synthetic producer declaration; no timestamp proof."
+        },
+        "variance_model": {
+          "declaration": "not_declared",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          }
+        },
+        "assumption_statements": [],
+        "operation_kind": "multiplicity_adjustment"
+      }
+    ],
+    "families": [
+      {
+        "family_id": "f-0",
+        "analysis_id": "a-0",
+        "selection": {
+          "relative_to_outcome_inspection": "before",
+          "statement": "Synthetic producer declaration; no timestamp proof."
+        },
+        "kind": "all_pairs",
+        "members": [
+          {
+            "member_id": "m-0",
+            "selection": {
+              "relative_to_outcome_inspection": "before",
+              "statement": "Synthetic producer declaration; no timestamp proof."
+            },
+            "kind": "pair",
+            "minuend_group_id": "g-0",
+            "subtrahend_group_id": "g-1"
+          },
+          {
+            "member_id": "m-1",
+            "selection": {
+              "relative_to_outcome_inspection": "before",
+              "statement": "Synthetic producer declaration; no timestamp proof."
+            },
+            "kind": "pair",
+            "minuend_group_id": "g-0",
+            "subtrahend_group_id": "g-2"
+          },
+          {
+            "member_id": "m-2",
+            "selection": {
+              "relative_to_outcome_inspection": "before",
+              "statement": "Synthetic producer declaration; no timestamp proof."
+            },
+            "kind": "pair",
+            "minuend_group_id": "g-1",
+            "subtrahend_group_id": "g-2"
+          }
+        ]
+      },
+      {
+        "family_id": "f-1",
+        "analysis_id": "a-1",
+        "selection": {
+          "relative_to_outcome_inspection": "before",
+          "statement": "Synthetic producer declaration; no timestamp proof."
+        },
+        "kind": "all_pairs",
+        "members": [
+          {
+            "member_id": "m-0",
+            "selection": {
+              "relative_to_outcome_inspection": "before",
+              "statement": "Synthetic producer declaration; no timestamp proof."
+            },
+            "kind": "pair",
+            "minuend_group_id": "g-0",
+            "subtrahend_group_id": "g-1"
+          },
+          {
+            "member_id": "m-1",
+            "selection": {
+              "relative_to_outcome_inspection": "before",
+              "statement": "Synthetic producer declaration; no timestamp proof."
+            },
+            "kind": "pair",
+            "minuend_group_id": "g-0",
+            "subtrahend_group_id": "g-2"
+          },
+          {
+            "member_id": "m-2",
+            "selection": {
+              "relative_to_outcome_inspection": "before",
+              "statement": "Synthetic producer declaration; no timestamp proof."
+            },
+            "kind": "pair",
+            "minuend_group_id": "g-1",
+            "subtrahend_group_id": "g-2"
+          }
+        ]
+      }
+    ],
+    "result_slots": [
+      {
+        "result_id": "r-0",
+        "analysis_id": "a-0",
+        "family_id": "f-0",
+        "kind": "multiplicity_adjustment",
+        "member_ids": ["m-0", "m-1", "m-2"],
+        "operation_kind": "multiplicity_adjustment"
+      },
+      {
+        "result_id": "r-1",
+        "analysis_id": "a-1",
+        "family_id": "f-1",
+        "kind": "multiplicity_adjustment",
+        "member_ids": ["m-0", "m-1", "m-2"],
+        "operation_kind": "multiplicity_adjustment"
+      }
+    ]
+  },
+  "inputs": {
+    "kind": "unissued-holm-envelope-input-v1",
+    "analysis_id": "a-0",
+    "family_id": "f-0",
+    "result_id": "r-0",
+    "members": [
+      {
+        "member_id": "m-0",
+        "origin": { "source_id": "source", "hypothesis_id": "h-0", "sidedness": "two_sided" },
+        "p_hex": "3f90000000000000"
+      },
+      {
+        "member_id": "m-1",
+        "origin": { "source_id": "source", "hypothesis_id": "h-1", "sidedness": "two_sided" },
+        "p_hex": "3fa0000000000000"
+      },
+      {
+        "member_id": "m-2",
+        "origin": { "source_id": "source", "hypothesis_id": "h-2", "sidedness": "two_sided" },
+        "p_hex": "3fc0000000000000"
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "repository": "licklider-ai/nomue-protocol",
+  "assets": [
+    {
+      "file": "candidate.py",
+      "source": "governance/drafts/release-3-preparation/holm-b2-repair-20260918/candidate.py",
+      "blob": "a10a57c89caefee5c370a7a1e882009b13d08982",
+      "sha256": "a1b0bf801096fa35ce7ac159193ecfae7f66373cb51b69f6caf9728cc935a694",
+      "commit": "7ac803a1b9fa71a5a0064a0e81d02b9321cf86d9"
+    },
+    {
+      "file": "worker.py",
+      "source": "governance/drafts/release-3-preparation/holm-declaration-binding-experiment-20260911/worker.py",
+      "blob": "7656beae6750dcc29e52f8c15df53c78027cd4ee",
+      "sha256": "d6dff0e19f8647157d55ac3d6ba37ddaeaa7ce192ba25313d921d53298607fa9",
+      "commit": "b52389fd3efc6b8968613f59f147a578d5bbb55d"
+    },
+    {
+      "file": "oracle.py",
+      "source": "governance/drafts/release-3-preparation/holm-declaration-binding-experiment-20260911/oracle.py",
+      "blob": "69fa6c33e6d34ccb890ac0d6268c79474df22213",
+      "sha256": "c136af873eee3d29fa4c9a8746879e8ca0f125db2afd3bf32daabcfb8d7a6390",
+      "commit": "b52389fd3efc6b8968613f59f147a578d5bbb55d"
+    }
+  ],
+  "note": "Multi-source unissued numerical closure. Per-asset commits identify exact imports; historical provenance is retained in git."
+}

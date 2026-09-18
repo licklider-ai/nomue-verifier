@@ -1,0 +1,54 @@
+{
+  "repository": "licklider-ai/nomue-protocol",
+  "commit": "b52389fd3efc6b8968613f59f147a578d5bbb55d",
+  "assets": [
+    {
+      "file": "record.schema.json",
+      "source": "governance/drafts/release-3-preparation/holm-separated-candidate-20260912/record.schema.json",
+      "blob": "41d61d50017567a644ffbd07daab17606c575708",
+      "sha256": "08dcffd8e222b3abf7cb98384b3e0188756900d40bd3cb8e0d6733b2928d436d"
+    },
+    {
+      "file": "expected.schema.json",
+      "source": "governance/drafts/release-3-preparation/holm-separated-candidate-20260912/expected.schema.json",
+      "blob": "194294c8e00a07ad06530597c3f7c4621de1f1c3",
+      "sha256": "475e24591e77379812b8098251c5bb06eaa082361e01f844e5ad0c97d81bba5b"
+    },
+    {
+      "file": "declaration-shapes.json",
+      "source": "governance/drafts/release-3-preparation/holm-separated-candidate-20260912/declaration-shapes.json",
+      "blob": "4427f474257f283c86453f4d859aa1fffced229b",
+      "sha256": "46d8c2c3eccc19451cab9e95a5a8fe5dcb82b46d99069ef2edecdcb004fb4f32"
+    },
+    {
+      "file": "example-record.jcs",
+      "source": "governance/drafts/release-3-preparation/holm-separated-candidate-20260912/example-record.jcs",
+      "blob": "7e946cd60df34ec4d3455c27e7067938b8942ab8",
+      "sha256": "0f9e91c7292e73895135ccd6c28e37baa15698e986877bd613d4a0db3a273902"
+    },
+    {
+      "file": "example-expected.json",
+      "source": "governance/drafts/release-3-preparation/holm-separated-candidate-20260912/example-expected.json",
+      "blob": "8f7182a0ec5d1d2ec89e30459da10c41a97e4c03",
+      "sha256": "059c5c4b280e81645b06110e8731a61ce8d544f5c452dd5dd444c91ab0ac5208"
+    },
+    {
+      "file": "fixture-contracts.json",
+      "source": "governance/drafts/release-3-preparation/holm-declaration-binding-experiment-20260911/fixture-contracts.json",
+      "blob": "9b022d6ab82540e9b1a9b826899721b4c69f3208",
+      "sha256": "5a534294d416637627e7ec158da71d4a8b47bcdd63f8e708eaef0a41293e5d18"
+    },
+    {
+      "file": "d0-cases.json",
+      "source": "governance/drafts/release-3-preparation/holm-declaration-binding-experiment-20260911/cases.json",
+      "blob": "d578a879078554ad5d80a77ce64377a8b188a1fd",
+      "sha256": "ddea992b2b0b7231c6f2f0398deb04153586069217ea681f9ccb86587b7b05b8"
+    },
+    {
+      "file": "d0-example.json",
+      "source": "governance/drafts/release-3-preparation/holm-declaration-binding-experiment-20260911/example.json",
+      "blob": "f11c27efda9b9c09773623e49d88b191907bd5bf",
+      "sha256": "debaf60e44a592c50b868dd9df8ac71fb0f64cef8985f98956de3f832525943a"
+    }
+  ]
+}

@@ -1,0 +1,813 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nomue.ai/id/schema/holm-successor-output/0.3.0-candidate.5",
+  "$comment": "Unissued development output contract. Semantic checks require private evaluation evidence and graph validation; not an adopted public surface.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol",
+        "kind",
+        "interpretation_bundle_id",
+        "record_reference",
+        "conformance",
+        "verification",
+        "guarantee_boundary",
+        "input_evidence"
+      ],
+      "properties": {
+        "protocol": {
+          "const": "unissued-holm-output/0.3.0-candidate.5"
+        },
+        "kind": {
+          "const": "report"
+        },
+        "interpretation_bundle_id": {
+          "const": "https://nomue.ai/id/bundle/holm-supplied-p-bundle/0.3.0-candidate.5"
+        },
+        "record_reference": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "record_id",
+            "revision_id",
+            "stored_projection_digest",
+            "meaning"
+          ],
+          "properties": {
+            "record_id": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 2048,
+              "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:\\S+$"
+            },
+            "revision_id": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 2048,
+              "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:\\S+$"
+            },
+            "stored_projection_digest": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "meaning": {
+              "const": "inspected_bytes_not_authenticated_identity"
+            }
+          }
+        },
+        "conformance": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/row"
+          }
+        },
+        "verification": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/row"
+          }
+        },
+        "guarantee_boundary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "scientific_validity",
+            "declaration_truth",
+            "distributional_model_validity",
+            "causal_interpretation",
+            "standardized_effect_size",
+            "familywise_error_control",
+            "source_authenticity",
+            "p_generation"
+          ],
+          "properties": {
+            "scientific_validity": {
+              "const": "not_asserted"
+            },
+            "declaration_truth": {
+              "const": "not_asserted"
+            },
+            "distributional_model_validity": {
+              "const": "not_asserted"
+            },
+            "causal_interpretation": {
+              "const": "not_asserted"
+            },
+            "standardized_effect_size": {
+              "const": "not_asserted"
+            },
+            "familywise_error_control": {
+              "const": "not_asserted"
+            },
+            "source_authenticity": {
+              "const": "not_asserted"
+            },
+            "p_generation": {
+              "const": "not_asserted"
+            }
+          }
+        },
+        "input_evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["availability"],
+          "properties": {
+            "availability": {
+              "const": "not_observed"
+            }
+          }
+        }
+      }
+    },
+    {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "kind", "refusal_kind", "reason"],
+          "properties": {
+            "protocol": {
+              "const": "unissued-holm-output/0.3.0-candidate.5"
+            },
+            "kind": {
+              "const": "refusal"
+            },
+            "refusal_kind": {
+              "const": "parse_error"
+            },
+            "reason": {
+              "const": "candidate:holm:invocation_parse_error"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "kind", "refusal_kind", "reason"],
+          "properties": {
+            "protocol": {
+              "const": "unissued-holm-output/0.3.0-candidate.5"
+            },
+            "kind": {
+              "const": "refusal"
+            },
+            "refusal_kind": {
+              "const": "routing_error"
+            },
+            "reason": {
+              "const": "candidate:holm:invocation_routing_error"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "kind", "refusal_kind", "reason"],
+          "properties": {
+            "protocol": {
+              "const": "unissued-holm-output/0.3.0-candidate.5"
+            },
+            "kind": {
+              "const": "refusal"
+            },
+            "refusal_kind": {
+              "const": "unsupported_bundle"
+            },
+            "reason": {
+              "const": "candidate:holm:invocation_unsupported_bundle"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "kind", "refusal_kind", "reason"],
+          "properties": {
+            "protocol": {
+              "const": "unissued-holm-output/0.3.0-candidate.5"
+            },
+            "kind": {
+              "const": "refusal"
+            },
+            "refusal_kind": {
+              "const": "unrepresentable_input"
+            },
+            "reason": {
+              "const": "candidate:holm:invocation_unrepresentable_input"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "kind", "refusal_kind", "reason"],
+          "properties": {
+            "protocol": {
+              "const": "unissued-holm-output/0.3.0-candidate.5"
+            },
+            "kind": {
+              "const": "refusal"
+            },
+            "refusal_kind": {
+              "const": "canonicalization_failure"
+            },
+            "reason": {
+              "const": "candidate:holm:invocation_canonicalization_failure"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "kind", "refusal_kind", "reason"],
+          "properties": {
+            "protocol": {
+              "const": "unissued-holm-output/0.3.0-candidate.5"
+            },
+            "kind": {
+              "const": "refusal"
+            },
+            "refusal_kind": {
+              "const": "resource_limit"
+            },
+            "reason": {
+              "const": "candidate:holm:invocation_resource_limit"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "kind", "refusal_kind", "reason"],
+          "properties": {
+            "protocol": {
+              "const": "unissued-holm-output/0.3.0-candidate.5"
+            },
+            "kind": {
+              "const": "refusal"
+            },
+            "refusal_kind": {
+              "const": "input_access_error"
+            },
+            "reason": {
+              "const": "candidate:holm:invocation_input_access_error"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "kind", "refusal_kind", "reason"],
+          "properties": {
+            "protocol": {
+              "const": "unissued-holm-output/0.3.0-candidate.5"
+            },
+            "kind": {
+              "const": "refusal"
+            },
+            "refusal_kind": {
+              "const": "unsupported_execution"
+            },
+            "reason": {
+              "const": "candidate:holm:invocation_unsupported_execution"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "kind", "refusal_kind", "reason"],
+          "properties": {
+            "protocol": {
+              "const": "unissued-holm-output/0.3.0-candidate.5"
+            },
+            "kind": {
+              "const": "refusal"
+            },
+            "refusal_kind": {
+              "const": "execution_cancelled"
+            },
+            "reason": {
+              "const": "candidate:holm:invocation_execution_cancelled"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protocol", "kind", "refusal_kind", "reason"],
+          "properties": {
+            "protocol": {
+              "const": "unissued-holm-output/0.3.0-candidate.5"
+            },
+            "kind": {
+              "const": "refusal"
+            },
+            "refusal_kind": {
+              "const": "internal_error"
+            },
+            "reason": {
+              "const": "candidate:holm:invocation_internal_error"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "$defs": {
+    "row": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "stage",
+            "check_id",
+            "execution",
+            "reasons",
+            "blockers",
+            "scope",
+            "outcome"
+          ],
+          "properties": {
+            "stage": {
+              "enum": ["S", "K", "D", "H", "I", "C", "A"]
+            },
+            "check_id": {
+              "enum": [
+                "candidate:holm:0.3.0-candidate.5:S",
+                "candidate:holm:0.3.0-candidate.5:K",
+                "candidate:holm:0.3.0-candidate.5:D",
+                "candidate:holm:0.3.0-candidate.5:H",
+                "candidate:holm:0.3.0-candidate.5:I",
+                "candidate:holm:0.3.0-candidate.5:C",
+                "candidate:holm:0.3.0-candidate.5:A"
+              ]
+            },
+            "execution": {
+              "const": "completed"
+            },
+            "reasons": {
+              "type": "array",
+              "uniqueItems": true,
+              "maxItems": 128,
+              "items": {
+                "enum": [
+                  "candidate:holm:record_schema",
+                  "candidate:holm:stored_bytes_noncanonical",
+                  "candidate:holm:d0_analysis_family_ref",
+                  "candidate:holm:d0_analysis_input_ref",
+                  "candidate:holm:d0_coefficient_duplicate_group",
+                  "candidate:holm:d0_contract_family_mismatch",
+                  "candidate:holm:d0_contract_ref",
+                  "candidate:holm:d0_contrast_dimension",
+                  "candidate:holm:d0_control_binding",
+                  "candidate:holm:d0_control_coverage",
+                  "candidate:holm:d0_control_ref",
+                  "candidate:holm:d0_duplicate_id",
+                  "candidate:holm:d0_duplicate_pair",
+                  "candidate:holm:d0_family_analysis_mismatch",
+                  "candidate:holm:d0_family_analysis_ref",
+                  "candidate:holm:d0_group_coverage",
+                  "candidate:holm:d0_member_group_ref",
+                  "candidate:holm:d0_obs_group_ref",
+                  "candidate:holm:d0_obs_unit_ref",
+                  "candidate:holm:d0_omnibus_group_coverage",
+                  "candidate:holm:d0_pair_coverage",
+                  "candidate:holm:d0_population_coverage",
+                  "candidate:holm:d0_repeated_unit",
+                  "candidate:holm:d0_result_analysis_mismatch",
+                  "candidate:holm:d0_result_analysis_ref",
+                  "candidate:holm:d0_result_family_ref",
+                  "candidate:holm:d0_result_kind_mismatch",
+                  "candidate:holm:d0_result_member_coverage",
+                  "candidate:holm:d0_result_slot_cardinality",
+                  "candidate:holm:d0_self_comparison",
+                  "candidate:holm:d0_unit_coverage",
+                  "candidate:holm:d0_unit_group_mismatch",
+                  "candidate:holm:d0_unit_group_ref",
+                  "candidate:holm:adjusted_count",
+                  "candidate:holm:adjusted_domain",
+                  "candidate:holm:d0_selected_id",
+                  "candidate:holm:display_domain",
+                  "candidate:holm:family_kind",
+                  "candidate:holm:family_scope",
+                  "candidate:holm:member_order",
+                  "candidate:holm:output_member_order",
+                  "candidate:holm:p_domain",
+                  "candidate:holm:result_ownership",
+                  "candidate:holm:selection_binding",
+                  "candidate:holm:selection_kind",
+                  "candidate:holm:source_hypothesis_duplicate",
+                  "candidate:holm:digest_mismatch",
+                  "candidate:holm:expected_unreadable",
+                  "candidate:holm:expected_missing",
+                  "candidate:holm:expected_type",
+                  "candidate:holm:expected_parse",
+                  "candidate:holm:expected_schema",
+                  "candidate:holm:context_mismatch",
+                  "candidate:holm:exact_value_mismatch",
+                  "candidate:holm:display_value_mismatch"
+                ]
+              }
+            },
+            "blockers": {
+              "type": "array",
+              "uniqueItems": true,
+              "maxItems": 6,
+              "items": {
+                "enum": [
+                  "candidate:holm:0.3.0-candidate.5:S",
+                  "candidate:holm:0.3.0-candidate.5:K",
+                  "candidate:holm:0.3.0-candidate.5:D",
+                  "candidate:holm:0.3.0-candidate.5:H",
+                  "candidate:holm:0.3.0-candidate.5:I",
+                  "candidate:holm:0.3.0-candidate.5:C",
+                  "candidate:holm:0.3.0-candidate.5:A"
+                ]
+              }
+            },
+            "scope": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind"],
+                  "properties": {
+                    "kind": {
+                      "enum": ["record", "expected_context"]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "selection"],
+                  "properties": {
+                    "kind": {
+                      "const": "selected_holm"
+                    },
+                    "selection": {
+                      "const": "unavailable"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "analysis_id", "family_id", "result_id"],
+                  "properties": {
+                    "kind": {
+                      "const": "selected_holm"
+                    },
+                    "analysis_id": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+                    },
+                    "family_id": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+                    },
+                    "result_id": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+                    }
+                  }
+                }
+              ]
+            },
+            "outcome": {
+              "enum": ["pass", "fail"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "stage",
+            "check_id",
+            "execution",
+            "reasons",
+            "blockers",
+            "scope"
+          ],
+          "properties": {
+            "stage": {
+              "enum": ["S", "K", "D", "H", "I", "C", "A"]
+            },
+            "check_id": {
+              "enum": [
+                "candidate:holm:0.3.0-candidate.5:S",
+                "candidate:holm:0.3.0-candidate.5:K",
+                "candidate:holm:0.3.0-candidate.5:D",
+                "candidate:holm:0.3.0-candidate.5:H",
+                "candidate:holm:0.3.0-candidate.5:I",
+                "candidate:holm:0.3.0-candidate.5:C",
+                "candidate:holm:0.3.0-candidate.5:A"
+              ]
+            },
+            "execution": {
+              "const": "error"
+            },
+            "reasons": {
+              "type": "array",
+              "uniqueItems": true,
+              "maxItems": 128,
+              "items": {
+                "enum": [
+                  "candidate:holm:record_schema",
+                  "candidate:holm:stored_bytes_noncanonical",
+                  "candidate:holm:d0_analysis_family_ref",
+                  "candidate:holm:d0_analysis_input_ref",
+                  "candidate:holm:d0_coefficient_duplicate_group",
+                  "candidate:holm:d0_contract_family_mismatch",
+                  "candidate:holm:d0_contract_ref",
+                  "candidate:holm:d0_contrast_dimension",
+                  "candidate:holm:d0_control_binding",
+                  "candidate:holm:d0_control_coverage",
+                  "candidate:holm:d0_control_ref",
+                  "candidate:holm:d0_duplicate_id",
+                  "candidate:holm:d0_duplicate_pair",
+                  "candidate:holm:d0_family_analysis_mismatch",
+                  "candidate:holm:d0_family_analysis_ref",
+                  "candidate:holm:d0_group_coverage",
+                  "candidate:holm:d0_member_group_ref",
+                  "candidate:holm:d0_obs_group_ref",
+                  "candidate:holm:d0_obs_unit_ref",
+                  "candidate:holm:d0_omnibus_group_coverage",
+                  "candidate:holm:d0_pair_coverage",
+                  "candidate:holm:d0_population_coverage",
+                  "candidate:holm:d0_repeated_unit",
+                  "candidate:holm:d0_result_analysis_mismatch",
+                  "candidate:holm:d0_result_analysis_ref",
+                  "candidate:holm:d0_result_family_ref",
+                  "candidate:holm:d0_result_kind_mismatch",
+                  "candidate:holm:d0_result_member_coverage",
+                  "candidate:holm:d0_result_slot_cardinality",
+                  "candidate:holm:d0_self_comparison",
+                  "candidate:holm:d0_unit_coverage",
+                  "candidate:holm:d0_unit_group_mismatch",
+                  "candidate:holm:d0_unit_group_ref",
+                  "candidate:holm:adjusted_count",
+                  "candidate:holm:adjusted_domain",
+                  "candidate:holm:d0_selected_id",
+                  "candidate:holm:display_domain",
+                  "candidate:holm:family_kind",
+                  "candidate:holm:family_scope",
+                  "candidate:holm:member_order",
+                  "candidate:holm:output_member_order",
+                  "candidate:holm:p_domain",
+                  "candidate:holm:result_ownership",
+                  "candidate:holm:selection_binding",
+                  "candidate:holm:selection_kind",
+                  "candidate:holm:source_hypothesis_duplicate",
+                  "candidate:holm:digest_mismatch",
+                  "candidate:holm:expected_unreadable",
+                  "candidate:holm:expected_missing",
+                  "candidate:holm:expected_type",
+                  "candidate:holm:expected_parse",
+                  "candidate:holm:expected_schema",
+                  "candidate:holm:context_mismatch",
+                  "candidate:holm:exact_value_mismatch",
+                  "candidate:holm:display_value_mismatch"
+                ]
+              }
+            },
+            "blockers": {
+              "type": "array",
+              "uniqueItems": true,
+              "maxItems": 6,
+              "items": {
+                "enum": [
+                  "candidate:holm:0.3.0-candidate.5:S",
+                  "candidate:holm:0.3.0-candidate.5:K",
+                  "candidate:holm:0.3.0-candidate.5:D",
+                  "candidate:holm:0.3.0-candidate.5:H",
+                  "candidate:holm:0.3.0-candidate.5:I",
+                  "candidate:holm:0.3.0-candidate.5:C",
+                  "candidate:holm:0.3.0-candidate.5:A"
+                ]
+              }
+            },
+            "scope": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind"],
+                  "properties": {
+                    "kind": {
+                      "enum": ["record", "expected_context"]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "selection"],
+                  "properties": {
+                    "kind": {
+                      "const": "selected_holm"
+                    },
+                    "selection": {
+                      "const": "unavailable"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "analysis_id", "family_id", "result_id"],
+                  "properties": {
+                    "kind": {
+                      "const": "selected_holm"
+                    },
+                    "analysis_id": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+                    },
+                    "family_id": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+                    },
+                    "result_id": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "stage",
+            "check_id",
+            "execution",
+            "reasons",
+            "blockers",
+            "scope"
+          ],
+          "properties": {
+            "stage": {
+              "enum": ["S", "K", "D", "H", "I", "C", "A"]
+            },
+            "check_id": {
+              "enum": [
+                "candidate:holm:0.3.0-candidate.5:S",
+                "candidate:holm:0.3.0-candidate.5:K",
+                "candidate:holm:0.3.0-candidate.5:D",
+                "candidate:holm:0.3.0-candidate.5:H",
+                "candidate:holm:0.3.0-candidate.5:I",
+                "candidate:holm:0.3.0-candidate.5:C",
+                "candidate:holm:0.3.0-candidate.5:A"
+              ]
+            },
+            "execution": {
+              "const": "not_run"
+            },
+            "reasons": {
+              "type": "array",
+              "uniqueItems": true,
+              "maxItems": 128,
+              "items": {
+                "enum": [
+                  "candidate:holm:record_schema",
+                  "candidate:holm:stored_bytes_noncanonical",
+                  "candidate:holm:d0_analysis_family_ref",
+                  "candidate:holm:d0_analysis_input_ref",
+                  "candidate:holm:d0_coefficient_duplicate_group",
+                  "candidate:holm:d0_contract_family_mismatch",
+                  "candidate:holm:d0_contract_ref",
+                  "candidate:holm:d0_contrast_dimension",
+                  "candidate:holm:d0_control_binding",
+                  "candidate:holm:d0_control_coverage",
+                  "candidate:holm:d0_control_ref",
+                  "candidate:holm:d0_duplicate_id",
+                  "candidate:holm:d0_duplicate_pair",
+                  "candidate:holm:d0_family_analysis_mismatch",
+                  "candidate:holm:d0_family_analysis_ref",
+                  "candidate:holm:d0_group_coverage",
+                  "candidate:holm:d0_member_group_ref",
+                  "candidate:holm:d0_obs_group_ref",
+                  "candidate:holm:d0_obs_unit_ref",
+                  "candidate:holm:d0_omnibus_group_coverage",
+                  "candidate:holm:d0_pair_coverage",
+                  "candidate:holm:d0_population_coverage",
+                  "candidate:holm:d0_repeated_unit",
+                  "candidate:holm:d0_result_analysis_mismatch",
+                  "candidate:holm:d0_result_analysis_ref",
+                  "candidate:holm:d0_result_family_ref",
+                  "candidate:holm:d0_result_kind_mismatch",
+                  "candidate:holm:d0_result_member_coverage",
+                  "candidate:holm:d0_result_slot_cardinality",
+                  "candidate:holm:d0_self_comparison",
+                  "candidate:holm:d0_unit_coverage",
+                  "candidate:holm:d0_unit_group_mismatch",
+                  "candidate:holm:d0_unit_group_ref",
+                  "candidate:holm:adjusted_count",
+                  "candidate:holm:adjusted_domain",
+                  "candidate:holm:d0_selected_id",
+                  "candidate:holm:display_domain",
+                  "candidate:holm:family_kind",
+                  "candidate:holm:family_scope",
+                  "candidate:holm:member_order",
+                  "candidate:holm:output_member_order",
+                  "candidate:holm:p_domain",
+                  "candidate:holm:result_ownership",
+                  "candidate:holm:selection_binding",
+                  "candidate:holm:selection_kind",
+                  "candidate:holm:source_hypothesis_duplicate",
+                  "candidate:holm:digest_mismatch",
+                  "candidate:holm:expected_unreadable",
+                  "candidate:holm:expected_missing",
+                  "candidate:holm:expected_type",
+                  "candidate:holm:expected_parse",
+                  "candidate:holm:expected_schema",
+                  "candidate:holm:context_mismatch",
+                  "candidate:holm:exact_value_mismatch",
+                  "candidate:holm:display_value_mismatch"
+                ]
+              }
+            },
+            "blockers": {
+              "type": "array",
+              "uniqueItems": true,
+              "maxItems": 6,
+              "items": {
+                "enum": [
+                  "candidate:holm:0.3.0-candidate.5:S",
+                  "candidate:holm:0.3.0-candidate.5:K",
+                  "candidate:holm:0.3.0-candidate.5:D",
+                  "candidate:holm:0.3.0-candidate.5:H",
+                  "candidate:holm:0.3.0-candidate.5:I",
+                  "candidate:holm:0.3.0-candidate.5:C",
+                  "candidate:holm:0.3.0-candidate.5:A"
+                ]
+              }
+            },
+            "scope": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind"],
+                  "properties": {
+                    "kind": {
+                      "enum": ["record", "expected_context"]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "selection"],
+                  "properties": {
+                    "kind": {
+                      "const": "selected_holm"
+                    },
+                    "selection": {
+                      "const": "unavailable"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "analysis_id", "family_id", "result_id"],
+                  "properties": {
+                    "kind": {
+                      "const": "selected_holm"
+                    },
+                    "analysis_id": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+                    },
+                    "family_id": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+                    },
+                    "result_id": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

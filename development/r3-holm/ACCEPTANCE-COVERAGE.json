@@ -1,0 +1,375 @@
+{
+  "status": "implementation accounting, not adoption or executed-host evidence",
+  "design_source": "Protocol 1eb6b93 D0 ACCEPTANCE.md, 44 locators",
+  "ordinary_case_count": 58,
+  "access_regressions": ["ACCESS-loop", "ACCESS-overlong"],
+  "rows": [
+    {
+      "locator": "R3D-01",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-01", "ORACLE-canonical"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-02",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-02"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-03",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-03"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-04",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-04"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-05",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-05", "ORACLE-declared-digest"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants.",
+      "component_evidence": [
+        "oracles.test.ts: 324 constructed byte vectors and 10 Record vectors, fixed hashlib digests; not helper-corruption evidence"
+      ]
+    },
+    {
+      "locator": "R3D-06",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-06"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-07",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-07", "ORACLE-absent", "ORACLE-nested-unicode"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-08",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-08"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-09",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-09", "R3D-09-oversized"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete invalid identifier matrix."
+    },
+    {
+      "locator": "R3D-10",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-10", "R3D-10-missing"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-11",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-11", "R3D-11-utf8"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-12",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-12"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-13",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-13"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-14",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [
+        "R3D-14",
+        "ORACLE-first",
+        "ORACLE-last",
+        "ORACLE-whitespace",
+        "ORACLE-escaped-key",
+        "ORACLE-number-spelling"
+      ],
+      "controlled_fault_entry": [],
+      "remaining": "Independent full-call raw projection/hash oracle and byte-layout variants.",
+      "component_evidence": [
+        "oracles.test.ts: 324 constructed byte vectors and 10 Record vectors, fixed hashlib digests; not helper-corruption evidence"
+      ]
+    },
+    {
+      "locator": "R3D-15",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-15", "ORACLE-newline"],
+      "controlled_fault_entry": [],
+      "remaining": "Independent raw projection/hash oracle including retained newline.",
+      "component_evidence": [
+        "oracles.test.ts: 324 constructed byte vectors and 10 Record vectors, fixed hashlib digests; not helper-corruption evidence"
+      ]
+    },
+    {
+      "locator": "R3D-16",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-16"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-17",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [
+        "R3D-17",
+        "R3D-17-missing-file",
+        "R3D-17-directory"
+      ],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-18",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-18"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-19",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-19-unselected", "R3D-19-order"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-20",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-20", "R3D-20-unread"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-21",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-21"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-22",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-22"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-23",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [
+        "R3D-23-zero",
+        "R3D-23-subnormal-tie",
+        "R3D-23-one",
+        "R3D-23-maximum-family"
+      ],
+      "controlled_fault_entry": [],
+      "remaining": "Full fixed rational rounding/tie/boundary set beyond these three elementary targets."
+    },
+    {
+      "locator": "R3D-24",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-24", "R3D-24-expected-bytes"],
+      "controlled_fault_entry": [],
+      "remaining": "Every structural and byte limit below/equal/above, plus late growth.",
+      "component_evidence": [
+        "oracles.test.ts: bytes/depth/nodes/entries/string/key below/equal/above; narrower local/expected/worker bounds remain open"
+      ]
+    },
+    {
+      "locator": "R3D-25",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": ["fault-late-budget"],
+      "remaining": "Controlled fault entry uses injected budget observations, not real heap/time exhaustion."
+    },
+    {
+      "locator": "R3D-26",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": [],
+      "remaining": "Existing direct host probes; after real successful inner completion and caller cancellation paths remain.",
+      "host_controls": [
+        "host-hang",
+        "host-valid-then-hang",
+        "host-cancellation",
+        "host-node-memory",
+        "host-worker-memory",
+        "host-cpu",
+        "host-pids"
+      ]
+    },
+    {
+      "locator": "R3D-27",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": [],
+      "remaining": "Actual failed setup/cleanup and supervisor-loss external-owner evidence; descendant success cleanup does not close these.",
+      "host_controls": ["host-descendant"]
+    },
+    {
+      "locator": "R3D-28",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": ["fault-a-pass"],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-29",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": ["fault-s-pass"],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-30",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": ["fault-swap", "fault-duplicate", "fault-omit"],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-31",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": [
+        "fault-error-outcome",
+        "fault-notrun-outcome",
+        "fault-generic-reason",
+        "fault-missing-blocker",
+        "fault-unrelated-blocker",
+        "fault-missing-reason"
+      ],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-32",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-32"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-33",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": [],
+      "remaining": "D2 final multi-bundle dispatcher and existing Phase 1/2A regression."
+    },
+    {
+      "locator": "R3D-34",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-34"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-35",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": [],
+      "remaining": "Pure retained-byte/projection tests and context-mismatch variants; broader complete-path corruption tests remain. External context authenticity is caller responsibility."
+    },
+    {
+      "locator": "R3D-36",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": ["fault-worker-output"],
+      "remaining": "Existing corrupt transport/overflow probes plus malformed worker fault; supervisor loss remains.",
+      "host_controls": [
+        "host-stdout",
+        "host-stderr",
+        "host-wrong-nonce",
+        "host-corrupt-output",
+        "host-invalid",
+        "host-descendant"
+      ]
+    },
+    {
+      "locator": "R3D-37",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-37-raw", "R3D-37-parsed"],
+      "controlled_fault_entry": ["fault-schema-budget"],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants.",
+      "component_evidence": [
+        "oracles.test.ts: bytes/depth/nodes/entries/string/key below/equal/above; narrower local/expected/worker bounds remain open"
+      ]
+    },
+    {
+      "locator": "R3D-38",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-38"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-39",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-39"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-40",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-40", "R3D-40-record_id", "R3D-40-revision_id"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-41",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": [],
+      "remaining": "D2 legacy invocation with expected argument; no silent ignore."
+    },
+    {
+      "locator": "R3D-42",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-42"],
+      "controlled_fault_entry": [],
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+    },
+    {
+      "locator": "R3D-43",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": ["R3D-43"],
+      "controlled_fault_entry": [],
+      "remaining": "Nonfinite canonicalization refusal covered; forced extraction/digest failures remain."
+    },
+    {
+      "locator": "R3D-44",
+      "status": "partial; no whole-row closure claimed",
+      "ordinary_variants": [],
+      "controlled_fault_entry": [],
+      "remaining": "Full-path canonicalizer/projection-helper corruption; existing helper evidence is not full-call evidence.",
+      "component_evidence": [
+        "oracles.test.ts: 324 constructed byte vectors and 10 Record vectors, fixed hashlib digests; not helper-corruption evidence"
+      ]
+    }
+  ]
+}

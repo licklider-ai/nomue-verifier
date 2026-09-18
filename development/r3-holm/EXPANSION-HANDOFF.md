@@ -1,0 +1,137 @@
+# D1 expanded controlled-call checkpoint
+
+Date: 2026-09-18 UTC. Parent: reviewed Verifier head
+`3c51172a66d2c13ebec99e2dbe7c4ab892888af9`. Resolve the delivery PR head/tree
+before review. This is a continuation checkpoint, not D1 completion, host
+qualification, integration, adoption, RFC action or publication.
+
+## Review custody and repairs
+
+Protocol preserves the independent controlled-call review from reviewer commit
+`310c4cf`, file `review-inputs/r3-holm-d1-controlled-call-20260918/REVIEW-RESULT.md`,
+blob `4694d74889a3bb69eaed07b1b2a566e392ba07ec`, SHA-256
+`ecf6888d660c1ea37dbb37195e576886cecf76f10ff604d63e880daf132b039b`.
+It returned GO_FOR_D1_CONTINUATION, zero BLOCKER/MAJOR and two MINOR findings,
+and independently closed expected-access m-1. Its actual-host/Python/CI limits
+and continuing-reviewer disclosure remain intact. This verdict does not cover
+this new delta.
+
+Author repairs, requesting independent closure:
+
+- m-2: `isInputAccessError` shares the seven path error codes and regular-file
+  violation between Record and expected adapters. Record ELOOP/ENAMETOOLONG
+  now produce invocation `input_access_error`; expected faults remain C error
+  `expected_unreadable`. Resource and unexpected failures keep their own handling.
+  Unit tests and actual-host cases ACCESS-loop/overlong exercise both Record paths.
+- m-3: absent expected arguments are represented as JSON null and passed to
+  `outer-run.mjs` as `-`, which omits the supervisor/entry positional argument.
+  R3D-16 asserts C reason `expected_missing`. R3D-17-missing-file retains the
+  distinct unreadable-path case and asserts `expected_unreadable`. R3D-20-unread
+  supplies an oversized expected file while S fails, proving no acquisition.
+
+The runtime source inventory additionally pins `tsconfig.json` and the two new
+fault-entry implementation files. The dependency lockfile, numeric implementation,
+independent oracle, schemas, public dispatch and SOURCE-PIN are unchanged.
+
+## New evidence scope
+
+`outer-cases.ts` saves 47 predetermined ordinary-call variants, compared with
+26 at the reviewed parent. These include both valid-but-different expected
+identities, unrelated declaration and order differences, negative-zero p,
+invalid UTF-8, missing bundle, oversized identifier, expected size refusal,
+S failure crossed with raw/parsed resource excess, and K/D/C simultaneous failure.
+R3D-42 checks exact direct blocking identities, ordered propagation and explicit
+root reason codes, including the H-to-A transitive chain.
+
+Three new all-pass numeric fixtures have independently specified elementary
+rational targets: all zeros give zero; three tied least-positive subnormal p
+values give exact numerator 3 in units of 2^-1074 and display bits 3; all ones
+clamp to numerator 2^1074 and display 1. The worker is not used to generate these
+expectations. These are a small boundary/tie subset, not the entire numerical
+acceptance expansion. The retained 86-vector independent oracle remains separate.
+
+`fault-injections.ts` defines fourteen fixed trusted mutations. The normal
+`outer-entry.mjs` and `controlledCall` do not import this module or accept a fault
+selector. The supervisor's explicitly test-only probe enumeration selects
+`outer-fault-entry.mjs`, which runs real bounded file acquisition, the same inner
+composition/private-evidence validator, actual numeric worker when eligible,
+framed completion and cgroup cleanup. The malformed-worker mode substitutes the
+worker reply deliberately. Late budget modes inject an observation after output
+construction, not an actual host clock/memory overrun.
+
+Faults cover impossible A pass, graph-consistent fabricated S pass, swapped,
+duplicated and omitted rows, outcomes on C error/A not_run, generic or missing
+reasons, missing/unrelated blockers, late all-pass/S-failure budgets, and malformed
+worker output. The fabricated S-pass mutation first proves structural validation
+accepts the fabricated graph; the private-evidence comparison must still reject it.
+Every fault receipt must contain a refusal only and no proposed Record bytes.
+
+These are **controlled fault-entry runs**, not successful ordinary API calls.
+Probe receipts retain non-null provenance and are rejected by the public
+projection boundary. The host suite checks the actual inner refusal, rather than
+counting rejection of probe provenance alone as proof that the inner guard ran.
+The fourteen plan entries are saved before their execution. The thirteen existing
+actual-host enforcement/lifecycle controls remain separate.
+
+The host suite now has 74 checks: 47 ordinary calls, 14 controlled fault-entry
+runs and 13 enforcement/lifecycle controls. Actual outcome, exact source/tree,
+artifact hash and immutable archive are recorded in Protocol after the CI run.
+A source declaration of 74 checks does not establish that the host executed them.
+
+The Record symlink-loop setup is recorded in cases.json and regenerated by the
+fixture authoring script. Its cyclic link is removed before artifact upload;
+the overlong path is intentionally absent. Synthetic input bytes and actual
+receipts/results are retained. A saved regular file with an ACCESS name is not
+mistaken for the faulting path: the manifest records the actual path and setup.
+
+## Validation and remaining obligations
+
+Local author evidence is in `evidence/EXPANSION-VALIDATION.json` and
+`evidence/expansion-tests.tap`. The local cgroup mount remains read-only; no
+local enforcement success is claimed. Hosted evidence is an author CI execution,
+not independent host qualification. No historical archive is rewritten.
+
+[ACCEPTANCE-COVERAGE.json](ACCEPTANCE-COVERAGE.json) accounts for all 44 design
+locators with the current ordinary variants/fault evidence and remaining work.
+No row is called fully closed by a single representative execution. In particular:
+
+- every numeric/structural limit still needs its complete below/equal/above matrix;
+- raw P(B) hashes and all byte-layout variants need a broader independently
+  authored full-call oracle, not just canonical fixtures and helper tests;
+- complete owned-reason/scope combinations and numeric rounding/tie cases remain;
+- setup/cleanup failure and supervisor-loss/external-owner teardown need actual
+  evidence; receipt mutations are not substitutes;
+- R3D-43 has a real nonfinite canonicalization refusal, but unavailable digest/
+  extraction paths and R3D-44 injected helper corruption remain;
+- R3D-33/41 final dispatcher/legacy argument behavior remains D2 work;
+- unselected-context binding tests do not authenticate caller-supplied context.
+
+The nonleader exit-zero descendant observed in historical receipts remains
+unidentified. No identity is inferred from exit status. Cancellation/overflow
+receipt-sink limitations and supervisor-loss external cleanup remain as previously
+disclosed. D3 still owns reason/schema/authority integration and the p_generation
+vocabulary disposition. D1 is open.
+
+## Independent review request
+
+Verify exact head/parent/tree, original review custody, source inventory and CI
+archive bytes. Close m-2 only after both Record path probes return input_access_error.
+Close m-3 only after the actual supervisor's omitted-argument receipt has
+expected_missing, separately from missing-file expected_unreadable.
+
+Try bypassing the private-evidence guard with the structurally valid S-pass lie;
+check that every fault actually reaches the claimed stage and cannot become a
+normal API option. Challenge fixture expectations, fixed graph reasons, all-pass
+original-byte forwarding, probe provenance, and the distinction between local
+inner tests and host execution. Confirm that no 44-row completion or runtime
+qualification is inferred from these representative variants.
+
+Return GO_FOR_D1_CONTINUATION, REPAIR_REQUIRED or BLOCKED, with exact target,
+findings, minimal repairs/closure conditions, independence/continuity/model
+disclosure and NOT_RUN. Preserve the review in Protocol at
+`review-inputs/r3-holm-d1-expansion-20260918/REVIEW-RESULT.md`.
+No merge, issue/comment, clock, ID, publication or adoption action is requested.
+
+Prepared with OpenAI Codex assistance in the continuing author/coordinator context.
+Only public sources and synthetic fixtures were used. Author tests and self-review
+are not independent or human-expert clearance.

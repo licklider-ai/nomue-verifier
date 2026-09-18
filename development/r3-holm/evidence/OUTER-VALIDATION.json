@@ -1,0 +1,171 @@
+{
+  "status": "author evidence for unissued checkpoint; not D1 completion",
+  "parent": "f4b07868db999b282126b3a1c5620ee01a5252a4",
+  "environment": {
+    "os": "Linux",
+    "architecture": "x86_64",
+    "node": "v24.19.0",
+    "python": "3.12.14"
+  },
+  "commands": [
+    {
+      "command": "NOMUE_TEST_PYTHON=<absolute Python 3.12.14> node --import tsx --test --test-reporter=tap development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts",
+      "tests": 75,
+      "pass": 75,
+      "skip": 0,
+      "log": "outer-tests.tap"
+    },
+    {
+      "command": "npx tsc --project development/r3-holm/tsconfig.json",
+      "exit": 0
+    },
+    {
+      "command": "python -B development/r3-holm/outer-supervisor.test.py",
+      "tests": 5,
+      "pass": 5
+    },
+    {
+      "command": "26 predetermined outer-cases.ts variants through evaluateInnerFiles with actual Python",
+      "pass": 26,
+      "full_call": false
+    },
+    {
+      "command": "npm test",
+      "exit": 0
+    },
+    {
+      "command": "npm run test:package",
+      "exit": 0
+    }
+  ],
+  "not_run": [
+    "Actual cgroup enforcement locally: read-only cgroup mount",
+    "All expanded 44-case acceptance",
+    "D2 final dispatcher/legacy compatibility",
+    "D3 authority integration",
+    "Independent review of this new code"
+  ],
+  "hosted_ci": "Separate exact-head result; new dedicated workflow runs real delegated controls and retains artifacts",
+  "sources": [
+    {
+      "path": "development/r3-holm/contracts/expected.schema.json",
+      "sha256": "8a29b4c3d7cf3db00a4e888bacdf44241717d4cad3a5e595165ddffa7274b243"
+    },
+    {
+      "path": "development/r3-holm/contracts/output.schema.json",
+      "sha256": "9f07de89fbe5456e148b1954b9fe7b15c9a171c6dcde386d8d5a5fe8b7d9a862"
+    },
+    {
+      "path": "development/r3-holm/contracts/reason-policy.json",
+      "sha256": "245939a85688c6ed08379189003916b780b98997a6e7bde78f049b44d1ea9e09"
+    },
+    {
+      "path": "development/r3-holm/contracts/record.schema.json",
+      "sha256": "739257f4bda22f55a91cb1bac57c66ab7d3fb83e4b051f45a92c224e6aafb176"
+    },
+    {
+      "path": "development/r3-holm/controlled-call.ts",
+      "sha256": "a03c8a01a275b5c2465c4b64d39f20c139a220b204de125435778070a7f68932"
+    },
+    {
+      "path": "development/r3-holm/d0-relations.ts",
+      "sha256": "c01e641aa0b4aef3063dba751e2018be1265ad1262d7b66ef8ab2191c6d2cf25"
+    },
+    {
+      "path": "development/r3-holm/dependencies.ts",
+      "sha256": "39821307418c5b642e54e5cf82930def0c2629c1b71ba7ea6604cb0a9ac7264c"
+    },
+    {
+      "path": "development/r3-holm/execution.ts",
+      "sha256": "c4778d40cc34f467c40403c90ae90091e92396393dbb1b3ff60cbacbc9cf86d8"
+    },
+    {
+      "path": "development/r3-holm/fixtures/declaration-shapes.json",
+      "sha256": "46d8c2c3eccc19451cab9e95a5a8fe5dcb82b46d99069ef2edecdcb004fb4f32"
+    },
+    {
+      "path": "development/r3-holm/fixtures/expected.schema.json",
+      "sha256": "475e24591e77379812b8098251c5bb06eaa082361e01f844e5ad0c97d81bba5b"
+    },
+    {
+      "path": "development/r3-holm/fixtures/fixture-contracts.json",
+      "sha256": "5a534294d416637627e7ec158da71d4a8b47bcdd63f8e708eaef0a41293e5d18"
+    },
+    {
+      "path": "development/r3-holm/fixtures/record.schema.json",
+      "sha256": "08dcffd8e222b3abf7cb98384b3e0188756900d40bd3cb8e0d6733b2928d436d"
+    },
+    {
+      "path": "development/r3-holm/inner-call.ts",
+      "sha256": "c7a53d8a8dc117294bcc14669e721a3c759ae709a03a478d54235e12b20ed9c0"
+    },
+    {
+      "path": "development/r3-holm/local-checks.ts",
+      "sha256": "37b4e761ec3b5a729718f745982b333868d0d1c7e37dd329d04c0ededcef3b10"
+    },
+    {
+      "path": "development/r3-holm/numerics/INPUTS.json",
+      "sha256": "b65204e257edda7d2f3473fd4cd04c226c3d598735d469bc5ff37234a53325d4"
+    },
+    {
+      "path": "development/r3-holm/numerics/PROVENANCE.json",
+      "sha256": "cbb77e6341ccce9f03df1e6a1cc54f70b2190623fa5480d6247db3950ca5c895"
+    },
+    {
+      "path": "development/r3-holm/numerics/candidate.py",
+      "sha256": "70924d2b7ac40367e9ae4abaee624dd6c0b85796a62c5445b0694f2240fac606"
+    },
+    {
+      "path": "development/r3-holm/numerics/oracle.py",
+      "sha256": "c136af873eee3d29fa4c9a8746879e8ca0f125db2afd3bf32daabcfb8d7a6390"
+    },
+    {
+      "path": "development/r3-holm/numerics/worker.py",
+      "sha256": "d6dff0e19f8647157d55ac3d6ba37ddaeaa7ce192ba25313d921d53298607fa9"
+    },
+    {
+      "path": "development/r3-holm/outer-entry.mjs",
+      "sha256": "3791b3c989760302f05c937894c6ee3a7482ed200054c53557fd854c03aee55c"
+    },
+    {
+      "path": "development/r3-holm/outer-probes.mjs",
+      "sha256": "d8bed0fa85e0ca792056614bca8057fab6fb093dd7515b82279337c2bdd7f455"
+    },
+    {
+      "path": "development/r3-holm/outer-run.mjs",
+      "sha256": "9499537e23053641cb66b78d509b0e75206ada396d65013140470e7ab6ba5126"
+    },
+    {
+      "path": "development/r3-holm/outer-supervisor.py",
+      "sha256": "2741e04b732fb5906a14602e0183029f42f99609759aee923313db5318b15f9e"
+    },
+    {
+      "path": "development/r3-holm/output.ts",
+      "sha256": "6de2f5416689ab61b65939d30c1b665f49ef7a40c1254913dfc3955002a35f6e"
+    },
+    {
+      "path": "development/r3-holm/stored-bytes.ts",
+      "sha256": "09fd575a08c1ca7d5014f38e59f9393107a552eafa945d7ee111edc8551dd94f"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "40589dd5f0ad2bba5b98c64a555345181adb48f9389273b0502e95c4f2c9478e"
+    },
+    {
+      "path": "package.json",
+      "sha256": "bd9936b65c2588d9db05cd65728b53b2d2db592082f8127994458f6390e76e15"
+    },
+    {
+      "path": "reference/verifier/src/jcs.ts",
+      "sha256": "47503c50dbd009bae33807aac1994d26c6adb8e1cfadb90d711347ab8f2198a7"
+    },
+    {
+      "path": "reference/verifier/src/strict-json.ts",
+      "sha256": "e7ed609f7e3b754f484e0f07b9ba0b3c33e63d5869de082a2583a0bc26a8dd56"
+    }
+  ],
+  "logs": {
+    "outer-tests.tap": "a574812f30a9a9f37e3ba939cc7ad808cd5ab7817a1e03e4bb51c892dd3872a2",
+    "outer-unsupported.json": "4e8e08245689ec22edddabd1eb594ff7ea006fa4608fa5578ed38784c9c80779"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "C10_comparison_budget": {
+    "budget": 10240,
+    "exceeded": false,
+    "family_size": 1024,
+    "headroom": 1057,
+    "headroom_percent": 10.32,
+    "iterations": 6000,
+    "note": "search result, not a worst-case bound for the interpreter's sort",
+    "observed_maximum": 9183
+  },
+  "C1_scheme1_equivalence": {
+    "alpha_cases": 9600,
+    "alpha_domain": "0 < alpha < 1",
+    "families": 1200,
+    "mismatches": 0
+  },
+  "C2_alpha_domain_boundary": {
+    "divergences_at_alpha_ge_1": 4,
+    "examples": [
+      {
+        "adjusted_le_alpha": [0, 1],
+        "alpha": "1",
+        "p": [0.6, 0.7],
+        "scheme1_rejects": []
+      },
+      {
+        "adjusted_le_alpha": [0, 1, 2],
+        "alpha": "1",
+        "p": [0.9, 0.95, 0.99],
+        "scheme1_rejects": []
+      },
+      {
+        "adjusted_le_alpha": [0, 1, 2],
+        "alpha": "3/2",
+        "p": [0.9, 0.95, 0.99],
+        "scheme1_rejects": []
+      }
+    ],
+    "note": "confirms the candidate design's documented exclusion of alpha = 1"
+  },
+  "C3_closed_testing_agreement": {
+    "closed_testing_mismatches": 0,
+    "families": 1200,
+    "stepdown_mismatches": 0
+  },
+  "C4_decode_fidelity": {
+    "checks": 20012,
+    "mismatches": 0
+  },
+  "C5_projection_round_ties_to_even": {
+    "checks": 102940,
+    "mismatches": 0
+  },
+  "C6_admitted_domain": {
+    "bytearray_eight": "refused: p bytes",
+    "infinity": "refused: p domain",
+    "minus_one": "refused: p domain",
+    "nan": "refused: p domain",
+    "negative_zero": "refused: p domain",
+    "nextafter_one": "refused: p domain",
+    "one": "admitted",
+    "positive_zero": "admitted",
+    "seven_bytes": "refused: p bytes",
+    "smallest_negative": "refused: p domain",
+    "two": "refused: p domain"
+  },
+  "C7_tie_and_permutation_invariance": {
+    "families": 2000,
+    "violations": 0
+  },
+  "C8_exact_versus_display": {
+    "display_collision_available": true,
+    "exact_only_tamper": "refused: evidence mismatch"
+  },
+  "C9_hostile_evidence": {
+    "bool_where_int": "refused: evidence mismatch",
+    "deeply_nested_list": "refused: evidence shape",
+    "extra_top_level_key": "refused: evidence mismatch",
+    "hostile_eq_member": "refused: evidence mismatch",
+    "int_where_bytes": "refused: evidence mismatch",
+    "missing_key": "refused: evidence mismatch",
+    "non_dict_evidence": "refused: evidence shape"
+  },
+  "environment": {
+    "candidate_module": "governance/drafts/release-3-preparation/holm-experiment-20260911/candidate.py",
+    "implementation": "cpython",
+    "note": "the candidate pins CPython 3.12.14; C1-C9 are exact integer and rational checks independent of the interpreter version, while C10 counts comparisons made by this interpreter's sort",
+    "python": "3.11.15"
+  }
+}

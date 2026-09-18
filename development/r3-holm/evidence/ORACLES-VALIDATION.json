@@ -1,0 +1,33 @@
+{
+  "status": "author evidence, not independent review or D1 completion",
+  "parent": "eda3ba9354429baf936212bc68572af94a5e20f6",
+  "checks": {
+    "typescript_pass": 121,
+    "typescript_skip": 0,
+    "component_oracle_vectors": 324,
+    "full_record_oracle_vectors": 10,
+    "component_below_equal_above": 18,
+    "replay_regression_tests": 3,
+    "comparison_mutations": 8,
+    "repinned_negative_replay": "rejected with retained-result mismatch",
+    "oracle_regeneration": "byte-identical",
+    "strict_typecheck": "pass",
+    "npm_test": "pass",
+    "package_test": "pass"
+  },
+  "hashes": {
+    "oracles/generate.py": "85a2619368704586443efb216dfc2519394e2ba7c2509df3139159d18295cfaa",
+    "oracles/projection-vectors.json": "f860a067bf8caf42d0a5647ce4ecd9b6ff756a14a434387a2c0bf2036a0e0886",
+    "numerics/b2-sources/repair-results.json": "7eeb3725adca06f99e75997d275e67e6f84f434ccd813c5de804b2443491db45",
+    "numerics/B2-PROVENANCE.json": "e59db37666c82e9b86c5b56f185a2cc3fe2d6eeb37bf879f3ec2063a311b7ce7",
+    "evidence/oracles-tests.tap": "97ff09d8683e3269da9e310f632b65e8af0380b1dc021f13732d134f04e3dcce",
+    "evidence/oracles-b2-replay.json": "30231d11318a1fb3d95a23a79372df11d84078ccba9a3aa45e51b0a9238b3ca5",
+    "outer-runtime.json": "f2a2811eb595b633f2b55b4b221d0d51a1e888570d555b5e789397cc4d78a260"
+  },
+  "not_run": [
+    "Local cgroup enforcement",
+    "Full helper corruption and failed cleanup/supervisor loss",
+    "D2/D3",
+    "Independent review of this changed checkpoint"
+  ]
+}

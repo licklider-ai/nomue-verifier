@@ -1,0 +1,49 @@
+{
+  "repository": "licklider-ai/nomue-protocol",
+  "scope": "Unchanged source import and author replay; original review is independent only within its recorded target/scope. Repair was authored by the reviewer.",
+  "source_pdf_sha256": "43a5a10279f8bf1752a3e8d4a8407f9717579f8f903be4bcd62d969e82d573af",
+  "assets": [
+    {
+      "file": "candidate.py",
+      "source": "governance/drafts/release-3-preparation/holm-b2-repair-20260918/candidate.py",
+      "commit": "7ac803a1b9fa71a5a0064a0e81d02b9321cf86d9",
+      "blob": "a10a57c89caefee5c370a7a1e882009b13d08982",
+      "sha256": "a1b0bf801096fa35ce7ac159193ecfae7f66373cb51b69f6caf9728cc935a694"
+    },
+    {
+      "file": "b2-sources/independent_checks.py",
+      "source": "review-inputs/r3-holm-b2-numerical-review-20260918/independent_checks.py",
+      "commit": "7ac803a1b9fa71a5a0064a0e81d02b9321cf86d9",
+      "blob": "ba74efbf25bd25236540ca2e29fa3c57c40f31e9",
+      "sha256": "df61ffc3031c2decdcc54f625a77ce66704b211c3de1209e8dced3d2a430aaf0"
+    },
+    {
+      "file": "b2-sources/RESULTS.json",
+      "source": "review-inputs/r3-holm-b2-numerical-review-20260918/RESULTS.json",
+      "commit": "7ac803a1b9fa71a5a0064a0e81d02b9321cf86d9",
+      "blob": "f9649ace46fda4653a2786052feab34de48424ac",
+      "sha256": "748cd7e352aee2ef395a38505f6bc5feae473afbd199d591e0127fd87c6d1475"
+    },
+    {
+      "file": "b2-sources/test_repair.py",
+      "source": "governance/drafts/release-3-preparation/holm-b2-repair-20260918/test_repair.py",
+      "commit": "7ac803a1b9fa71a5a0064a0e81d02b9321cf86d9",
+      "blob": "21fbc299a6905735abf043c2f0753cb1b66d081b",
+      "sha256": "225ddf129a25d5a5fe2e7fe37e94885318ca7ebcb3ac5c48001cd6e0040e5153"
+    },
+    {
+      "file": "b2-sources/predecessor.py",
+      "source": "governance/drafts/release-3-preparation/holm-experiment-20260911/candidate.py",
+      "commit": "0c7a685a1ea6b2b2d0dbe8966c572be95b82755a",
+      "blob": "fbebc6e4c33d2de6dac3557e8f8f60548ff2dc64",
+      "sha256": "70924d2b7ac40367e9ae4abaee624dd6c0b85796a62c5445b0694f2240fac606"
+    },
+    {
+      "file": "b2-sources/repair-results.json",
+      "source": "governance/drafts/release-3-preparation/holm-b2-repair-20260918/RESULTS.json",
+      "commit": "7ac803a1b9fa71a5a0064a0e81d02b9321cf86d9",
+      "blob": "e4802b3f2d96d74276e05d6db659b43d732af447",
+      "sha256": "7eeb3725adca06f99e75997d275e67e6f84f434ccd813c5de804b2443491db45"
+    }
+  ]
+}
