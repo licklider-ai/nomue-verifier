@@ -37,6 +37,13 @@
       "commit": "0c7a685a1ea6b2b2d0dbe8966c572be95b82755a",
       "blob": "fbebc6e4c33d2de6dac3557e8f8f60548ff2dc64",
       "sha256": "70924d2b7ac40367e9ae4abaee624dd6c0b85796a62c5445b0694f2240fac606"
+    },
+    {
+      "file": "b2-sources/repair-results.json",
+      "source": "governance/drafts/release-3-preparation/holm-b2-repair-20260918/RESULTS.json",
+      "commit": "7ac803a1b9fa71a5a0064a0e81d02b9321cf86d9",
+      "blob": "e4802b3f2d96d74276e05d6db659b43d732af447",
+      "sha256": "7eeb3725adca06f99e75997d275e67e6f84f434ccd813c5de804b2443491db45"
     }
   ]
 }

@@ -37,6 +37,18 @@ def tree_bound(n):
     return tree_bound(left) + tree_bound(n - left) + n - 1
 
 
+def assert_repair_results(actual, expected):
+    # Exclude only top-level environment metadata; do not coerce numbers, drop
+    # unknown groups, or accept missing keys. JSON encoding distinguishes bool/int.
+    def comparable(value):
+        if type(value) is not dict or 'environment' not in value:
+            raise AssertionError('repair result/environment shape')
+        return json.dumps({k: v for k, v in value.items() if k != 'environment'},
+                          sort_keys=True, separators=(',', ':'), allow_nan=False)
+    if comparable(actual) != comparable(expected):
+        raise AssertionError('repair results differ from retained expectation')
+
+
 def main():
     pins = json.loads((HERE / 'B2-PROVENANCE.json').read_text())
     for row in pins['assets']:
@@ -82,6 +94,8 @@ def main():
                            capture_output=True, timeout=120, check=True)
         repair_results = json.loads(p.stdout)
         assert p.stderr == b''
+        repair_expected = json.loads((HERE / 'b2-sources/repair-results.json').read_text())
+        assert_repair_results(repair_results, repair_expected)
         # Now apply the original independent oracle functions to the wired module,
         # not to the historical candidate. Do not run main or overwrite its receipt.
         shutil.copyfile(HERE / 'candidate.py', predecessor / 'candidate.py')
@@ -108,8 +122,9 @@ def main():
         'exhaustive_small_permutations': exhaustive,
         'independent_C1_C9': independent.RESULTS,
         'preserved_repair_checks': repair_results,
+        'repair_results_match_except_environment': True,
         'not_run': ['C10 historical runtime-sort search, replaced by derived bound',
-                    'Independent review of successor wiring', 'Full-call host lifecycle in this Python runner'],
+                    'Independent review of this replay repair and new D1 tests', 'Full-call host lifecycle in this Python runner'],
     }
     print(json.dumps(result, indent=2, sort_keys=True))
 

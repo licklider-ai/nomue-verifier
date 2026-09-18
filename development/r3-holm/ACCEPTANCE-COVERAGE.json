@@ -1,13 +1,13 @@
 {
   "status": "implementation accounting, not adoption or executed-host evidence",
   "design_source": "Protocol 1eb6b93 D0 ACCEPTANCE.md, 44 locators",
-  "ordinary_case_count": 48,
+  "ordinary_case_count": 58,
   "access_regressions": ["ACCESS-loop", "ACCESS-overlong"],
   "rows": [
     {
       "locator": "R3D-01",
       "status": "partial; no whole-row closure claimed",
-      "ordinary_variants": ["R3D-01"],
+      "ordinary_variants": ["R3D-01", "ORACLE-canonical"],
       "controlled_fault_entry": [],
       "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
     },
@@ -35,9 +35,12 @@
     {
       "locator": "R3D-05",
       "status": "partial; no whole-row closure claimed",
-      "ordinary_variants": ["R3D-05"],
+      "ordinary_variants": ["R3D-05", "ORACLE-declared-digest"],
       "controlled_fault_entry": [],
-      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants.",
+      "component_evidence": [
+        "oracles.test.ts: 324 constructed byte vectors and 10 Record vectors, fixed hashlib digests; not helper-corruption evidence"
+      ]
     },
     {
       "locator": "R3D-06",
@@ -49,7 +52,7 @@
     {
       "locator": "R3D-07",
       "status": "partial; no whole-row closure claimed",
-      "ordinary_variants": ["R3D-07"],
+      "ordinary_variants": ["R3D-07", "ORACLE-absent", "ORACLE-nested-unicode"],
       "controlled_fault_entry": [],
       "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
     },
@@ -98,16 +101,29 @@
     {
       "locator": "R3D-14",
       "status": "partial; no whole-row closure claimed",
-      "ordinary_variants": ["R3D-14"],
+      "ordinary_variants": [
+        "R3D-14",
+        "ORACLE-first",
+        "ORACLE-last",
+        "ORACLE-whitespace",
+        "ORACLE-escaped-key",
+        "ORACLE-number-spelling"
+      ],
       "controlled_fault_entry": [],
-      "remaining": "Independent full-call raw projection/hash oracle and byte-layout variants."
+      "remaining": "Independent full-call raw projection/hash oracle and byte-layout variants.",
+      "component_evidence": [
+        "oracles.test.ts: 324 constructed byte vectors and 10 Record vectors, fixed hashlib digests; not helper-corruption evidence"
+      ]
     },
     {
       "locator": "R3D-15",
       "status": "partial; no whole-row closure claimed",
-      "ordinary_variants": ["R3D-15"],
+      "ordinary_variants": ["R3D-15", "ORACLE-newline"],
       "controlled_fault_entry": [],
-      "remaining": "Independent raw projection/hash oracle including retained newline."
+      "remaining": "Independent raw projection/hash oracle including retained newline.",
+      "component_evidence": [
+        "oracles.test.ts: 324 constructed byte vectors and 10 Record vectors, fixed hashlib digests; not helper-corruption evidence"
+      ]
     },
     {
       "locator": "R3D-16",
@@ -179,7 +195,10 @@
       "status": "partial; no whole-row closure claimed",
       "ordinary_variants": ["R3D-24", "R3D-24-expected-bytes"],
       "controlled_fault_entry": [],
-      "remaining": "Every structural and byte limit below/equal/above, plus late growth."
+      "remaining": "Every structural and byte limit below/equal/above, plus late growth.",
+      "component_evidence": [
+        "oracles.test.ts: bytes/depth/nodes/entries/string/key below/equal/above; narrower local/expected/worker bounds remain open"
+      ]
     },
     {
       "locator": "R3D-25",
@@ -193,14 +212,24 @@
       "status": "partial; no whole-row closure claimed",
       "ordinary_variants": [],
       "controlled_fault_entry": [],
-      "remaining": "Existing direct host probes; after real successful inner completion and caller cancellation paths remain."
+      "remaining": "Existing direct host probes; after real successful inner completion and caller cancellation paths remain.",
+      "host_controls": [
+        "host-hang",
+        "host-valid-then-hang",
+        "host-cancellation",
+        "host-node-memory",
+        "host-worker-memory",
+        "host-cpu",
+        "host-pids"
+      ]
     },
     {
       "locator": "R3D-27",
       "status": "partial; no whole-row closure claimed",
       "ordinary_variants": [],
       "controlled_fault_entry": [],
-      "remaining": "Actual cleanup/setup failure and supervisor loss with external-owner teardown."
+      "remaining": "Actual failed setup/cleanup and supervisor-loss external-owner evidence; descendant success cleanup does not close these.",
+      "host_controls": ["host-descendant"]
     },
     {
       "locator": "R3D-28",
@@ -270,14 +299,25 @@
       "status": "partial; no whole-row closure claimed",
       "ordinary_variants": [],
       "controlled_fault_entry": ["fault-worker-output"],
-      "remaining": "Existing corrupt transport/overflow probes plus malformed worker fault; supervisor loss remains."
+      "remaining": "Existing corrupt transport/overflow probes plus malformed worker fault; supervisor loss remains.",
+      "host_controls": [
+        "host-stdout",
+        "host-stderr",
+        "host-wrong-nonce",
+        "host-corrupt-output",
+        "host-invalid",
+        "host-descendant"
+      ]
     },
     {
       "locator": "R3D-37",
       "status": "partial; no whole-row closure claimed",
       "ordinary_variants": ["R3D-37-raw", "R3D-37-parsed"],
       "controlled_fault_entry": ["fault-schema-budget"],
-      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants."
+      "remaining": "Complete parameterized scope/reason/byte evidence required by ACCEPTANCE.md; these are representative variants.",
+      "component_evidence": [
+        "oracles.test.ts: bytes/depth/nodes/entries/string/key below/equal/above; narrower local/expected/worker bounds remain open"
+      ]
     },
     {
       "locator": "R3D-38",
@@ -326,7 +366,10 @@
       "status": "partial; no whole-row closure claimed",
       "ordinary_variants": [],
       "controlled_fault_entry": [],
-      "remaining": "Full-path canonicalizer/projection-helper corruption; existing helper evidence is not full-call evidence."
+      "remaining": "Full-path canonicalizer/projection-helper corruption; existing helper evidence is not full-call evidence.",
+      "component_evidence": [
+        "oracles.test.ts: 324 constructed byte vectors and 10 Record vectors, fixed hashlib digests; not helper-corruption evidence"
+      ]
     }
   ]
 }

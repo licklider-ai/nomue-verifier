@@ -1,0 +1,213 @@
+{
+  "bound_at_120": 713,
+  "candidate_sha256": "a1b0bf801096fa35ce7ac159193ecfae7f66373cb51b69f6caf9728cc935a694",
+  "derived_bound_sizes_checked": 1024,
+  "exhaustive_small_permutations": 46233,
+  "independent_C1_C9": {
+    "C1_scheme1_equivalence": {
+      "alpha_cases": 9600,
+      "alpha_domain": "0 < alpha < 1",
+      "families": 1200,
+      "mismatches": 0
+    },
+    "C2_alpha_domain_boundary": {
+      "divergences_at_alpha_ge_1": 4,
+      "examples": [
+        {
+          "adjusted_le_alpha": [
+            0,
+            1
+          ],
+          "alpha": "1",
+          "p": [
+            0.6,
+            0.7
+          ],
+          "scheme1_rejects": []
+        },
+        {
+          "adjusted_le_alpha": [
+            0,
+            1,
+            2
+          ],
+          "alpha": "1",
+          "p": [
+            0.9,
+            0.95,
+            0.99
+          ],
+          "scheme1_rejects": []
+        },
+        {
+          "adjusted_le_alpha": [
+            0,
+            1,
+            2
+          ],
+          "alpha": "3/2",
+          "p": [
+            0.9,
+            0.95,
+            0.99
+          ],
+          "scheme1_rejects": []
+        }
+      ],
+      "note": "confirms the candidate design's documented exclusion of alpha = 1"
+    },
+    "C3_closed_testing_agreement": {
+      "closed_testing_mismatches": 0,
+      "families": 1200,
+      "stepdown_mismatches": 0
+    },
+    "C4_decode_fidelity": {
+      "checks": 20012,
+      "mismatches": 0
+    },
+    "C5_projection_round_ties_to_even": {
+      "checks": 102940,
+      "mismatches": 0
+    },
+    "C6_admitted_domain": {
+      "bytearray_eight": "refused: p bytes",
+      "infinity": "refused: p domain",
+      "minus_one": "refused: p domain",
+      "nan": "refused: p domain",
+      "negative_zero": "refused: p domain",
+      "nextafter_one": "refused: p domain",
+      "one": "admitted",
+      "positive_zero": "admitted",
+      "seven_bytes": "refused: p bytes",
+      "smallest_negative": "refused: p domain",
+      "two": "refused: p domain"
+    },
+    "C7_tie_and_permutation_invariance": {
+      "families": 2000,
+      "violations": 0
+    },
+    "C8_exact_versus_display": {
+      "display_collision_available": true,
+      "exact_only_tamper": "refused: evidence mismatch"
+    },
+    "C9_hostile_evidence": {
+      "bool_where_int": "refused: evidence mismatch",
+      "deeply_nested_list": "refused: evidence shape",
+      "extra_top_level_key": "refused: evidence mismatch",
+      "hostile_eq_member": "refused: evidence mismatch",
+      "int_where_bytes": "refused: evidence mismatch",
+      "missing_key": "refused: evidence mismatch",
+      "non_dict_evidence": "refused: evidence shape"
+    }
+  },
+  "maximum_comparison_bound": 9217,
+  "not_run": [
+    "C10 historical runtime-sort search, replaced by derived bound",
+    "Independent review of this replay repair and new D1 tests",
+    "Full-call host lifecycle in this Python runner"
+  ],
+  "preserved_repair_checks": {
+    "C1_predecessor_equivalence": {
+      "carriers": 6000,
+      "divergences": 0,
+      "identical": 6000,
+      "refusing_carriers": 2385
+    },
+    "C2_order_equivalence": {
+      "divergences": 0,
+      "sorts": 3000
+    },
+    "C3_derived_bound": {
+      "sizes": {
+        "1": {
+          "bound": 0,
+          "observed_maximum": 0
+        },
+        "1023": {
+          "bound": 9207,
+          "observed_maximum": 8980
+        },
+        "1024": {
+          "bound": 9217,
+          "observed_maximum": 8994
+        },
+        "120": {
+          "bound": 713,
+          "observed_maximum": 695
+        },
+        "2": {
+          "bound": 1,
+          "observed_maximum": 1
+        },
+        "3": {
+          "bound": 3,
+          "observed_maximum": 3
+        },
+        "512": {
+          "bound": 4097,
+          "observed_maximum": 3990
+        },
+        "63": {
+          "bound": 315,
+          "observed_maximum": 311
+        },
+        "64": {
+          "bound": 321,
+          "observed_maximum": 318
+        },
+        "65": {
+          "bound": 385,
+          "observed_maximum": 375
+        },
+        "7": {
+          "bound": 14,
+          "observed_maximum": 14
+        },
+        "8": {
+          "bound": 17,
+          "observed_maximum": 17
+        },
+        "9": {
+          "bound": 25,
+          "observed_maximum": 25
+        }
+      },
+      "violations": 0
+    },
+    "C4_maximal_family": {
+      "family_size": 1024,
+      "orderings": 60,
+      "predecessor_fixed_ceiling": 10240,
+      "predecessor_peak_comparisons": 8935,
+      "predecessor_refusals": 0,
+      "repaired_bound": 9217,
+      "repaired_peak_comparisons": 8988,
+      "repaired_refusals": 0
+    },
+    "C5_adjusted_values_unchanged": {
+      "divergences": 0,
+      "families": 2000
+    },
+    "environment": {
+      "implementation": "cpython",
+      "predecessor": "governance/drafts/release-3-preparation/holm-experiment-20260911/candidate.py",
+      "python": "3.12.14"
+    },
+    "totals": {
+      "checks": 13088
+    }
+  },
+  "python": "3.12.14",
+  "repair_results_match_except_environment": true,
+  "status": "author replay on successor, not a new independent review or whole-call acceptance",
+  "transform_source_unchanged": true,
+  "unchanged_functions_ast": [
+    "require",
+    "decode",
+    "project",
+    "transform",
+    "identical",
+    "evidence_view",
+    "check_evidence"
+  ]
+}

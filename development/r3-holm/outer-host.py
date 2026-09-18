@@ -68,6 +68,8 @@ def tests(delegation, artifact):
                     assert (row.get('outcome') if row['execution']=='completed' else row['execution'])==want,(stage,row,want)
                 for stage,want in case.get('reasons',{}).items():
                     assert by_stage[stage]['reasons']==want,(stage,by_stage[stage],want)
+                if 'reference_digest' in case:
+                    assert output['record_reference']['stored_projection_digest']==case['reference_digest'],output
                 if case['id']=='R3D-42':
                     # Fixed prerequisite order and union, independent of dependency implementation.
                     ids=lambda names:['candidate:holm:0.3.0-candidate.5:'+n for n in names]

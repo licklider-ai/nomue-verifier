@@ -91,7 +91,7 @@ one owner in `stored-bytes.ts`; legacy adapter size guards remain explicit.
 
 ```sh
 npm ci --ignore-scripts
-node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts development/r3-holm/fault-injections.test.ts
+node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts development/r3-holm/fault-injections.test.ts development/r3-holm/oracles.test.ts
 npx tsc --project development/r3-holm/tsconfig.json
 npm test
 npm run test:package
@@ -164,3 +164,7 @@ The current numerical review intake and bounded-sort wiring are in
 [B2-INTEGRATION-HANDOFF.md](B2-INTEGRATION-HANDOFF.md). Replay the retained
 independent expectations with `python -B development/r3-holm/numerics/replay_b2.py`.
 Earlier checkpoint records remain historical evidence, not approvals of later heads.
+
+The current [D1 oracle checkpoint](ORACLES-HANDOFF.md) follows the independent
+B-2 integration receipt. It repairs retained-result comparison and adds raw-byte
+and component-boundary evidence; D1 remains open. Earlier handoffs are chronology.

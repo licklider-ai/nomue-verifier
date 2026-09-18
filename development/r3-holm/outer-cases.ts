@@ -1,5 +1,5 @@
 /** Predetermined first-pass full-call expectations, not the entire expanded 44-case suite. */
-import { writeFileSync, mkdirSync, symlinkSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, symlinkSync } from "node:fs";
 import { resolve, join } from "node:path";
 import { baseRecord, seal, context } from "./outer-fixtures.ts";
 import { jcsCanonicalize } from "../../reference/verifier/src/jcs.ts";
@@ -447,5 +447,19 @@ add(
     },
   },
 );
+// Independent Python-constructed bytes and fixed hashes, never candidate-derived.
+const oracle = JSON.parse(
+  readFileSync(
+    new URL("./oracles/projection-vectors.json", import.meta.url),
+    "utf8",
+  ),
+);
+for (const v of oracle.full_call_vectors) {
+  add(v.id, Buffer.from(v.input), e, v.checks, undefined, {
+    forward: v.forward,
+    reference_digest: v.digest,
+    projection_utf8: v.projection,
+  });
+}
 // Persist expectations before running any candidate; the runner never rewrites these.
 writeFileSync(join(dir, "cases.json"), JSON.stringify(rows, null, 2) + "\n");
