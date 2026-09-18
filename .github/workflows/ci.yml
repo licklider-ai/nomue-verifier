@@ -54,6 +54,7 @@ jobs:
           export NOMUE_TEST_PYTHON="$(command -v python)"
           node --import tsx --test development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts development/r3-holm/fault-injections.test.ts
           python development/r3-holm/numerics/test_worker.py
+          python -B development/r3-holm/numerics/replay_b2.py
           python -B development/r3-holm/outer-supervisor.test.py
 
   r3-controlled-host:

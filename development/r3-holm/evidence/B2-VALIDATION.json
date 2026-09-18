@@ -1,0 +1,35 @@
+{
+  "status": "author B-2 successor replay and integration evidence; not independent review",
+  "parent": "5ee62cdb98dde2b32b7910560bc85d1ad54b16c8",
+  "last_independent_controlled_call": "3c51172a66d2c13ebec99e2dbe7c4ab892888af9",
+  "checks": {
+    "typescript": {
+      "pass": 91,
+      "skip": 0
+    },
+    "inner_file_cases": 48,
+    "independent_C1_C9": "all retained expected results matched",
+    "repair_checks": 13088,
+    "bound_sizes": 1024,
+    "exhaustive_small_permutations": 46233,
+    "python_worker_tests": 3,
+    "historical_worker_vectors": 86,
+    "worker_boundary_counts": [2, 3, 119, 120, 121],
+    "supervisor_tests": 5,
+    "strict_typecheck": "pass",
+    "npm_test": "pass",
+    "package_test": "pass"
+  },
+  "hashes": {
+    "numerics/candidate.py": "a1b0bf801096fa35ce7ac159193ecfae7f66373cb51b69f6caf9728cc935a694",
+    "numerics/B2-PROVENANCE.json": "b9f5435714384121ca4da91ea4ca3e23aa370b73842ba266aab3b863f99fd052",
+    "evidence/b2-replay.json": "10075d2e8201ceb5b7ad90bf1f8dbf43ed21b3d18aff885d1a501b6ed4f57120",
+    "evidence/b2-tests.tap": "4f1b1e99b7d357e4f4f8cf3f895922d552898f413f1059d0c08cc89efc26a868",
+    "outer-runtime.json": "f2a2811eb595b633f2b55b4b221d0d51a1e888570d555b5e789397cc4d78a260"
+  },
+  "not_run": [
+    "Local actual cgroup enforcement",
+    "Independent new-head wiring review",
+    "Full D1 acceptance matrix and D2/D3"
+  ]
+}

@@ -1,17 +1,8 @@
-"""Disposable supplied-p transform; no scientific or Protocol acceptance.
+"""Disposable supplied-p transform; no scientific or Protocol acceptance."""
+from functools import cmp_to_key
 
-Successor to holm-experiment-20260911/candidate.py. The only behavioural change
-is that ordering no longer delegates to the interpreter's sort. The comparisons
-a family costs are now a deterministic function of the input, bounded by a
-schedule that depends only on the family size, so no admissible family can be
-admitted by one conforming Python and refused by another. Decoding, rank
-scaling, the capped cumulative scan, projection, the admitted domain, the
-refusal order and the evidence comparator are unchanged, and every input
-produces the identical result or the identical refusal. See README.md.
-"""
-
-LIMIT = 1024
 U = 1 << 1074
+LIMIT = 1024
 ALPHABET = frozenset('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-')
 
 
@@ -20,73 +11,15 @@ def require(ok, reason):
         raise ValueError(reason)
 
 
-def comparison_bound(n):
-    """Exact worst case of the merge sort below, derived from the merge schedule.
-
-    Merging a left block of `a` and a right block of `b` costs at most a+b-1
-    comparisons, because the last remaining element is appended without one.
-    The schedule depends only on n, so this bound is a property of the admitted
-    family size and not of any runtime.
-    """
-    require(type(n) is int and n >= 0, 'bound domain')
-    total, width = 0, 1
-    while width < n:
-        start = 0
-        while start < n:
-            middle = min(start + width, n)
-            end = min(start + 2 * width, n)
-            if end > middle:
-                total += end - start - 1
-            start += 2 * width
-        width *= 2
-    return total
-
-
 def ordered(indices, key):
-    """Stable bottom-up merge sort over `indices`, ordered by `key`.
-
-    Returns the sorted indices and the comparisons actually spent. That count
-    depends on the input, but never on the interpreter's sort algorithm, and it
-    is bounded by comparison_bound(n), which depends only on n. Admission is
-    therefore a property of the family, not of the runtime. The check below is
-    an internal invariant that a correct implementation cannot trip, not an
-    admission rule.
-    """
-    items = list(indices)
-    n = len(items)
-    keys = [key(i) for i in items]
-    order = list(range(n))
-    scratch = [0] * n
     count = 0
-    width = 1
-    while width < n:
-        start = 0
-        while start < n:
-            middle = min(start + width, n)
-            end = min(start + 2 * width, n)
-            i, j, out = start, middle, start
-            while i < middle and j < end:
-                count += 1
-                if keys[order[j]] < keys[order[i]]:
-                    scratch[out] = order[j]
-                    j += 1
-                else:
-                    scratch[out] = order[i]
-                    i += 1
-                out += 1
-            while i < middle:
-                scratch[out] = order[i]
-                i += 1
-                out += 1
-            while j < end:
-                scratch[out] = order[j]
-                j += 1
-                out += 1
-            start += 2 * width
-        order, scratch = scratch, order
-        width *= 2
-    require(count <= comparison_bound(n), 'comparison budget')
-    return [items[p] for p in order], count
+    def compare(i, j):
+        nonlocal count
+        count += 1
+        require(count <= 10240, 'comparison budget')
+        a, b = key(i), key(j)
+        return (a > b) - (a < b)
+    return sorted(indices, key=cmp_to_key(compare)), count
 
 
 def decode(raw):
@@ -157,8 +90,8 @@ DIAGNOSTICS = frozenset({'comparisons'})
 
 
 def evidence_view(result):
-    # Comparison counters stay outside evidence identity. They no longer vary
-    # with the interpreter, but the evidence contract is unchanged.
+    # Runtime comparison counters depend on the interpreter's sort algorithm;
+    # they are diagnostics, not exact mathematical or identity evidence.
     require(type(result) is dict, 'evidence shape')
     return {k: v for k, v in result.items() if k not in DIAGNOSTICS}
 

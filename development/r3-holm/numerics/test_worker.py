@@ -20,6 +20,25 @@ class WorkerEvidence(unittest.TestCase):
         for row in json.loads((HERE / 'PROVENANCE.json').read_text())['assets']:
             self.assertEqual(hashlib.sha256((HERE / row['file']).read_bytes()).hexdigest(), row['sha256'])
 
+    def test_worker_family_boundaries(self):
+        # Identical least-positive subnormals: all adjusted numerators are n.
+        # These expectations are literal integers, never worker-derived.
+        for n in [2, 3, 119, 120, 121]:
+            with self.subTest(n=n):
+                carrier = {'family':'boundary','revision':'fixed','members':[
+                    {'hypothesis':'h'+str(i),'origin':'supplied','p':'0000000000000001'} for i in range(n)]}
+                p = subprocess.run([sys.executable,'-I',str(HERE/'worker.py')],
+                    input=json.dumps(carrier).encode(),capture_output=True,timeout=5)
+                if n in [2,121]:
+                    self.assertNotEqual(p.returncode,0)
+                    self.assertEqual(p.stdout,b'')
+                    self.assertIn(b'private family count',p.stderr)
+                else:
+                    self.assertEqual(p.returncode,0,p.stderr.decode())
+                    self.assertEqual(json.loads(p.stdout),{
+                        'adjusted_hex':[format(n,'x')]*n,
+                        'display_hex':[format(n,'016x')]*n})
+
     def test_closed_testing(self):
         rng = random.Random(20260918)
         cases = [[0.0]*3, [1.0]*3, [0.0, 0.5, 1.0], [2**-1074]*3,

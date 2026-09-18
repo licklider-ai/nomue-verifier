@@ -369,5 +369,83 @@ for (const [name, path] of [
     path_setup: name,
   });
 }
+// Maximum admitted all-pairs family: 16 groups and 120 identical least subnormals.
+// Holm gives numerator/display 120 for every member; no candidate arithmetic oracle.
+const maximal = baseRecord();
+const decl = maximal.payload.declaration;
+decl.design.groups = Array.from({ length: 16 }, (_, i) => ({
+  group_id: `g-${i}`,
+}));
+decl.design.units = Array.from({ length: 16 }, (_, i) => ({
+  experimental_unit_id: `u-${i}`,
+  group_id: `g-${i}`,
+}));
+decl.dataset.observations = Array.from({ length: 16 }, (_, i) => ({
+  observation_id: `o-${i}`,
+  experimental_unit_id: `u-${i}`,
+  group_id: `g-${i}`,
+  value: i,
+}));
+for (const analysis of decl.analyses)
+  analysis.population.observation_ids = decl.dataset.observations.map(
+    (o: any) => o.observation_id,
+  );
+const members: any[] = [];
+for (let a = 0; a < 16; a++)
+  for (let b = a + 1; b < 16; b++)
+    members.push({
+      ...structuredClone(decl.families[0].members[0]),
+      member_id: `m-${members.length}`,
+      minuend_group_id: `g-${a}`,
+      subtrahend_group_id: `g-${b}`,
+    });
+for (const family of decl.families) family.members = structuredClone(members);
+for (const slot of decl.result_slots)
+  slot.member_ids = members.map((m) => m.member_id);
+maximal.payload.inputs.members = members.map((m, i) => ({
+  member_id: m.member_id,
+  origin: {
+    source_id: "source",
+    hypothesis_id: `h-${i}`,
+    sidedness: "two_sided",
+  },
+  p_hex: "0000000000000001",
+}));
+maximal.payload.result.adjusted = members.map((m) => ({
+  member_id: m.member_id,
+  adjusted_hex: "78",
+  display_hex: "0000000000000078",
+}));
+const maximalExpected = {
+  record_id: maximal.record_id,
+  revision_id: maximal.revision_id,
+  declaration: structuredClone(decl),
+  inputs: structuredClone(maximal.payload.inputs),
+};
+add(
+  "R3D-23-maximum-family",
+  seal(maximal),
+  JSON.stringify(maximalExpected),
+  {
+    S: "pass",
+    K: "pass",
+    D: "pass",
+    H: "pass",
+    I: "pass",
+    C: "pass",
+    A: "pass",
+  },
+  undefined,
+  {
+    forward: true,
+    numeric_target: {
+      groups: 16,
+      members: 120,
+      p: "0000000000000001",
+      numerator: "78",
+      display: "0000000000000078",
+    },
+  },
+);
 // Persist expectations before running any candidate; the runner never rewrites these.
 writeFileSync(join(dir, "cases.json"), JSON.stringify(rows, null, 2) + "\n");

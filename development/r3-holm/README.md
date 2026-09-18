@@ -159,3 +159,8 @@ The versioned vocabulary change needs D3 schema/public-surface disposition.
 
 The next bounded expansion and review request is [EXPANSION-HANDOFF.md](EXPANSION-HANDOFF.md).
 It distinguishes ordinary controlled-call variants from trusted fault-entry runs.
+
+The current numerical review intake and bounded-sort wiring are in
+[B2-INTEGRATION-HANDOFF.md](B2-INTEGRATION-HANDOFF.md). Replay the retained
+independent expectations with `python -B development/r3-holm/numerics/replay_b2.py`.
+Earlier checkpoint records remain historical evidence, not approvals of later heads.

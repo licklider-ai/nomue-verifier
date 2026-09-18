@@ -63,15 +63,15 @@
     },
     {
       "path": "development/r3-holm/numerics/INPUTS.json",
-      "sha256": "b65204e257edda7d2f3473fd4cd04c226c3d598735d469bc5ff37234a53325d4"
+      "sha256": "b15e888959116ece0aa598337589ab191b782156c3a63f6ef01125dd8a70533b"
     },
     {
       "path": "development/r3-holm/numerics/PROVENANCE.json",
-      "sha256": "cbb77e6341ccce9f03df1e6a1cc54f70b2190623fa5480d6247db3950ca5c895"
+      "sha256": "f3c8d202c00fad25a8ab6bd3e5053d580aac4d3be692050555af7c3694bba8ba"
     },
     {
       "path": "development/r3-holm/numerics/candidate.py",
-      "sha256": "70924d2b7ac40367e9ae4abaee624dd6c0b85796a62c5445b0694f2240fac606"
+      "sha256": "a1b0bf801096fa35ce7ac159193ecfae7f66373cb51b69f6caf9728cc935a694"
     },
     {
       "path": "development/r3-holm/numerics/oracle.py",

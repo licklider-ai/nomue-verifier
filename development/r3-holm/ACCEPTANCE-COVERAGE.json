@@ -1,7 +1,7 @@
 {
   "status": "implementation accounting, not adoption or executed-host evidence",
   "design_source": "Protocol 1eb6b93 D0 ACCEPTANCE.md, 44 locators",
-  "ordinary_case_count": 47,
+  "ordinary_case_count": 48,
   "access_regressions": ["ACCESS-loop", "ACCESS-overlong"],
   "rows": [
     {
@@ -168,7 +168,8 @@
       "ordinary_variants": [
         "R3D-23-zero",
         "R3D-23-subnormal-tie",
-        "R3D-23-one"
+        "R3D-23-one",
+        "R3D-23-maximum-family"
       ],
       "controlled_fault_entry": [],
       "remaining": "Full fixed rational rounding/tie/boundary set beyond these three elementary targets."
