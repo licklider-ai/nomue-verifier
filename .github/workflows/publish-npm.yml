@@ -1,8 +1,6 @@
 name: Publish npm release candidate
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -54,7 +52,7 @@ jobs:
           set -euo pipefail
           package_name=$(node --input-type=module -e "import manifest from './package.json' with { type: 'json' }; process.stdout.write(manifest.name)")
           package_version=$(node --input-type=module -e "import manifest from './package.json' with { type: 'json' }; process.stdout.write(manifest.version)")
-          for attempt in {1..12}; do
+          for attempt in {1..36}; do
             if [[ "$(npm view "$package_name@$package_version" version 2>/dev/null || true)" == "$package_version" ]]; then
               npm view "$package_name@$package_version" version dist.integrity gitHead --json
               exit 0
