@@ -33,7 +33,7 @@
     "nomue": "bin/nomue.cjs"
   },
   "scripts": {
-    "test": "node --import tsx tests/smoke.ts && node --import tsx tests/boundary.ts && node --import tsx tests/reason-metadata.test.ts",
+    "test": "node --import tsx tests/smoke.ts && node --import tsx tests/boundary.ts && node --import tsx tests/reason-metadata.test.ts && node --import tsx tests/ci-precision.ts",
     "test:package": "node scripts/package-smoke.mjs",
     "prepublishOnly": "npm test && npm run test:package",
     "rebuild:evidence": "node scripts/rebuild-evidence.mjs"
@@ -43,7 +43,8 @@
     "yaml": "2.9.0",
     "@stdlib/stats-base-dists-t-cdf": "0.2.3",
     "@stdlib/stats-base-dists-t-quantile": "0.2.3",
-    "tsx": "4.23.12"
+    "tsx": "4.23.12",
+    "decimal.js": "10.6.0"
   },
   "devDependencies": {
     "@types/node": "26.2.0",
