@@ -23,8 +23,14 @@ FAULTS = {
                              'throw new Error("injected canonicalizer failure");')],
     'projection-throws': [('const ws = (n: number)',
                           'throw new Error("injected projection failure");\n  const ws = (n: number)')],
+    'projection-returns-undefined': [('const ws = (n: number)',
+                                    'return undefined as any;\n  const ws = (n: number)')],
+    'projection-returns-string': [('const ws = (n: number)',
+                                 'return "x" as any;\n  const ws = (n: number)')],
     'digest-throws': [('createHash("sha256")',
                       '(() => { throw new Error("injected digest failure"); })()')],
+    'digest-resource-limit': [('createHash("sha256")',
+        '(() => { throw new StoredInputError("resource_limit", "processing_timeout"); })()')],
     'projection-disagreement': [('return Buffer.concat([bytes.subarray(0, from), bytes.subarray(to)]);',
                                  'return Buffer.from("{}");')],
     'reserialized-reference-control': [('return Buffer.concat([bytes.subarray(0, from), bytes.subarray(to)]);',
@@ -110,6 +116,9 @@ def exercise(delegation, artifact, node, python):
     plans = [(m, n, True) for m in ['baseline', 'canonicalizer-throws', 'projection-throws', 'digest-throws'] for n in names]
     plans += [('projection-disagreement', 'R3D-01', True), ('guard-disabled-control', 'R3D-01', True)]
     plans += [('reserialized-reference-control', 'ORACLE-whitespace', True)]
+    plans += [(m, n, True) for m in ['projection-returns-undefined', 'projection-returns-string']
+              for n in ['R3D-01', 'ORACLE-whitespace']]
+    plans += [('digest-resource-limit', 'R3D-01', True)]
     if delegation is not None:
         plans += [('projection-disagreement', 'R3D-01', False)]
     (artifact / 'PLAN.json').write_text(json.dumps(plans, indent=2) + '\n')
@@ -175,13 +184,15 @@ def exercise(delegation, artifact, node, python):
                     try: assert observed == case['reference_digest']
                     except AssertionError: pass
                     else: raise AssertionError('wrong failure reference went undetected')
+                elif mode == 'digest-resource-limit':
+                    refusal(result, 'resource_limit')
                 else:
                     refusal(result, 'canonicalization_failure')
                 rows.append({'name': label, 'pass': True, 'mode': mode, 'repin': repin})
             except Exception as error:
                 rows.append({'name': label, 'pass': False, 'error': repr(error)})
     assert (ROOT / SOURCE).read_bytes() == before_source and (ROOT / MANIFEST).read_bytes() == before_inventory
-    assert len(rows) == (16 if delegation is not None else 15)
+    assert len(rows) == (21 if delegation is not None else 20)
     summary = {'status': 'author disposable-source fault evidence, not candidate or host qualification',
                'lane': 'controlled-host' if delegation is not None else 'inner-only',
                'node': run([node, '--version'], ROOT).decode().strip(), 'python': sys.version,

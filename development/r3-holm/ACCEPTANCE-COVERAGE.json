@@ -4,8 +4,8 @@
   "ordinary_case_count": 163,
   "helper_fault_copies": {
     "source": "helper-faults.py",
-    "inner_case_count": 15,
-    "host_case_count": 16,
+    "inner_case_count": 20,
+    "host_case_count": 21,
     "accounting": "Separate explicitly identified test-copy inventories; two negative sensitivity controls; one host-only unpinned source-drift control. Not additional ordinary candidate calls or independent clearance."
   },
   "context_matrix": {

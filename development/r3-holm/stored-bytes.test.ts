@@ -3,6 +3,8 @@ import { createHash } from "node:crypto";
 import { test } from "node:test";
 import {
   inspectStoredBytes,
+  inspectParsedBytes,
+  parseStoredBytes,
   LIMITS,
   StoredInputError,
 } from "./stored-bytes.ts";
@@ -207,6 +209,43 @@ test("projection checkpoints preserve even untyped cancellation sentinels", () =
         caught = false;
       try {
         inspectStoredBytes(input, () => {
+          if (++seen === stop) throw sentinel;
+        });
+      } catch (error) {
+        caught = true;
+        assert.equal(error, sentinel);
+      }
+      assert.equal(caught, true);
+    }
+  }
+});
+test("periodic projection checkpoints preserve budget and cancellation identity", () => {
+  // Long whitespace, string and nested-array spans exercise skip/quote/valueEnd ticks.
+  const input = Buffer.from(
+    "{" +
+      " ".repeat(768) +
+      '"a":"' +
+      "x".repeat(768) +
+      '","b":[' +
+      Array(400).fill("0").join(",") +
+      '],"integrity":{}}',
+  );
+  const parsed = parseStoredBytes(input, checkpoint);
+  let total = 0;
+  inspectParsedBytes(parsed, () => total++);
+  assert.ok(input.length > 2048);
+  // Five phase/member calls plus at least nine periodic skip/quote/valueEnd ticks.
+  assert.ok(total >= 14, String(total));
+  for (const sentinel of [
+    new StoredInputError("resource_limit", "processing_timeout"),
+    new Error("cancelled"),
+    undefined,
+  ]) {
+    for (let stop = 1; stop <= total; stop++) {
+      let seen = 0;
+      let caught = false;
+      try {
+        inspectParsedBytes(parsed, () => {
           if (++seen === stop) throw sentinel;
         });
       } catch (error) {

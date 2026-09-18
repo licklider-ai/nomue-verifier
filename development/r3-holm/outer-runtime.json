@@ -107,7 +107,7 @@
     },
     {
       "path": "development/r3-holm/stored-bytes.ts",
-      "sha256": "dd06fe98e54d53f0035d417ba29a2edf2fce1aad14dc4087b0deb3c0816634c1"
+      "sha256": "2a4420abe9ed0d47483693f5dfba76db666307233b9d83ce2b8bb2d087210ee2"
     },
     {
       "path": "development/r3-holm/tsconfig.json",
