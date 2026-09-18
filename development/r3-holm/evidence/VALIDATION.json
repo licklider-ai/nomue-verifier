@@ -1,0 +1,71 @@
+{
+  "status": "author_validation_not_independent_clearance",
+  "date_utc": "2026-09-18",
+  "reviewed_parent": "77bb4ebaac5eca37390b8b23aede90f3d25702c0",
+  "environment": {
+    "os": "Linux",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "node": "v24.19.0"
+  },
+  "results": {
+    "typescript_tests": {
+      "passed": 66,
+      "failed": 0,
+      "skipped": 0
+    },
+    "strict_typecheck": "pass",
+    "independent_worker_vectors": 86,
+    "npm_test": "pass",
+    "actual_package_smoke": "pass"
+  },
+  "commands": [
+    "NOMUE_TEST_PYTHON=<absolute-python-3.12.14> node --import tsx --test --test-reporter=tap development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts",
+    "npx tsc --project development/r3-holm/tsconfig.json",
+    "python3 development/r3-holm/numerics/test_worker.py",
+    "npm test",
+    "npm run test:package"
+  ],
+  "source_hashes": {
+    "PROVENANCE.json": "d337eeff6630bce457c73ba0f48ee3f551915d016d72b11ef6b26935eac8e2f9",
+    "contracts/expected.schema.json": "8a29b4c3d7cf3db00a4e888bacdf44241717d4cad3a5e595165ddffa7274b243",
+    "contracts/output.schema.json": "9f07de89fbe5456e148b1954b9fe7b15c9a171c6dcde386d8d5a5fe8b7d9a862",
+    "contracts/reason-policy.json": "245939a85688c6ed08379189003916b780b98997a6e7bde78f049b44d1ea9e09",
+    "contracts/record.schema.json": "739257f4bda22f55a91cb1bac57c66ab7d3fb83e4b051f45a92c224e6aafb176",
+    "d0-relations.ts": "c01e641aa0b4aef3063dba751e2018be1265ad1262d7b66ef8ab2191c6d2cf25",
+    "dependencies.test.ts": "0b51f67d4c3278ac898dda9d86602b32caa2d1540d9a030eb418b079a4397b20",
+    "dependencies.ts": "39821307418c5b642e54e5cf82930def0c2629c1b71ba7ea6604cb0a9ac7264c",
+    "execution.ts": "3e270fa7184078f38a1f5112db730e98b62c8da4ebd1bcea852e5871f8e852d8",
+    "fixtures/d0-cases.json": "ddea992b2b0b7231c6f2f0398deb04153586069217ea681f9ccb86587b7b05b8",
+    "fixtures/d0-example.json": "debaf60e44a592c50b868dd9df8ac71fb0f64cef8985f98956de3f832525943a",
+    "fixtures/declaration-shapes.json": "46d8c2c3eccc19451cab9e95a5a8fe5dcb82b46d99069ef2edecdcb004fb4f32",
+    "fixtures/example-expected.json": "059c5c4b280e81645b06110e8731a61ce8d544f5c452dd5dd444c91ab0ac5208",
+    "fixtures/expected.schema.json": "475e24591e77379812b8098251c5bb06eaa082361e01f844e5ad0c97d81bba5b",
+    "fixtures/fixture-contracts.json": "5a534294d416637627e7ec158da71d4a8b47bcdd63f8e708eaef0a41293e5d18",
+    "fixtures/record.schema.json": "08dcffd8e222b3abf7cb98384b3e0188756900d40bd3cb8e0d6733b2928d436d",
+    "inner-call.test.ts": "8c9f5f9ed41ba792f82a05abff855b7de1fe05e2464f2197de1b95dea8d7a2e1",
+    "inner-call.ts": "3e6795a9a5300417162428d7fdecc8cd7ce4f901f3fbc51908b58d708698a8c8",
+    "local-checks.test.ts": "f2dc37d561c4f38eaa02e56bab0dd23e84988c4768324b25b7f791266109ff0c",
+    "local-checks.ts": "37b4e761ec3b5a729718f745982b333868d0d1c7e37dd329d04c0ededcef3b10",
+    "numerics/INPUTS.json": "b65204e257edda7d2f3473fd4cd04c226c3d598735d469bc5ff37234a53325d4",
+    "numerics/PROVENANCE.json": "cbb77e6341ccce9f03df1e6a1cc54f70b2190623fa5480d6247db3950ca5c895",
+    "numerics/candidate.py": "70924d2b7ac40367e9ae4abaee624dd6c0b85796a62c5445b0694f2240fac606",
+    "numerics/oracle.py": "c136af873eee3d29fa4c9a8746879e8ca0f125db2afd3bf32daabcfb8d7a6390",
+    "numerics/test_worker.py": "167e77b13319ff8d529d3d13e2aaa6b3833e11957189e726745739d18c05ecb7",
+    "numerics/worker.py": "d6dff0e19f8647157d55ac3d6ba37ddaeaa7ce192ba25313d921d53298607fa9",
+    "output.ts": "6bbb13db0a4fcd7f7790e08d65cd4a244a3bdf47ef78f04aee1aad2e1a316f1d",
+    "stored-bytes.test.ts": "1610df32d93bf7a84b365320ff65fa679c446687ff19026906c28d4448565e6f",
+    "stored-bytes.ts": "09fd575a08c1ca7d5014f38e59f9393107a552eafa945d7ee111edc8551dd94f",
+    "tsconfig.json": "4b0c8f0d51f52e0120b2e1323272652e192df28ce001cea912fc9b72ce1be722"
+  },
+  "logs": {
+    "inner-tests.tap": "f3e34a1bfcb01b3ed060c05730a3009664676dafdfda052fe54f3890e5fe8d49",
+    "numerical-worker.txt": "2122c54ac4e303169d00480ace50ce5c0155cc423b73940cb615e1220c0ae69a"
+  },
+  "not_run": [
+    "outer_cgroup_and_whole_process_tree",
+    "full_44_case_acceptance",
+    "final_legacy_dispatcher",
+    "primary_source_re_review"
+  ]
+}

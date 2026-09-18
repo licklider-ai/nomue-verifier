@@ -1,9 +1,9 @@
-# Unissued Holm D1 local checking components
+# Unissued Holm D1 successor inner call
 
 Date: 2026-09-18 UTC. **Component implementation checkpoint; D1 remains open.**
 This directory is outside the npm allowlist, released CLI, registered dispatcher,
-and Protocol reference-source synchronization. No supported capability or public
-report is produced by these components. The package remains Release 1 only.
+and Protocol reference-source synchronization. Only unissued development outputs
+are produced; no supported capability is added. The package remains Release 1 only.
 
 ## Fixed design authority and scope
 
@@ -15,10 +15,12 @@ report is produced by these components. The package remains Release 1 only.
   Eight schema/fixture artifacts are copied byte-for-byte under `fixtures/`,
   pinned in `PROVENANCE.json`. The D0 relation algorithm is extracted into
   `d0-relations.ts`; see the current handoff for its exact source and adaptations.
-  No numerical kernel, worker, public report schema or legacy envelope is imported.
+  The next checkpoint also retains the numerical kernel, worker and independent
+  oracle byte-for-byte in `numerics/`, with their own provenance manifest.
+  The legacy envelope and supervisor are not imported.
 
-This step connects raw projection and dependencies to six actual local checks,
-before coupling them to a complete successor. Source/IEEE/Holm numerical evidence
+This step connects actual S/K/D/H/I/C evaluations to the unchanged numerical
+worker A and versioned development output. Source/IEEE/Holm numerical evidence
 remains at its original scope. There is no new theorem, numerical method,
 tolerance or performance/host qualification in this checkpoint.
 
@@ -70,13 +72,17 @@ do not depend on I/C agreement; K failure blocks I. Graph rows can be assembled
 for blocked-A cases; a six-pass preparation deliberately has no A evaluation and
 cannot be assembled into a complete graph until actual arithmetic is added.
 
-The old Record and expected schemas describe component input fixtures only.
-This does not implement the old candidate.4 invocation semantics or issue a
-successor bundle. A versioned public output contract, numerical worker, refusal
-adapter, supported-host controls and full lifecycle remain for D1/D2 work.
+The old Record and expected schemas remain exact component fixtures. New
+`contracts/` schemas use candidate.5 identities; its inner call rejects candidate.4
+instead of aliasing it. The Record and expected schema constraints are unchanged
+apart from their candidate identities. The new output schema separates four
+conformance rows from three verification rows and keeps all eight non-claims.
+Permanent registry allocation and supported dispatch remain D2/D3 work.
 `ExpectedContextAccessError` may wrap only an expected-input access error;
 unexpected callback errors and budget failures propagate as invocation failures.
-Actual filesystem acquisition and its bounded reader are not implemented here.
+`execution.ts` now supplies a regular-file reader bounded to cap+1 bytes, before
+decoding; expected-file access is delayed until C. It also supplies one monotonic
+time/heap budget, explicit cancellation and a bounded isolated Python child.
 Checkpoint callbacks must come from the trusted shared budget owner; test no-op
 callbacks provide no enforcement evidence. Raw/expected document bounds share
 one owner in `stored-bytes.ts`; legacy adapter size guards remain explicit.
@@ -85,8 +91,8 @@ one owner in `stored-bytes.ts`; legacy adapter size guards remain explicit.
 
 ```sh
 npm ci --ignore-scripts
-node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts
-npx tsc --noEmit --target es2022 --module nodenext --moduleResolution nodenext --allowImportingTsExtensions --strict --types node development/r3-holm/dependencies.ts development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/d0-relations.ts development/r3-holm/local-checks.ts development/r3-holm/local-checks.test.ts
+node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts
+npx tsc --project development/r3-holm/tsconfig.json
 npm test
 npm run test:package
 ```
@@ -94,6 +100,22 @@ npm run test:package
 CI uses these same test and strict typecheck commands, naming files explicitly
 so Node 20/22 on Windows/macOS/Linux does not rely on shell globbing.
 Those component regressions do not admit those platforms for full R3 execution.
+
+For the actual numerical child, use Linux x64 / Python 3.12.14 and set
+`NOMUE_TEST_PYTHON` to its absolute executable path before the test command above.
+Then run `python3 development/r3-holm/numerics/test_worker.py` with that interpreter.
+The dedicated CI job uses Node 24.19.0 / Python 3.12.14. Without the explicit
+interpreter the one actual-child test is skipped, not treated as passing evidence.
+
+`evaluateInner` and `evaluateInnerFiles` are development-only inner compositions.
+They produce either a scoped candidate.5 report or a verifier-selected refusal,
+never both. A runs only on six genuine passes. Its exact numerator and displayed
+bits are compared separately; malformed child output becomes an invocation
+refusal. Final output is checked against its schema, dependency graph and private
+evaluation evidence, then serialized and checked again. The API never forwards
+Record bytes. A remaining outer supervisor must cover startup, the process tree,
+aggregate memory, cleanup and trusted completion before any full-call success.
+The current implementation does not attest those controls or qualify a host.
 
 Tests include 14 hand-specified raw input/projection pairs, independent expected
 hashes from those literal targets, strict-parser rejection, bounds, early/late
@@ -105,7 +127,7 @@ or independent researcher review is claimed for these author tests.
 `tests/boundary.ts` names every file in this directory in its existing
 repository inventory; it does not use a wildcard or edit historical extraction
 evidence. `scripts/package-smoke.mjs` additionally rejects any `development/`
-entry in the actual npm tarball. See [current handoff](LOCAL-CHECKS-HANDOFF.md) for coverage, self-review,
+entry in the actual npm tarball. See [current handoff](INNER-CALL-HANDOFF.md) for coverage, self-review,
 remaining work and the bounded independent implementation-review request.
 
 Prepared with OpenAI Codex assistance in the continuing author/coordinator

@@ -146,10 +146,10 @@ export interface StoredInspection {
  * The full invocation must still perform exact routing/schema/reference admission.
  * No result here is permission to emit a report or accept/forward bytes.
  */
-export function inspectStoredBytes(
+export function parseStoredBytes(
   input: Uint8Array,
   checkpoint: Checkpoint,
-): StoredInspection {
+): { original: Buffer; value: Record<string, unknown> } {
   if (
     !(input instanceof Uint8Array) ||
     input.buffer instanceof SharedArrayBuffer
@@ -173,6 +173,15 @@ export function inspectStoredBytes(
   parsedBounds(value, checkpoint);
   if (value === null || typeof value !== "object" || Array.isArray(value))
     throw new StoredInputError("unrepresentable_input", "record_object");
+  return { original, value: value as Record<string, unknown> };
+}
+
+/** Trusted parsed snapshot only. Caller selects exact bundle before this phase. */
+export function inspectParsedBytes(
+  parsed: ReturnType<typeof parseStoredBytes>,
+  checkpoint: Checkpoint,
+): StoredInspection {
+  const { original, value } = parsed;
   let canonical: Buffer;
   let canonicalProjection: Buffer;
   try {
@@ -207,4 +216,12 @@ export function inspectStoredBytes(
     referenceDigest,
     canonicalStorage,
   };
+}
+
+/** Byte-component convenience wrapper, without invocation routing semantics. */
+export function inspectStoredBytes(
+  input: Uint8Array,
+  checkpoint: Checkpoint,
+): StoredInspection {
+  return inspectParsedBytes(parseStoredBytes(input, checkpoint), checkpoint);
 }

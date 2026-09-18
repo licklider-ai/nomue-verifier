@@ -21,9 +21,9 @@ jobs:
       - run: npm ci
       - run: npm test
       - name: Unissued R3 component regression (not runtime qualification)
-        run: node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts
+        run: node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts
       - name: Strict typecheck of unissued R3 components
-        run: npx tsc --noEmit --target es2022 --module nodenext --moduleResolution nodenext --allowImportingTsExtensions --strict --types node development/r3-holm/dependencies.ts development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/d0-relations.ts development/r3-holm/local-checks.ts development/r3-holm/local-checks.test.ts
+        run: npx tsc --project development/r3-holm/tsconfig.json
       - name: Pack, install, and exercise the published CLI shape
         run: npm run test:package
       - name: Rebuild/package provenance regression evidence
@@ -33,6 +33,27 @@ jobs:
           name: rebuild-regression-${{ matrix.os }}-node${{ matrix.node }}
           path: ${{ runner.temp }}/rebuild-evidence/
           if-no-files-found: error
+
+  r3-inner-numerical:
+    name: unissued R3 inner numerical regression (not host qualification)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24.19.0"
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+      - run: npm ci
+      - name: Actual isolated worker and independent closed-testing comparison
+        shell: bash
+        run: |
+          set -euo pipefail
+          export NOMUE_TEST_PYTHON="$(command -v python)"
+          node --import tsx --test development/r3-holm/inner-call.test.ts
+          python development/r3-holm/numerics/test_worker.py
 
   offline-kit-regression:
     name: offline isolation kit regression (internal only)

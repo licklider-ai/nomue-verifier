@@ -242,7 +242,7 @@ test("expected-input limits and unexpected acquisition failures escape without p
   );
 });
 
-test("resource and canonicalization failure dominate schema/routing failures", () => {
+test("raw bounds precede routing; routing and references precede canonicalization", () => {
   const r = record();
   r.payload = {};
   r.extra = "x".repeat(LIMITS.string + 1);
@@ -254,6 +254,21 @@ test("resource and canonicalization failure dominate schema/routing failures", (
         expectedText,
         noop,
       ),
+    (e) => e instanceof LocalInputError && e.kind === "unsupported_bundle",
+  );
+  assert.throws(
+    () => inspectLocalRecord(Buffer.from('{"x":1e999}'), expectedText, noop),
+    (e) => e instanceof LocalInputError && e.kind === "routing_error",
+  );
+  const routed = `{"interpretation_bundle_id":${JSON.stringify(record().interpretation_bundle_id)},"x":1e999}`;
+  assert.throws(
+    () => inspectLocalRecord(Buffer.from(routed), expectedText, noop),
+    (e) => e instanceof LocalInputError && e.kind === "unrepresentable_input",
+  );
+  const referenced =
+    routed.slice(0, -1) + ',"record_id":"urn:r","revision_id":"urn:v"}';
+  assert.throws(
+    () => inspectLocalRecord(Buffer.from(referenced), expectedText, noop),
     (e) =>
       e instanceof StoredInputError && e.kind === "canonicalization_failure",
   );

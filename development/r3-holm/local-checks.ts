@@ -8,7 +8,8 @@ import {
 import { jcsCanonicalize } from "../../reference/verifier/src/jcs.ts";
 import { checkD0Relations } from "./d0-relations.ts";
 import {
-  inspectStoredBytes,
+  parseStoredBytes,
+  inspectParsedBytes,
   parsedBounds,
   LIMITS,
   StoredInputError,
@@ -30,7 +31,23 @@ const ajv = new Ajv2020({
 });
 const schema = ajv.compile(recordSchema);
 const expectedSchema = ajv.compile(read("expected.schema.json"));
-const identity = ajv.compile(recordSchema.properties.record_id);
+const successorSchemaSource = JSON.parse(
+  readFileSync(
+    new URL("./contracts/record.schema.json", import.meta.url),
+    "utf8",
+  ),
+);
+const successorSchema = ajv.compile(successorSchemaSource);
+const successorExpected = ajv.compile(
+  JSON.parse(
+    readFileSync(
+      new URL("./contracts/expected.schema.json", import.meta.url),
+      "utf8",
+    ),
+  ),
+);
+const recordIdentity = ajv.compile(recordSchema.properties.record_id);
+const revisionIdentity = ajv.compile(recordSchema.properties.revision_id);
 const bundle: string = recordSchema.properties.interpretation_bundle_id.const;
 const shapes: Record<string, string> = read(
   "declaration-shapes.json",
@@ -210,6 +227,7 @@ function context(
   record: any,
   acquire: () => string | undefined,
   checkpoint: Checkpoint,
+  version: "candidate.4" | "candidate.5",
 ): Evaluation {
   let text: string | undefined;
   try {
@@ -242,7 +260,8 @@ function context(
   }
   checkpoint();
   parsedBounds(value, checkpoint, "expected");
-  if (!expectedSchema(value)) return contextError("expected_schema");
+  if (!(version === "candidate.5" ? successorExpected : expectedSchema)(value))
+    return contextError("expected_schema");
   const actual = {
     record_id: record.record_id,
     revision_id: record.revision_id,
@@ -264,6 +283,28 @@ export interface LocalInspection {
   };
   /** Only evaluated stages. A is deliberately absent, even on six passes. */
   evaluations: Partial<Record<Exclude<Stage, "A">, Evaluation>>;
+  selection?: { analysis_id: string; family_id: string; result_id: string };
+}
+
+export interface ArithmeticInput {
+  carrier: {
+    family: string;
+    revision: string;
+    members: Array<{ hypothesis: string; origin: string; p: string }>;
+  };
+  submitted: Array<{
+    member_id: string;
+    adjusted_hex: string;
+    display_hex: string;
+  }>;
+}
+const arithmeticInputs = new WeakMap<LocalInspection, ArithmeticInput>();
+/** Only a genuine six-pass inspection supplies a copied private worker request. */
+export function preparedArithmetic(
+  inspection: LocalInspection,
+): ArithmeticInput | undefined {
+  const value = arithmeticInputs.get(inspection);
+  return value && structuredClone(value);
 }
 
 /**
@@ -275,18 +316,37 @@ export function inspectLocalRecord(
   bytes: Uint8Array,
   acquireExpected: () => string | undefined,
   checkpoint: Checkpoint,
+  version: "candidate.4" | "candidate.5" = "candidate.4",
 ): LocalInspection {
-  const inspected = inspectStoredBytes(bytes, checkpoint);
-  const record = inspected.value;
+  let parsed: ReturnType<typeof parseStoredBytes>;
+  try {
+    parsed = parseStoredBytes(bytes, checkpoint);
+  } catch (e) {
+    if (e instanceof SyntaxError || e instanceof StrictJsonError)
+      throw new StoredInputError("parse_error", "record_parse");
+    if (e instanceof RangeError)
+      throw new StoredInputError("resource_limit", "record_parser_exhaustion");
+    throw e;
+  }
+  const record = parsed.value;
   if (
     !Object.hasOwn(record, "interpretation_bundle_id") ||
     typeof record.interpretation_bundle_id !== "string"
   )
     throw new LocalInputError("routing_error", "bundle_missing_or_type");
-  if (record.interpretation_bundle_id !== bundle)
+  if (
+    record.interpretation_bundle_id !==
+    (version === "candidate.5"
+      ? successorSchemaSource.properties.interpretation_bundle_id.const
+      : bundle)
+  )
     throw new LocalInputError("unsupported_bundle", "bundle_unsupported");
-  if (!identity(record.record_id) || !identity(record.revision_id))
+  if (
+    !recordIdentity(record.record_id) ||
+    !revisionIdentity(record.revision_id)
+  )
     throw new LocalInputError("unrepresentable_input", "record_reference");
+  const inspected = inspectParsedBytes(parsed, checkpoint);
   // Freeze the private parsed graph before any external acquisition callback.
   const stack: unknown[] = [record];
   while (stack.length) {
@@ -303,7 +363,11 @@ export function inspectLocalRecord(
     storedProjectionDigest: inspected.referenceDigest,
   };
   const evaluations: LocalInspection["evaluations"] = {
-    S: result(schema(record) ? [] : ["record_schema"]),
+    S: result(
+      (version === "candidate.5" ? successorSchema : schema)(record)
+        ? []
+        : ["record_schema"],
+    ),
   };
   checkpoint();
   if (
@@ -332,7 +396,33 @@ export function inspectLocalRecord(
         ? []
         : ["digest_mismatch"],
     );
-  evaluations.C = context(valid, acquireExpected, checkpoint);
+  evaluations.C = context(valid, acquireExpected, checkpoint, version);
   checkpoint();
-  return { reference, evaluations };
+  const selection = Object.fromEntries(
+    ["analysis_id", "family_id", "result_id"].map((k) => [
+      k,
+      valid.payload.inputs[k],
+    ]),
+  ) as NonNullable<LocalInspection["selection"]>;
+  const output = { reference, evaluations, selection };
+  if (
+    Object.keys(evaluations).length === 6 &&
+    Object.values(evaluations).every(
+      (e) => e.execution === "completed" && e.outcome === "pass",
+    )
+  ) {
+    arithmeticInputs.set(output, {
+      carrier: {
+        family: valid.payload.inputs.family_id,
+        revision: "internal-bound-revision",
+        members: valid.payload.inputs.members.map((m: any) => ({
+          hypothesis: m.member_id,
+          origin: m.origin.source_id,
+          p: m.p_hex,
+        })),
+      },
+      submitted: structuredClone(valid.payload.result.adjusted),
+    });
+  }
+  return output;
 }

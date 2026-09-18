@@ -1,5 +1,10 @@
 # D1 local evaluation checkpoint
 
+Historical checkpoint at `77bb4eb`: independent review returned
+GO_FOR_D1_CONTINUATION, 0 BLOCKER, 0 MAJOR, 1 MINOR. The current checkpoint,
+order repair and review request are in [INNER-CALL-HANDOFF.md](INNER-CALL-HANDOFF.md).
+The scope and evidence below describe that fixed historical target.
+
 Date: 2026-09-18 UTC. Component continuation only; D1 remains open. Resolve the
 delivery PR head, parent and tree before review. The delivery PR and Protocol
 handoff pin this checkpoint; this file does not attempt a self-referential head.
