@@ -18,11 +18,11 @@ Protocol Release 1 identities:
 - release-decision D / `release-1` tag target: `5db97826e0905a72e0fed14536d820e77af9be95`
 - Protocol snapshot: `sha256:fc26c770538abe3598fc27a571ca6e99cc29763e0a25859a80c267ee2d80ab06`
 
-Package version: **`0.2.1-rc.0`**.
+Package version: **`0.2.1-rc.1`**.
 
-The Protocol release is published; this verifier package remains experimental and
-retains its existing release-candidate package version. The package version is a
-verifier-packaging identity and does not change the published Protocol Release 1
+The Protocol release is published; this verifier package remains experimental.
+Release candidate `0.2.1-rc.1` carries the df=1 Student-t center precision correction.
+The package version is a verifier-packaging identity and does not change the published Protocol Release 1
 status. `SOURCE-PIN.json` records the exact C/R/D/tag/snapshot relationship.
 
 Release 1 is intentionally narrow: independent two-group continuous outcomes under
