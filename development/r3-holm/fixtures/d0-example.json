@@ -1,0 +1,466 @@
+{
+  "artifact_kind": "unissued-d0-declaration-exercise",
+  "dataset": {
+    "dataset_id": "dataset-1",
+    "outcome_definition": "Single synthetic continuous endpoint in arbitrary units.",
+    "scale_declaration": "continuous",
+    "observations": [
+      {
+        "observation_id": "o-1",
+        "experimental_unit_id": "u-1",
+        "group_id": "g-a",
+        "value": 1.0
+      },
+      {
+        "observation_id": "o-2",
+        "experimental_unit_id": "u-2",
+        "group_id": "g-b",
+        "value": 2.0
+      },
+      {
+        "observation_id": "o-3",
+        "experimental_unit_id": "u-3",
+        "group_id": "g-c",
+        "value": 3.0
+      }
+    ]
+  },
+  "design": {
+    "design_id": "design-1",
+    "kind": "independent_one_way",
+    "experimental_unit_definition": "One separately identified synthetic unit.",
+    "independence_declared": true,
+    "not_flattened_declared": true,
+    "groups": [
+      {
+        "group_id": "g-a"
+      },
+      {
+        "group_id": "g-b"
+      },
+      {
+        "group_id": "g-c"
+      }
+    ],
+    "units": [
+      {
+        "experimental_unit_id": "u-1",
+        "group_id": "g-a"
+      },
+      {
+        "experimental_unit_id": "u-2",
+        "group_id": "g-b"
+      },
+      {
+        "experimental_unit_id": "u-3",
+        "group_id": "g-c"
+      }
+    ]
+  },
+  "analyses": [
+    {
+      "analysis_id": "a-0",
+      "dataset_id": "dataset-1",
+      "design_id": "design-1",
+      "population": {
+        "definition": "All represented observations; no filtering.",
+        "observation_ids": ["o-1", "o-2", "o-3"]
+      },
+      "family_id": "f-0",
+      "contract_ref": "example-contract-omnibus-v0",
+      "procedure_selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "variance_model": {
+        "declaration": "not_declared",
+        "selection": {
+          "relative_to_outcome_inspection": "before",
+          "statement": "Synthetic producer declaration; no timestamp proof."
+        }
+      },
+      "assumption_statements": []
+    },
+    {
+      "analysis_id": "a-1",
+      "dataset_id": "dataset-1",
+      "design_id": "design-1",
+      "population": {
+        "definition": "All represented observations; no filtering.",
+        "observation_ids": ["o-1", "o-2", "o-3"]
+      },
+      "family_id": "f-1",
+      "contract_ref": "example-contract-pairwise-v0",
+      "procedure_selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "variance_model": {
+        "declaration": "not_declared",
+        "selection": {
+          "relative_to_outcome_inspection": "before",
+          "statement": "Synthetic producer declaration; no timestamp proof."
+        }
+      },
+      "assumption_statements": []
+    },
+    {
+      "analysis_id": "a-2",
+      "dataset_id": "dataset-1",
+      "design_id": "design-1",
+      "population": {
+        "definition": "All represented observations; no filtering.",
+        "observation_ids": ["o-1", "o-2", "o-3"]
+      },
+      "family_id": "f-2",
+      "contract_ref": "example-contract-many-to-one-v0",
+      "procedure_selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "variance_model": {
+        "declaration": "not_declared",
+        "selection": {
+          "relative_to_outcome_inspection": "before",
+          "statement": "Synthetic producer declaration; no timestamp proof."
+        }
+      },
+      "assumption_statements": []
+    },
+    {
+      "analysis_id": "a-3",
+      "dataset_id": "dataset-1",
+      "design_id": "design-1",
+      "population": {
+        "definition": "All represented observations; no filtering.",
+        "observation_ids": ["o-1", "o-2", "o-3"]
+      },
+      "family_id": "f-3",
+      "contract_ref": "example-contract-planned-contrast-v0",
+      "procedure_selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "variance_model": {
+        "declaration": "not_declared",
+        "selection": {
+          "relative_to_outcome_inspection": "before",
+          "statement": "Synthetic producer declaration; no timestamp proof."
+        }
+      },
+      "assumption_statements": []
+    },
+    {
+      "analysis_id": "a-4",
+      "dataset_id": "dataset-1",
+      "design_id": "design-1",
+      "population": {
+        "definition": "All represented observations; no filtering.",
+        "observation_ids": ["o-1", "o-2", "o-3"]
+      },
+      "family_id": "f-4",
+      "contract_ref": "example-contract-multiplicity-adjustment-v0",
+      "procedure_selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "variance_model": {
+        "declaration": "not_declared",
+        "selection": {
+          "relative_to_outcome_inspection": "before",
+          "statement": "Synthetic producer declaration; no timestamp proof."
+        }
+      },
+      "assumption_statements": []
+    },
+    {
+      "analysis_id": "a-5",
+      "dataset_id": "dataset-1",
+      "design_id": "design-1",
+      "population": {
+        "definition": "All represented observations; no filtering.",
+        "observation_ids": ["o-1", "o-2", "o-3"]
+      },
+      "family_id": "f-5",
+      "contract_ref": "example-contract-interval-v0",
+      "procedure_selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "variance_model": {
+        "declaration": "not_declared",
+        "selection": {
+          "relative_to_outcome_inspection": "before",
+          "statement": "Synthetic producer declaration; no timestamp proof."
+        }
+      },
+      "assumption_statements": []
+    }
+  ],
+  "families": [
+    {
+      "family_id": "f-0",
+      "analysis_id": "a-0",
+      "selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "kind": "omnibus",
+      "members": [
+        {
+          "member_id": "global",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "omnibus",
+          "group_ids": ["g-a", "g-b", "g-c"]
+        }
+      ]
+    },
+    {
+      "family_id": "f-1",
+      "analysis_id": "a-1",
+      "selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "kind": "all_pairs",
+      "members": [
+        {
+          "member_id": "m-0",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-a",
+          "subtrahend_group_id": "g-b"
+        },
+        {
+          "member_id": "m-1",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-a",
+          "subtrahend_group_id": "g-c"
+        },
+        {
+          "member_id": "m-2",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-b",
+          "subtrahend_group_id": "g-c"
+        }
+      ]
+    },
+    {
+      "family_id": "f-2",
+      "analysis_id": "a-2",
+      "selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "kind": "many_to_one",
+      "members": [
+        {
+          "member_id": "m-0",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-b",
+          "subtrahend_group_id": "g-a"
+        },
+        {
+          "member_id": "m-1",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-c",
+          "subtrahend_group_id": "g-a"
+        }
+      ],
+      "control_group_id": "g-a"
+    },
+    {
+      "family_id": "f-3",
+      "analysis_id": "a-3",
+      "selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "kind": "finite_contrasts",
+      "members": [
+        {
+          "member_id": "contrast-1",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "contrast",
+          "coefficients": [
+            {
+              "group_id": "g-a",
+              "value": 1
+            },
+            {
+              "group_id": "g-b",
+              "value": -1
+            },
+            {
+              "group_id": "g-c",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "family_id": "f-4",
+      "analysis_id": "a-4",
+      "selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "kind": "all_pairs",
+      "members": [
+        {
+          "member_id": "m-0",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-a",
+          "subtrahend_group_id": "g-b"
+        },
+        {
+          "member_id": "m-1",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-a",
+          "subtrahend_group_id": "g-c"
+        },
+        {
+          "member_id": "m-2",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-b",
+          "subtrahend_group_id": "g-c"
+        }
+      ]
+    },
+    {
+      "family_id": "f-5",
+      "analysis_id": "a-5",
+      "selection": {
+        "relative_to_outcome_inspection": "before",
+        "statement": "Synthetic producer declaration; no timestamp proof."
+      },
+      "kind": "all_pairs",
+      "members": [
+        {
+          "member_id": "m-0",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-a",
+          "subtrahend_group_id": "g-b"
+        },
+        {
+          "member_id": "m-1",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-a",
+          "subtrahend_group_id": "g-c"
+        },
+        {
+          "member_id": "m-2",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-b",
+          "subtrahend_group_id": "g-c"
+        }
+      ]
+    }
+  ],
+  "result_slots": [
+    {
+      "result_id": "r-0",
+      "analysis_id": "a-0",
+      "family_id": "f-0",
+      "contract_ref": "example-contract-omnibus-v0",
+      "kind": "omnibus",
+      "payload_status": "method_payload_deferred",
+      "member_id": "global"
+    },
+    {
+      "result_id": "r-1",
+      "analysis_id": "a-1",
+      "family_id": "f-1",
+      "contract_ref": "example-contract-pairwise-v0",
+      "kind": "pairwise",
+      "payload_status": "method_payload_deferred",
+      "member_ids": ["m-0", "m-1", "m-2"]
+    },
+    {
+      "result_id": "r-2",
+      "analysis_id": "a-2",
+      "family_id": "f-2",
+      "contract_ref": "example-contract-many-to-one-v0",
+      "kind": "many_to_one",
+      "payload_status": "method_payload_deferred",
+      "member_ids": ["m-0", "m-1"]
+    },
+    {
+      "result_id": "r-3",
+      "analysis_id": "a-3",
+      "family_id": "f-3",
+      "contract_ref": "example-contract-planned-contrast-v0",
+      "kind": "planned_contrast",
+      "payload_status": "method_payload_deferred",
+      "member_ids": ["contrast-1"]
+    },
+    {
+      "result_id": "r-4",
+      "analysis_id": "a-4",
+      "family_id": "f-4",
+      "contract_ref": "example-contract-multiplicity-adjustment-v0",
+      "kind": "multiplicity_adjustment",
+      "payload_status": "method_payload_deferred",
+      "member_ids": ["m-0", "m-1", "m-2"]
+    },
+    {
+      "result_id": "r-5",
+      "analysis_id": "a-5",
+      "family_id": "f-5",
+      "contract_ref": "example-contract-interval-v0",
+      "kind": "interval",
+      "payload_status": "method_payload_deferred",
+      "member_ids": ["m-0", "m-1", "m-2"]
+    }
+  ]
+}

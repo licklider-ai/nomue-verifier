@@ -1,0 +1,11 @@
+{
+  "status": "unissued declaration shapes, not executable Contracts",
+  "legacy_adapter": {
+    "omnibus": "example-contract-omnibus-v0",
+    "pairwise": "example-contract-pairwise-v0",
+    "many_to_one": "example-contract-many-to-one-v0",
+    "planned_contrast": "example-contract-planned-contrast-v0",
+    "multiplicity_adjustment": "example-contract-multiplicity-adjustment-v0",
+    "interval": "example-contract-interval-v0"
+  }
+}

@@ -21,7 +21,9 @@ jobs:
       - run: npm ci
       - run: npm test
       - name: Unissued R3 component regression (not runtime qualification)
-        run: node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts
+        run: node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts
+      - name: Strict typecheck of unissued R3 components
+        run: npx tsc --noEmit --target es2022 --module nodenext --moduleResolution nodenext --allowImportingTsExtensions --strict --types node development/r3-holm/dependencies.ts development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/d0-relations.ts development/r3-holm/local-checks.ts development/r3-holm/local-checks.test.ts
       - name: Pack, install, and exercise the published CLI shape
         run: npm run test:package
       - name: Rebuild/package provenance regression evidence

@@ -33,13 +33,21 @@ export type Row = { stage: Stage; checkId: string; blockers: string[] } & (
   Evaluation | { execution: "not_run"; reasons: string[] }
 );
 
+export class GraphInvariantError extends Error {
+  readonly kind = "internal_error";
+  constructor(message: string) {
+    super(message);
+    this.name = "GraphInvariantError";
+  }
+}
+
 function evaluation(stage: Stage, item: unknown): Evaluation {
   if (item === null || typeof item !== "object" || Array.isArray(item))
-    throw Error(`missing evaluation ${stage}`);
+    throw new GraphInvariantError(`missing evaluation ${stage}`);
   const v = item as Record<string, unknown>;
   const completed = v.execution === "completed";
   if (!completed && !(stage === "C" && v.execution === "error"))
-    throw Error(`invalid execution ${stage}`);
+    throw new GraphInvariantError(`invalid execution ${stage}`);
   const keys = completed
     ? ["execution", "outcome", "reasons"]
     : ["execution", "reasons"];
@@ -47,9 +55,9 @@ function evaluation(stage: Stage, item: unknown): Evaluation {
     Object.keys(v).length !== keys.length ||
     keys.some((key) => !Object.hasOwn(v, key))
   )
-    throw Error(`invalid fields ${stage}`);
+    throw new GraphInvariantError(`invalid fields ${stage}`);
   if (completed && v.outcome !== "pass" && v.outcome !== "fail")
-    throw Error(`invalid outcome ${stage}`);
+    throw new GraphInvariantError(`invalid outcome ${stage}`);
   if (
     !Array.isArray(v.reasons) ||
     v.reasons.some(
@@ -61,9 +69,9 @@ function evaluation(stage: Stage, item: unknown): Evaluation {
     ) ||
     new Set(v.reasons).size !== v.reasons.length
   )
-    throw Error(`invalid reasons ${stage}`);
+    throw new GraphInvariantError(`invalid reasons ${stage}`);
   if ((completed && v.outcome === "pass") !== (v.reasons.length === 0))
-    throw Error(`outcome reasons ${stage}`);
+    throw new GraphInvariantError(`outcome reasons ${stage}`);
   // Copy, so later caller mutation cannot change a completed graph row.
   return completed
     ? {
@@ -87,7 +95,7 @@ export function assembleResults(
     Array.isArray(evaluations) ||
     Object.keys(evaluations).some((key) => !STAGES.includes(key as Stage))
   )
-    throw Error("invalid evaluation map");
+    throw new GraphInvariantError("invalid evaluation map");
   const rows: Row[] = [];
   const byStage = new Map<Stage, Row>();
   for (const stage of STAGES) {
@@ -97,7 +105,7 @@ export function assembleResults(
     let row: Row;
     if (blocking.length) {
       if (Object.hasOwn(evaluations, stage))
-        throw Error(`evaluation of blocked stage ${stage}`);
+        throw new GraphInvariantError(`evaluation of blocked stage ${stage}`);
       const reasons = [...new Set(blocking.flatMap((item) => item.reasons))];
       row = {
         stage,
@@ -108,7 +116,7 @@ export function assembleResults(
       };
     } else {
       if (!Object.hasOwn(evaluations, stage))
-        throw Error(`missing evaluation ${stage}`);
+        throw new GraphInvariantError(`missing evaluation ${stage}`);
       row = {
         stage,
         checkId: CHECK_IDS[stage],
@@ -125,15 +133,15 @@ export function assembleResults(
 /** Validate serialized internal rows against the fixed graph, including reason content/order. */
 export function validateResults(value: unknown): asserts value is Row[] {
   if (!Array.isArray(value) || value.length !== STAGES.length)
-    throw Error("invalid row count");
+    throw new GraphInvariantError("invalid row count");
   const evaluated: Partial<Record<Stage, Evaluation>> = {};
   value.forEach((row: unknown, i) => {
     if (row === null || typeof row !== "object" || Array.isArray(row))
-      throw Error("invalid row");
+      throw new GraphInvariantError("invalid row");
     const r = row as Record<string, unknown>;
     const stage = STAGES[i]!;
     if (r.stage !== stage || r.checkId !== CHECK_IDS[stage])
-      throw Error("invalid row identity/order");
+      throw new GraphInvariantError("invalid row identity/order");
     const keys =
       r.execution === "completed"
         ? ["stage", "checkId", "execution", "outcome", "reasons", "blockers"]
@@ -142,7 +150,7 @@ export function validateResults(value: unknown): asserts value is Row[] {
       Object.keys(r).length !== keys.length ||
       keys.some((k) => !Object.hasOwn(r, k))
     )
-      throw Error("invalid row fields");
+      throw new GraphInvariantError("invalid row fields");
     if (r.execution !== "not_run") {
       const v =
         r.execution === "completed"
@@ -161,6 +169,6 @@ export function validateResults(value: unknown): asserts value is Row[] {
       JSON.stringify(row.reasons) !== JSON.stringify(e.reasons) ||
       JSON.stringify(row.blockers) !== JSON.stringify(e.blockers)
     )
-      throw Error("inconsistent dependency result");
+      throw new GraphInvariantError("inconsistent dependency result");
   });
 }

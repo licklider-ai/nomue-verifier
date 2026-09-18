@@ -1,0 +1,1089 @@
+[
+  {
+    "name": "six-distinct-result-slot-kinds",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": []
+  },
+  {
+    "name": "reorder-groups",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/design/groups",
+        "value": [
+          {
+            "group_id": "g-c"
+          },
+          {
+            "group_id": "g-b"
+          },
+          {
+            "group_id": "g-a"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "reorder-units",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/design/units",
+        "value": [
+          {
+            "experimental_unit_id": "u-3",
+            "group_id": "g-c"
+          },
+          {
+            "experimental_unit_id": "u-2",
+            "group_id": "g-b"
+          },
+          {
+            "experimental_unit_id": "u-1",
+            "group_id": "g-a"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "reorder-observations",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/dataset/observations",
+        "value": [
+          {
+            "observation_id": "o-3",
+            "experimental_unit_id": "u-3",
+            "group_id": "g-c",
+            "value": 3.0
+          },
+          {
+            "observation_id": "o-2",
+            "experimental_unit_id": "u-2",
+            "group_id": "g-b",
+            "value": 2.0
+          },
+          {
+            "observation_id": "o-1",
+            "experimental_unit_id": "u-1",
+            "group_id": "g-a",
+            "value": 1.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "reorder-result-members",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/result_slots/1/member_ids",
+        "value": ["m-2", "m-0", "m-1"]
+      }
+    ]
+  },
+  {
+    "name": "reorder-coefficients",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/3/members/0/coefficients",
+        "value": [
+          {
+            "group_id": "g-c",
+            "value": 0
+          },
+          {
+            "group_id": "g-b",
+            "value": -1
+          },
+          {
+            "group_id": "g-a",
+            "value": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "numeric-ties-do-not-imply-unit-duplicates",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/dataset/observations/1/value",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "name": "post-inspection-member-declaration-is-not-admissibility",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/3/members/0/selection/relative_to_outcome_inspection",
+        "value": "after"
+      }
+    ]
+  },
+  {
+    "name": "unknown-timing-is-not-certification",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/analyses/0/procedure_selection/relative_to_outcome_inspection",
+        "value": "not_declared"
+      }
+    ]
+  },
+  {
+    "name": "coefficient-zero-vector-is-structural-only",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/3/members/0/coefficients/0/value",
+        "value": 0
+      },
+      {
+        "op": "set",
+        "path": "/families/3/members/0/coefficients/1/value",
+        "value": 0
+      },
+      {
+        "op": "set",
+        "path": "/families/3/members/0/coefficients/2/value",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "name": "nonzero-coefficient-sum-is-deferred",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/3/members/0/coefficients/0/value",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "non-statistical-prototype-like-id-is-opaque",
+    "expected": {
+      "stage": "relations",
+      "codes": []
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/analyses/0/analysis_id",
+        "value": "__proto__"
+      },
+      {
+        "op": "set",
+        "path": "/families/0/analysis_id",
+        "value": "__proto__"
+      },
+      {
+        "op": "set",
+        "path": "/result_slots/0/analysis_id",
+        "value": "__proto__"
+      }
+    ]
+  },
+  {
+    "name": "unknown-top-field",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/alpha",
+        "value": 0.05
+      }
+    ]
+  },
+  {
+    "name": "unknown-nested-field",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/1/members/0/p_value",
+        "value": 0.1
+      }
+    ]
+  },
+  {
+    "name": "missing-group-binding",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "delete",
+        "path": "/dataset/observations/0/group_id"
+      }
+    ]
+  },
+  {
+    "name": "missing-selection",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "delete",
+        "path": "/families/0/selection"
+      }
+    ]
+  },
+  {
+    "name": "null-value-no-dropping",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/dataset/observations/0/value",
+        "value": null
+      }
+    ]
+  },
+  {
+    "name": "numeric-string-no-coercion",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/dataset/observations/0/value",
+        "value": "1"
+      }
+    ]
+  },
+  {
+    "name": "two-groups-only",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "delete",
+        "path": "/design/groups/2"
+      }
+    ]
+  },
+  {
+    "name": "false-independence-declaration",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/design/independence_declared",
+        "value": false
+      }
+    ]
+  },
+  {
+    "name": "flattened-declaration",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/design/not_flattened_declared",
+        "value": false
+      }
+    ]
+  },
+  {
+    "name": "duplicate-group-id",
+    "expected": {
+      "stage": "relations",
+      "codes": ["DUPLICATE_ID"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/design/groups/3",
+        "value": {
+          "group_id": "g-a"
+        }
+      }
+    ]
+  },
+  {
+    "name": "duplicate-observation-id",
+    "expected": {
+      "stage": "relations",
+      "codes": ["DUPLICATE_ID", "REPEATED_UNIT"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/dataset/observations/3",
+        "value": {
+          "observation_id": "o-1",
+          "experimental_unit_id": "u-1",
+          "group_id": "g-a",
+          "value": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "duplicate-unit-id",
+    "expected": {
+      "stage": "relations",
+      "codes": ["DUPLICATE_ID"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/design/units/3",
+        "value": {
+          "experimental_unit_id": "u-1",
+          "group_id": "g-a"
+        }
+      }
+    ]
+  },
+  {
+    "name": "repeated-unit-different-row",
+    "expected": {
+      "stage": "relations",
+      "codes": ["POPULATION_COVERAGE", "REPEATED_UNIT"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/dataset/observations/3",
+        "value": {
+          "observation_id": "o-4",
+          "experimental_unit_id": "u-1",
+          "group_id": "g-a",
+          "value": 1.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "unknown-unit",
+    "expected": {
+      "stage": "relations",
+      "codes": ["OBS_UNIT_REF", "UNIT_COVERAGE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/dataset/observations/0/experimental_unit_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "unknown-observation-group",
+    "expected": {
+      "stage": "relations",
+      "codes": ["GROUP_COVERAGE", "OBS_GROUP_REF", "UNIT_GROUP_MISMATCH"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/dataset/observations/0/group_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "unit-group-mismatch",
+    "expected": {
+      "stage": "relations",
+      "codes": ["UNIT_GROUP_MISMATCH"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/design/units/0/group_id",
+        "value": "g-b"
+      }
+    ]
+  },
+  {
+    "name": "unknown-unit-group",
+    "expected": {
+      "stage": "relations",
+      "codes": ["UNIT_GROUP_MISMATCH", "UNIT_GROUP_REF"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/design/units/0/group_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "population-omits-row",
+    "expected": {
+      "stage": "relations",
+      "codes": ["POPULATION_COVERAGE"]
+    },
+    "edits": [
+      {
+        "op": "delete",
+        "path": "/analyses/0/population/observation_ids/2"
+      }
+    ]
+  },
+  {
+    "name": "population-unknown-row",
+    "expected": {
+      "stage": "relations",
+      "codes": ["POPULATION_COVERAGE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/analyses/0/population/observation_ids/2",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "population-duplicate-row",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/analyses/0/population/observation_ids/2",
+        "value": "o-1"
+      }
+    ]
+  },
+  {
+    "name": "wrong-dataset",
+    "expected": {
+      "stage": "relations",
+      "codes": ["ANALYSIS_INPUT_REF"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/analyses/0/dataset_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "wrong-design",
+    "expected": {
+      "stage": "relations",
+      "codes": ["ANALYSIS_INPUT_REF"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/analyses/0/design_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "unknown-family",
+    "expected": {
+      "stage": "relations",
+      "codes": ["ANALYSIS_FAMILY_REF", "FAMILY_ANALYSIS_MISMATCH", "RESULT_ANALYSIS_MISMATCH"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/analyses/0/family_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "duplicate-family-id",
+    "expected": {
+      "stage": "relations",
+      "codes": ["DUPLICATE_ID"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/6",
+        "value": {
+          "family_id": "f-0",
+          "analysis_id": "a-0",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "omnibus",
+          "members": [
+            {
+              "member_id": "global",
+              "selection": {
+                "relative_to_outcome_inspection": "before",
+                "statement": "Synthetic producer declaration; no timestamp proof."
+              },
+              "kind": "omnibus",
+              "group_ids": ["g-a", "g-b", "g-c"]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "duplicate-analysis-id",
+    "expected": {
+      "stage": "relations",
+      "codes": ["DUPLICATE_ID"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/analyses/6",
+        "value": {
+          "analysis_id": "a-0",
+          "dataset_id": "dataset-1",
+          "design_id": "design-1",
+          "population": {
+            "definition": "All represented observations; no filtering.",
+            "observation_ids": ["o-1", "o-2", "o-3"]
+          },
+          "family_id": "f-0",
+          "contract_ref": "example-contract-omnibus-v0",
+          "procedure_selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "variance_model": {
+            "declaration": "not_declared",
+            "selection": {
+              "relative_to_outcome_inspection": "before",
+              "statement": "Synthetic producer declaration; no timestamp proof."
+            }
+          },
+          "assumption_statements": []
+        }
+      }
+    ]
+  },
+  {
+    "name": "family-unknown-analysis",
+    "expected": {
+      "stage": "relations",
+      "codes": ["FAMILY_ANALYSIS_MISMATCH", "FAMILY_ANALYSIS_REF", "RESULT_ANALYSIS_MISMATCH"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/0/analysis_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "contract-case-not-alias",
+    "expected": {
+      "stage": "relations",
+      "codes": ["CONTRACT_REF", "RESULT_ANALYSIS_MISMATCH"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/analyses/0/contract_ref",
+        "value": "Example-contract-omnibus-v0"
+      }
+    ]
+  },
+  {
+    "name": "contract-kind-family-mismatch",
+    "expected": {
+      "stage": "relations",
+      "codes": ["CONTRACT_FAMILY_MISMATCH", "RESULT_ANALYSIS_MISMATCH"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/analyses/0/contract_ref",
+        "value": "example-contract-pairwise-v0"
+      }
+    ]
+  },
+  {
+    "name": "unknown-control",
+    "expected": {
+      "stage": "relations",
+      "codes": ["CONTROL_BINDING", "CONTROL_COVERAGE", "CONTROL_REF"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/2/control_group_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "wrong-existing-control",
+    "expected": {
+      "stage": "relations",
+      "codes": ["CONTROL_BINDING", "CONTROL_COVERAGE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/2/control_group_id",
+        "value": "g-b"
+      }
+    ]
+  },
+  {
+    "name": "all-pairs-member-missing",
+    "expected": {
+      "stage": "relations",
+      "codes": ["PAIR_COVERAGE", "RESULT_MEMBER_COVERAGE"]
+    },
+    "edits": [
+      {
+        "op": "delete",
+        "path": "/families/1/members/2"
+      }
+    ]
+  },
+  {
+    "name": "pair-duplicate-same-endpoints",
+    "expected": {
+      "stage": "relations",
+      "codes": ["DUPLICATE_PAIR", "RESULT_MEMBER_COVERAGE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/1/members/3",
+        "value": {
+          "member_id": "other",
+          "selection": {
+            "relative_to_outcome_inspection": "before",
+            "statement": "Synthetic producer declaration; no timestamp proof."
+          },
+          "kind": "pair",
+          "minuend_group_id": "g-a",
+          "subtrahend_group_id": "g-b"
+        }
+      }
+    ]
+  },
+  {
+    "name": "duplicate-member-id",
+    "expected": {
+      "stage": "relations",
+      "codes": ["DUPLICATE_ID", "RESULT_MEMBER_COVERAGE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/1/members/1/member_id",
+        "value": "m-0"
+      }
+    ]
+  },
+  {
+    "name": "pair-self-comparison",
+    "expected": {
+      "stage": "relations",
+      "codes": ["PAIR_COVERAGE", "SELF_COMPARISON"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/1/members/0/subtrahend_group_id",
+        "value": "g-a"
+      }
+    ]
+  },
+  {
+    "name": "pair-group-not-found",
+    "expected": {
+      "stage": "relations",
+      "codes": ["MEMBER_GROUP_REF", "PAIR_COVERAGE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/1/members/0/subtrahend_group_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "omnibus-missing-group",
+    "expected": {
+      "stage": "relations",
+      "codes": ["OMNIBUS_GROUP_COVERAGE"]
+    },
+    "edits": [
+      {
+        "op": "delete",
+        "path": "/families/0/members/0/group_ids/2"
+      }
+    ]
+  },
+  {
+    "name": "coefficient-missing-dimension",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "delete",
+        "path": "/families/3/members/0/coefficients/2"
+      }
+    ]
+  },
+  {
+    "name": "coefficient-unknown-dimension",
+    "expected": {
+      "stage": "relations",
+      "codes": ["CONTRAST_DIMENSION"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/3/members/0/coefficients/2/group_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "coefficient-duplicate-dimension",
+    "expected": {
+      "stage": "relations",
+      "codes": ["COEFFICIENT_DUPLICATE_GROUP", "CONTRAST_DIMENSION"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/families/3/members/0/coefficients/2/group_id",
+        "value": "g-a"
+      }
+    ]
+  },
+  {
+    "name": "result-other-analysis-same-member-names",
+    "expected": {
+      "stage": "relations",
+      "codes": ["RESULT_ANALYSIS_MISMATCH", "RESULT_SLOT_CARDINALITY"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/result_slots/1/analysis_id",
+        "value": "a-4"
+      }
+    ]
+  },
+  {
+    "name": "result-unknown-analysis",
+    "expected": {
+      "stage": "relations",
+      "codes": ["RESULT_ANALYSIS_MISMATCH", "RESULT_ANALYSIS_REF", "RESULT_SLOT_CARDINALITY"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/result_slots/1/analysis_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "result-unknown-family",
+    "expected": {
+      "stage": "relations",
+      "codes": ["RESULT_ANALYSIS_MISMATCH", "RESULT_FAMILY_REF"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/result_slots/1/family_id",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "result-missing-member",
+    "expected": {
+      "stage": "relations",
+      "codes": ["RESULT_MEMBER_COVERAGE"]
+    },
+    "edits": [
+      {
+        "op": "delete",
+        "path": "/result_slots/1/member_ids/2"
+      }
+    ]
+  },
+  {
+    "name": "result-unknown-member",
+    "expected": {
+      "stage": "relations",
+      "codes": ["RESULT_MEMBER_COVERAGE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/result_slots/1/member_ids/2",
+        "value": "absent"
+      }
+    ]
+  },
+  {
+    "name": "result-duplicate-member",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/result_slots/1/member_ids/2",
+        "value": "m-0"
+      }
+    ]
+  },
+  {
+    "name": "result-slot-missing",
+    "expected": {
+      "stage": "relations",
+      "codes": ["RESULT_SLOT_CARDINALITY"]
+    },
+    "edits": [
+      {
+        "op": "delete",
+        "path": "/result_slots/1"
+      }
+    ]
+  },
+  {
+    "name": "result-duplicate-id",
+    "expected": {
+      "stage": "relations",
+      "codes": ["DUPLICATE_ID", "RESULT_SLOT_CARDINALITY"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/result_slots/6",
+        "value": {
+          "result_id": "r-0",
+          "analysis_id": "a-0",
+          "family_id": "f-0",
+          "contract_ref": "example-contract-omnibus-v0",
+          "kind": "omnibus",
+          "payload_status": "method_payload_deferred",
+          "member_id": "global"
+        }
+      }
+    ]
+  },
+  {
+    "name": "result-unreviewed-numeric-payload",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/result_slots/0/p_value",
+        "value": 0.05
+      }
+    ]
+  },
+  {
+    "name": "result-guarantee-injection",
+    "expected": {
+      "stage": "schema",
+      "codes": ["SHAPE"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/result_slots/4/guarantee",
+        "value": "strong_fwer"
+      }
+    ]
+  },
+  {
+    "name": "interval-relabelled-as-adjustment",
+    "expected": {
+      "stage": "relations",
+      "codes": ["RESULT_KIND_MISMATCH"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/result_slots/5/kind",
+        "value": "multiplicity_adjustment"
+      }
+    ]
+  },
+  {
+    "name": "contract-reference-unknown-in-result",
+    "expected": {
+      "stage": "relations",
+      "codes": ["CONTRACT_REF", "RESULT_ANALYSIS_MISMATCH"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/result_slots/0/contract_ref",
+        "value": "unissued-other"
+      }
+    ]
+  },
+  {
+    "name": "raw-duplicate",
+    "expected": {
+      "stage": "raw_json",
+      "codes": ["DUPLICATE_JSON_MEMBER"]
+    },
+    "raw": "{\"a\":1,\"a\":1}"
+  },
+  {
+    "name": "raw-escaped-duplicate",
+    "expected": {
+      "stage": "raw_json",
+      "codes": ["DUPLICATE_JSON_MEMBER"]
+    },
+    "raw": "{\"a\":1,\"\\u0061\":2}"
+  },
+  {
+    "name": "raw-unpaired-surrogate",
+    "expected": {
+      "stage": "raw_json",
+      "codes": ["INVALID_UNICODE_STRING"]
+    },
+    "raw": "{\"a\":\"\\ud800\"}"
+  },
+  {
+    "name": "raw-negative-zero",
+    "expected": {
+      "stage": "raw_json",
+      "codes": ["NEGATIVE_ZERO_NUMBER"]
+    },
+    "raw": "{\"a\":-0}"
+  },
+  {
+    "name": "raw-nan",
+    "expected": {
+      "stage": "raw_json",
+      "codes": ["JSON_SYNTAX"]
+    },
+    "raw": "{\"a\":NaN}"
+  },
+  {
+    "name": "raw-overflow",
+    "expected": {
+      "stage": "numeric_domain",
+      "codes": ["NONFINITE"]
+    },
+    "raw": "{\"a\":1e999}"
+  },
+  {
+    "name": "unicode-not-normalized",
+    "expected": {
+      "stage": "relations",
+      "codes": ["FAMILY_ANALYSIS_MISMATCH", "FAMILY_ANALYSIS_REF", "RESULT_ANALYSIS_MISMATCH"]
+    },
+    "edits": [
+      {
+        "op": "set",
+        "path": "/analyses/0/analysis_id",
+        "value": "\u00e9"
+      },
+      {
+        "op": "set",
+        "path": "/families/0/analysis_id",
+        "value": "e\u0301"
+      },
+      {
+        "op": "set",
+        "path": "/result_slots/0/analysis_id",
+        "value": "\u00e9"
+      }
+    ]
+  }
+]

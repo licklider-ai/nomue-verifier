@@ -1,4 +1,4 @@
-# Unissued Holm D1 foundations
+# Unissued Holm D1 local checking components
 
 Date: 2026-09-18 UTC. **Component implementation checkpoint; D1 remains open.**
 This directory is outside the npm allowlist, released CLI, registered dispatcher,
@@ -12,9 +12,12 @@ report is produced by these components. The package remains Release 1 only.
 - D0 permission: [reviewer confirmation at 6410025](https://github.com/licklider-ai/nomue-protocol/blob/6410025cb56631a63c311e4aa213890e02f4d0be/review-inputs/r3-holm-design-decision-20260918/REPAIR-CONFIRMATION.md),
   GO_FOR_UNISSUED_IMPLEMENTATION only, not adoption or publication.
 - Existing candidate.4: Protocol `b52389fd3efc6b8968613f59f147a578d5bbb55d`.
-  No candidate.4 runtime, Python kernel or review bytes are copied or changed here.
+  Eight schema/fixture artifacts are copied byte-for-byte under `fixtures/`,
+  pinned in `PROVENANCE.json`. The D0 relation algorithm is extracted into
+  `d0-relations.ts`; see the current handoff for its exact source and adaptations.
+  No numerical kernel, worker, public report schema or legacy envelope is imported.
 
-This step implements the newly specified raw projection and dependency policy
+This step connects raw projection and dependencies to six actual local checks,
 before coupling them to a complete successor. Source/IEEE/Holm numerical evidence
 remains at its original scope. There is no new theorem, numerical method,
 tolerance or performance/host qualification in this checkpoint.
@@ -45,31 +48,51 @@ identity/order, exact field sets, execution/outcome consistency, and every block
 and reason. Only C accepts the design's expected-context execution-error state;
 whole-invocation failure is not converted into a graph row.
 
+Graph invariant violations throw `GraphInvariantError`, with
+`kind=internal_error`. Every graph-component exception (including unexpected
+exceptions) must become a whole-invocation internal-error refusal at integration,
+never a graph row or report. The future full-call adapter must test this mapping.
+Parsed `StoredInspection.value` is also caller-owned and must be treated read-only.
+
 The graph receives **trusted local evaluations**, not submitted evidence. It does
 not prove that any supplied pass is true or perform D0/Holm validation. Admitting
 arbitrary user-supplied rows through this helper would be an integration defect.
 The future public report still needs scoped versioned schemas and inverse/output
 validation. No public wire shape is issued by these internal TypeScript interfaces.
 
-The byte inspector is also a lower-level component, not a public verification
-entry point: final exact routing/schema/reference admission, expected-context
-access, outcome/refusal projection, supported-host checks and the outer lifecycle
-remain for later D1/D2 work. Tests with small synthetic objects are byte vectors,
-not accepted Records. Checkpoint callbacks must come from the trusted shared
-budget owner; test no-op callbacks provide no enforcement evidence.
+`local-checks.ts` performs exact candidate routing, supplied-reference admission,
+Record schema S, storage K, D0 relations D, bounded Holm admission H, declared
+digest comparison I and independent expected-context comparison C. It takes raw
+bytes, a trusted context acquisition callback and budget checkpoint; it accepts
+no caller-supplied evaluation flags. It freezes its private parsed Record and
+does not expose inspected buffers. S failure prevents context acquisition. D/H
+do not depend on I/C agreement; K failure blocks I. Graph rows can be assembled
+for blocked-A cases; a six-pass preparation deliberately has no A evaluation and
+cannot be assembled into a complete graph until actual arithmetic is added.
+
+The old Record and expected schemas describe component input fixtures only.
+This does not implement the old candidate.4 invocation semantics or issue a
+successor bundle. A versioned public output contract, numerical worker, refusal
+adapter, supported-host controls and full lifecycle remain for D1/D2 work.
+`ExpectedContextAccessError` may wrap only an expected-input access error;
+unexpected callback errors and budget failures propagate as invocation failures.
+Actual filesystem acquisition and its bounded reader are not implemented here.
+Checkpoint callbacks must come from the trusted shared budget owner; test no-op
+callbacks provide no enforcement evidence. Raw/expected document bounds share
+one owner in `stored-bytes.ts`; legacy adapter size guards remain explicit.
 
 ## Reproduce
 
 ```sh
 npm ci --ignore-scripts
-node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts
-./node_modules/.bin/tsc --noEmit --target es2022 --module nodenext --moduleResolution nodenext --allowImportingTsExtensions --strict --types node development/r3-holm/*.ts
+node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts
+npx tsc --noEmit --target es2022 --module nodenext --moduleResolution nodenext --allowImportingTsExtensions --strict --types node development/r3-holm/dependencies.ts development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/d0-relations.ts development/r3-holm/local-checks.ts development/r3-holm/local-checks.test.ts
 npm test
 npm run test:package
 ```
 
-The typecheck command above is for a POSIX shell. CI names both test files
-explicitly so Node 20/22 on Windows/macOS/Linux does not rely on shell globbing.
+CI uses these same test and strict typecheck commands, naming files explicitly
+so Node 20/22 on Windows/macOS/Linux does not rely on shell globbing.
 Those component regressions do not admit those platforms for full R3 execution.
 
 Tests include 14 hand-specified raw input/projection pairs, independent expected
@@ -79,10 +102,10 @@ boolean expression, and 15 invalid-output mutations. Expected byte targets are
 not generated by either implementation component. No published numerical oracle
 or independent researcher review is claimed for these author tests.
 
-`tests/boundary.ts` adds exactly the six files in this directory to its existing
+`tests/boundary.ts` names every file in this directory in its existing
 repository inventory; it does not use a wildcard or edit historical extraction
 evidence. `scripts/package-smoke.mjs` additionally rejects any `development/`
-entry in the actual npm tarball. See [handoff](HANDOFF.md) for coverage, self-review,
+entry in the actual npm tarball. See [current handoff](LOCAL-CHECKS-HANDOFF.md) for coverage, self-review,
 remaining work and the bounded independent implementation-review request.
 
 Prepared with OpenAI Codex assistance in the continuing author/coordinator

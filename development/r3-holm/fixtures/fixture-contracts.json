@@ -1,0 +1,38 @@
+[
+  {
+    "contract_ref": "example-contract-omnibus-v0",
+    "result_kind": "omnibus",
+    "family_kinds": ["omnibus"],
+    "status": "synthetic_unissued_binding_only"
+  },
+  {
+    "contract_ref": "example-contract-pairwise-v0",
+    "result_kind": "pairwise",
+    "family_kinds": ["all_pairs"],
+    "status": "synthetic_unissued_binding_only"
+  },
+  {
+    "contract_ref": "example-contract-many-to-one-v0",
+    "result_kind": "many_to_one",
+    "family_kinds": ["many_to_one"],
+    "status": "synthetic_unissued_binding_only"
+  },
+  {
+    "contract_ref": "example-contract-planned-contrast-v0",
+    "result_kind": "planned_contrast",
+    "family_kinds": ["finite_contrasts"],
+    "status": "synthetic_unissued_binding_only"
+  },
+  {
+    "contract_ref": "example-contract-multiplicity-adjustment-v0",
+    "result_kind": "multiplicity_adjustment",
+    "family_kinds": ["all_pairs", "many_to_one", "finite_contrasts", "omnibus"],
+    "status": "synthetic_unissued_binding_only"
+  },
+  {
+    "contract_ref": "example-contract-interval-v0",
+    "result_kind": "interval",
+    "family_kinds": ["all_pairs", "many_to_one", "finite_contrasts"],
+    "status": "synthetic_unissued_binding_only"
+  }
+]

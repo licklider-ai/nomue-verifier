@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
   assembleResults,
+  GraphInvariantError,
   CHECK_IDS,
   validateResults,
   type Evaluation,
@@ -232,7 +233,14 @@ test("serialized-output mutations cannot invent graph passes or erase causes", (
   }
 });
 test("trusted evaluator boundary rejects incomplete/invalid inputs and generic root causes", () => {
-  assert.throws(() => assembleResults({}));
+  assert.throws(
+    () => assembleResults({}),
+    (e) => e instanceof GraphInvariantError && e.kind === "internal_error",
+  );
+  assert.throws(
+    () => validateResults([]),
+    (e) => e instanceof GraphInvariantError && e.kind === "internal_error",
+  );
   assert.throws(() => assembleResults({ S: fail("schema"), K: pass() }));
   assert.throws(() => assembleResults({ ...all(), X: pass() } as any));
   assert.throws(() => assembleResults({ ...all(), S: error() }));

@@ -1,6 +1,9 @@
 # D1 component checkpoint and continuation
 
-Status: implementation components ready for bounded independent review;
+Historical initial checkpoint at `a829970`: independent review returned
+GO_FOR_D1_CONTINUATION, with two MINOR repairs carried into the next unit.
+The current scope and review request are in [LOCAL-CHECKS-HANDOFF.md](LOCAL-CHECKS-HANDOFF.md).
+The original coverage table below describes only that first component checkpoint;
 **full D1 and all 44 full-call acceptance cases remain open**. No new public
 report/refusal schema, supported bundle, release identifier or source pin is issued.
 

@@ -6,6 +6,7 @@ import { jcsCanonicalize } from "../../reference/verifier/src/jcs.ts";
 export type Checkpoint = () => void;
 export const LIMITS = Object.freeze({
   bytes: 2359296,
+  expectedBytes: 1572864,
   depth: 36,
   nodes: 28736,
   entries: 1024,
@@ -26,7 +27,11 @@ export class StoredInputError extends Error {
   }
 }
 
-function parsedBounds(root: unknown, checkpoint: Checkpoint): void {
+export function parsedBounds(
+  root: unknown,
+  checkpoint: Checkpoint,
+  target: "record" | "expected" = "record",
+): void {
   const stack: { value: unknown; depth: number }[] = [
     { value: root, depth: 0 },
   ];
@@ -35,18 +40,18 @@ function parsedBounds(root: unknown, checkpoint: Checkpoint): void {
     checkpoint();
     const { value, depth } = stack.pop()!;
     if (++nodes > LIMITS.nodes)
-      throw new StoredInputError("resource_limit", "record_nodes");
+      throw new StoredInputError("resource_limit", `${target}_nodes`);
     if (typeof value === "string" && value.length > LIMITS.string)
-      throw new StoredInputError("resource_limit", "record_string");
+      throw new StoredInputError("resource_limit", `${target}_string`);
     if (value !== null && typeof value === "object") {
       if (depth + 1 > LIMITS.depth)
-        throw new StoredInputError("resource_limit", "record_depth");
+        throw new StoredInputError("resource_limit", `${target}_depth`);
       const entries = Object.entries(value);
       if (entries.length > LIMITS.entries)
-        throw new StoredInputError("resource_limit", "record_container");
+        throw new StoredInputError("resource_limit", `${target}_container`);
       for (const [key, child] of entries) {
         if (key.length > LIMITS.string)
-          throw new StoredInputError("resource_limit", "record_key");
+          throw new StoredInputError("resource_limit", `${target}_key`);
         stack.push({ value: child, depth: depth + 1 });
       }
     }
