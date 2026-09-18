@@ -109,6 +109,9 @@ try {
   if (packedPaths.some((path) => path.startsWith("reference/spikes/"))) {
     fail("unreleased paired-t spike entered the Release 1 package");
   }
+  if (packedPaths.some((path) => path.startsWith("development/"))) {
+    fail("unissued development source entered the Release 1 package");
+  }
   const filename = packOutput?.[0]?.filename;
   if (typeof filename !== "string" || filename.length === 0) {
     fail("npm pack did not return a tarball filename", packResult);

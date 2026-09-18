@@ -37,6 +37,14 @@ const postExtractionOperationalFiles = new Set([
   "reference/verifier/src/approval.ts",
   "reference/verifier/src/attestation.ts",
   "reference/verifier/src/lifecycle.ts",
+  // Protocol PR #355 D0 GO permits these unissued D1 development assets.
+  // Exact entries only: none is a supported bundle or npm runtime module.
+  "development/r3-holm/stored-bytes.ts",
+  "development/r3-holm/stored-bytes.test.ts",
+  "development/r3-holm/dependencies.ts",
+  "development/r3-holm/dependencies.test.ts",
+  "development/r3-holm/README.md",
+  "development/r3-holm/HANDOFF.md",
 ]);
 const currentAllowlist = new Set([
   ...historicalExtractionFiles,
