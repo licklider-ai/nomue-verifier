@@ -7,7 +7,9 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(
   fs.readFileSync(path.join(root, "EXTRACTION-MANIFEST.json"), "utf8"),
 ) as { files: Array<{ destination: string }> };
-const historicalExtractionFiles = new Set(manifest.files.map((f) => f.destination));
+const historicalExtractionFiles = new Set(
+  manifest.files.map((f) => f.destination),
+);
 
 // EXTRACTION-MANIFEST.json is immutable historical evidence for the August demo
 // extraction. Release 1 operational/rebuild/offline-evidence files added later are
@@ -39,6 +41,23 @@ const postExtractionOperationalFiles = new Set([
   "reference/verifier/src/lifecycle.ts",
   // Protocol PR #355 D0 GO permits these unissued D1 development assets.
   // Exact entries only: none is a supported bundle or npm runtime module.
+  "development/r3-holm/OUTER-CALL-HANDOFF.md",
+  "development/r3-holm/OUTER-PROVENANCE.json",
+  "development/r3-holm/controlled-call.test.ts",
+  "development/r3-holm/controlled-call.ts",
+  "development/r3-holm/evidence/OUTER-VALIDATION.json",
+  "development/r3-holm/evidence/outer-tests.tap",
+  "development/r3-holm/evidence/outer-unsupported.json",
+  "development/r3-holm/outer-cases.ts",
+  "development/r3-holm/outer-entry.mjs",
+  "development/r3-holm/outer-fixtures.ts",
+  "development/r3-holm/outer-host.py",
+  "development/r3-holm/outer-probes.mjs",
+  "development/r3-holm/outer-run.mjs",
+  "development/r3-holm/outer-runtime.json",
+  "development/r3-holm/outer-supervisor.py",
+  "development/r3-holm/outer-supervisor.test.py",
+  "development/r3-holm/pin-outer.py",
   "development/r3-holm/stored-bytes.ts",
   "development/r3-holm/stored-bytes.test.ts",
   "development/r3-holm/dependencies.ts",
@@ -99,19 +118,32 @@ function walk(dir: string, base = ""): string[] {
 
 const files = walk(root);
 const missing = files.filter((f) => !currentAllowlist.has(f));
-const historicalExtra = [...historicalExtractionFiles].filter((f) => !files.includes(f));
-const operationalExtra = [...postExtractionOperationalFiles].filter((f) => !files.includes(f));
+const historicalExtra = [...historicalExtractionFiles].filter(
+  (f) => !files.includes(f),
+);
+const operationalExtra = [...postExtractionOperationalFiles].filter(
+  (f) => !files.includes(f),
+);
 
 if (missing.length > 0) {
-  console.error("T5 boundary: files outside historical+Release1 allowlist:", missing);
+  console.error(
+    "T5 boundary: files outside historical+Release1 allowlist:",
+    missing,
+  );
   process.exit(1);
 }
 if (historicalExtra.length > 0) {
-  console.error("T5 boundary: historical extraction entries missing on disk:", historicalExtra);
+  console.error(
+    "T5 boundary: historical extraction entries missing on disk:",
+    historicalExtra,
+  );
   process.exit(1);
 }
 if (operationalExtra.length > 0) {
-  console.error("T5 boundary: Release 1 operational entries missing on disk:", operationalExtra);
+  console.error(
+    "T5 boundary: Release 1 operational entries missing on disk:",
+    operationalExtra,
+  );
   process.exit(1);
 }
 

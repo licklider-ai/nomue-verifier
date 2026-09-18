@@ -163,3 +163,10 @@ versioned output, prove original-byte forwarding and all 44 expanded cases, then
 perform D2 dispatcher/conformance and D3 authoritative integration. Prepared with
 OpenAI Codex assistance in the continuing author/coordinator context; public
 sources only. Self-review is not independent or human-expert review.
+
+## Subsequent checkpoint
+
+This historical handoff received independent GO_FOR_D1_CONTINUATION with one
+expected-file access MINOR. See [controlled-call handoff](OUTER-CALL-HANDOFF.md)
+for original receipt provenance, repair, new lifecycle implementation and current
+review scope. The earlier verdict does not clear the new runtime.

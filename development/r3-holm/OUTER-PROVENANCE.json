@@ -1,0 +1,20 @@
+{
+  "source_repository": "licklider-ai/nomue-protocol",
+  "source_commit": "b52389fd3efc6b8968613f59f147a578d5bbb55d",
+  "assets": [
+    {
+      "path": "governance/drafts/release-3-preparation/holm-repaired-candidate-20260911/supervisor.py",
+      "git_blob": "c7e600b8cbbe87cc17a0e83c27e68b81fb7b9ffb",
+      "sha256": "a25997e41dea174f2f6455fd3be7c1eaf977ad28e28b95df01a57a5f2d7d9ded",
+      "destination": "outer-supervisor.py",
+      "copy": "adapted; not byte identical"
+    }
+  ],
+  "changes": [
+    "Repository root and explicit source inventory",
+    "Candidate.5 completion envelope, per-call nonce and corruption digest",
+    "Direct entry and separate reproduction/probe paths",
+    "Current version identity; previous kernel controls and cleanup loop retained"
+  ],
+  "independence": "Existing review scopes remain historical; new code requires independent implementation review."
+}

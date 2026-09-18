@@ -1,0 +1,460 @@
+TAP version 13
+# Subtest: trusted projection forwards only retained original bytes after complete lifecycle observations
+ok 1 - trusted projection forwards only retained original bytes after complete lifecycle observations
+  ---
+  duration_ms: 45.27614
+  type: 'test'
+  ...
+# Subtest: missing/false lifecycle evidence, changed nonce/pins, and probe provenance refuse
+ok 2 - missing/false lifecycle evidence, changed nonce/pins, and probe provenance refuse
+  ---
+  duration_ms: 14.480315
+  type: 'test'
+  ...
+# Subtest: late outer causes discard every provisional report and have fixed precedence
+ok 3 - late outer causes discard every provisional report and have fixed precedence
+  ---
+  duration_ms: 9.662113
+  type: 'test'
+  ...
+# Subtest: changed snapshot, declared digest or output graph cannot pass final projection
+ok 4 - changed snapshot, declared digest or output graph cannot pass final projection
+  ---
+  duration_ms: 17.257713
+  type: 'test'
+  ...
+# Subtest: safe C error remains a report after cleanup and cannot forward
+ok 5 - safe C error remains a report after cleanup and cannot forward
+  ---
+  duration_ms: 9.052426
+  type: 'test'
+  ...
+# Subtest: expected symlink follows a regular target; path-only faults remain C errors
+ok 6 - expected symlink follows a regular target; path-only faults remain C errors
+  ---
+  duration_ms: 20.745684
+  type: 'test'
+  ...
+# Subtest: direct launcher rejects unavailable delegation before Record access
+ok 7 - direct launcher rejects unavailable delegation before Record access
+  ---
+  duration_ms: 60.280553
+  type: 'test'
+  ...
+# Subtest: native child transport uses real Python and a fresh completion nonce
+ok 8 - native child transport uses real Python and a fresh completion nonce
+  ---
+  duration_ms: 437.821822
+  type: 'test'
+  ...
+# Subtest: all-pass seven-result graph is internally valid, not a forwarding authorization
+ok 9 - all-pass seven-result graph is internally valid, not a forwarding authorization
+  ---
+  duration_ms: 2.071716
+  type: 'test'
+  ...
+# Subtest: schema failure blocks every dependent with actual schema reason
+ok 10 - schema failure blocks every dependent with actual schema reason
+  ---
+  duration_ms: 1.683041
+  type: 'test'
+  ...
+# Subtest: K failure blocks I/A without suppressing D/H/C
+ok 11 - K failure blocks I/A without suppressing D/H/C
+  ---
+  duration_ms: 0.477278
+  type: 'test'
+  ...
+# Subtest: D/H remain evaluated despite I failure and C error
+ok 12 - D/H remain evaluated despite I failure and C error
+  ---
+  duration_ms: 0.311779
+  type: 'test'
+  ...
+# Subtest: multiple and transitive blockers retain deterministic actual reasons
+ok 13 - multiple and transitive blockers retain deterministic actual reasons
+  ---
+  duration_ms: 0.361554
+  type: 'test'
+  ...
+# Subtest: exhaustive pass/fail/context-error combinations agree with an independent boolean oracle
+ok 14 - exhaustive pass/fail/context-error combinations agree with an independent boolean oracle
+  ---
+  duration_ms: 14.335834
+  type: 'test'
+  ...
+# Subtest: serialized-output mutations cannot invent graph passes or erase causes
+ok 15 - serialized-output mutations cannot invent graph passes or erase causes
+  ---
+  duration_ms: 2.770237
+  type: 'test'
+  ...
+# Subtest: trusted evaluator boundary rejects incomplete/invalid inputs and generic root causes
+ok 16 - trusted evaluator boundary rejects incomplete/invalid inputs and generic root causes
+  ---
+  duration_ms: 0.756878
+  type: 'test'
+  ...
+# Subtest: caller mutations do not rewrite copied reasons
+ok 17 - caller mutations do not rewrite copied reasons
+  ---
+  duration_ms: 0.417328
+  type: 'test'
+  ...
+# Subtest: successor schema and output are exact versions; candidate.4 never aliases candidate.5
+ok 18 - successor schema and output are exact versions; candidate.4 never aliases candidate.5
+  ---
+  duration_ms: 34.754209
+  type: 'test'
+  ...
+# Subtest: pre-routing strict eligibility and bounds, then exact dispatch, then canonicalization
+ok 19 - pre-routing strict eligibility and bounds, then exact dispatch, then canonicalization
+  ---
+  duration_ms: 1.025532
+  type: 'test'
+  ...
+# Subtest: S fail returns scoped failure rows, never reads context or launches A
+ok 20 - S fail returns scoped failure rows, never reads context or launches A
+  ---
+  duration_ms: 2.282293
+  type: 'test'
+  ...
+# Subtest: K, D, I and C failures retain independently evaluated rows and block actual A launch
+ok 21 - K, D, I and C failures retain independently evaluated rows and block actual A launch
+  ---
+  duration_ms: 15.802198
+  type: 'test'
+  ...
+# Subtest: exact numerator mismatch cannot be hidden by unchanged display bits
+ok 22 - exact numerator mismatch cannot be hidden by unchanged display bits
+  ---
+  duration_ms: 11.090722
+  type: 'test'
+  ...
+# Subtest: malformed worker completion refuses, and arbitrary callback exceptions are internal
+ok 23 - malformed worker completion refuses, and arbitrary callback exceptions are internal
+  ---
+  duration_ms: 37.052301
+  type: 'test'
+  ...
+# Subtest: wire mutations and even graph-consistent fabricated S pass fail against private evidence
+ok 24 - wire mutations and even graph-consistent fabricated S pass fail against private evidence
+  ---
+  duration_ms: 39.396647
+  type: 'test'
+  ...
+# Subtest: late shared-budget failure supersedes a complete inner report
+ok 25 - late shared-budget failure supersedes a complete inner report
+  ---
+  duration_ms: 5.024628
+  type: 'test'
+  ...
+# Subtest: bounded file adapter checks actual bytes and preserves S-failure no-read behavior
+ok 26 - bounded file adapter checks actual bytes and preserves S-failure no-read behavior
+  ---
+  duration_ms: 26.125946
+  type: 'test'
+  ...
+# Subtest: expected directory is C unreadable while Record-local passes remain
+ok 27 - expected directory is C unreadable while Record-local passes remain
+  ---
+  duration_ms: 7.094732
+  type: 'test'
+  ...
+# Subtest: cancellation is an invocation refusal; copied arithmetic cannot rewrite private inspected data
+ok 28 - cancellation is an invocation refusal; copied arithmetic cannot rewrite private inspected data
+  ---
+  duration_ms: 2.236484
+  type: 'test'
+  ...
+# Subtest: actual isolated Python worker agrees with retained fixed results
+ok 29 - actual isolated Python worker agrees with retained fixed results
+  ---
+  duration_ms: 64.791369
+  type: 'test'
+  ...
+# Subtest: fixed example has six local passes and its original digest; never an A evaluation
+ok 30 - fixed example has six local passes and its original digest; never an A evaluation
+  ---
+  duration_ms: 26.750521
+  type: 'test'
+  ...
+# Subtest: schema failure with faithful references does not acquire context and blocks all dependents
+ok 31 - schema failure with faithful references does not acquire context and blocks all dependents
+  ---
+  duration_ms: 4.790967
+  type: 'test'
+  ...
+# Subtest: exact routing and valid supplied identity are required before any S result
+ok 32 - exact routing and valid supplied identity are required before any S result
+  ---
+  duration_ms: 3.493064
+  type: 'test'
+  ...
+# Subtest: declared digest mismatch preserves D/H/C and reference uses independently computed bytes
+ok 33 - declared digest mismatch preserves D/H/C and reference uses independently computed bytes
+  ---
+  duration_ms: 2.246198
+  type: 'test'
+  ...
+# Subtest: noncanonical bytes with D and C failures preserve independent results and transitive reasons
+ok 34 - noncanonical bytes with D and C failures preserve independent results and transitive reasons
+  ---
+  duration_ms: 2.447311
+  type: 'test'
+  ...
+# Subtest: whitespace K failure still evaluates passing D/H/C and never evaluates I
+ok 35 - whitespace K failure still evaluates passing D/H/C and never evaluates I
+  ---
+  duration_ms: 3.037739
+  type: 'test'
+  ...
+# Subtest: independent expected record_id mismatch is C fail, not local nonconformance
+ok 36 - independent expected record_id mismatch is C fail, not local nonconformance
+  ---
+  duration_ms: 1.73565
+  type: 'test'
+  ...
+# Subtest: independent expected revision_id mismatch is C fail, not local nonconformance
+ok 37 - independent expected revision_id mismatch is C fail, not local nonconformance
+  ---
+  duration_ms: 1.639186
+  type: 'test'
+  ...
+# Subtest: independent expected declaration mismatch is C fail, not local nonconformance
+ok 38 - independent expected declaration mismatch is C fail, not local nonconformance
+  ---
+  duration_ms: 1.631835
+  type: 'test'
+  ...
+# Subtest: independent expected inputs mismatch is C fail, not local nonconformance
+ok 39 - independent expected inputs mismatch is C fail, not local nonconformance
+  ---
+  duration_ms: 1.633557
+  type: 'test'
+  ...
+# Subtest: schema-valid D0 failure may coexist with C pass on an independently supplied matching fixture
+ok 40 - schema-valid D0 failure may coexist with C pass on an independently supplied matching fixture
+  ---
+  duration_ms: 1.601639
+  type: 'test'
+  ...
+# Subtest: missing, unreadable, malformed and schema-invalid context yield C error only
+ok 41 - missing, unreadable, malformed and schema-invalid context yield C error only
+  ---
+  duration_ms: 7.551628
+  type: 'test'
+  ...
+# Subtest: expected-input limits and unexpected acquisition failures escape without partial output
+ok 42 - expected-input limits and unexpected acquisition failures escape without partial output
+  ---
+  duration_ms: 6.009409
+  type: 'test'
+  ...
+# Subtest: raw bounds precede routing; routing and references precede canonicalization
+ok 43 - raw bounds precede routing; routing and references precede canonicalization
+  ---
+  duration_ms: 6.274577
+  type: 'test'
+  ...
+# Subtest: p-domain admits zero, subnormal and one, rejects negative zero/nonfinite/greater-than-one
+ok 44 - p-domain admits zero, subnormal and one, rejects negative zero/nonfinite/greater-than-one
+  ---
+  duration_ms: 10.027953
+  type: 'test'
+  ...
+# Subtest: actual Holm domain and ownership mutations cannot be accepted through a trusted flag
+ok 45 - actual Holm domain and ownership mutations cannot be accepted through a trusted flag
+  ---
+  duration_ms: 9.94575
+  type: 'test'
+  ...
+# Subtest: acquisition cannot change inspected bytes by mutating the original input
+ok 46 - acquisition cannot change inspected bytes by mutating the original input
+  ---
+  duration_ms: 1.38244
+  type: 'test'
+  ...
+# Subtest: D0 relation-only vectors retain all original expected reason sets
+ok 47 - D0 relation-only vectors retain all original expected reason sets
+  ---
+  duration_ms: 4.903976
+  type: 'test'
+  ...
+# Subtest: copied candidate input bytes match their fixed source manifest
+ok 48 - copied candidate input bytes match their fixed source manifest
+  ---
+  duration_ms: 0.463597
+  type: 'test'
+  ...
+# Subtest: stored projection: first
+ok 49 - stored projection: first
+  ---
+  duration_ms: 3.426394
+  type: 'test'
+  ...
+# Subtest: stored projection: middle
+ok 50 - stored projection: middle
+  ---
+  duration_ms: 0.414513
+  type: 'test'
+  ...
+# Subtest: stored projection: last
+ok 51 - stored projection: last
+  ---
+  duration_ms: 0.349445
+  type: 'test'
+  ...
+# Subtest: stored projection: sole
+ok 52 - stored projection: sole
+  ---
+  duration_ms: 0.296315
+  type: 'test'
+  ...
+# Subtest: stored projection: absent
+ok 53 - stored projection: absent
+  ---
+  duration_ms: 0.304357
+  type: 'test'
+  ...
+# Subtest: stored projection: space-first
+ok 54 - stored projection: space-first
+  ---
+  duration_ms: 0.189816
+  type: 'test'
+  ...
+# Subtest: stored projection: space-middle
+ok 55 - stored projection: space-middle
+  ---
+  duration_ms: 0.273321
+  type: 'test'
+  ...
+# Subtest: stored projection: space-last
+ok 56 - stored projection: space-last
+  ---
+  duration_ms: 0.224788
+  type: 'test'
+  ...
+# Subtest: stored projection: escaped-key
+ok 57 - stored projection: escaped-key
+  ---
+  duration_ms: 0.382386
+  type: 'test'
+  ...
+# Subtest: stored projection: nested
+ok 58 - stored projection: nested
+  ---
+  duration_ms: 0.535776
+  type: 'test'
+  ...
+# Subtest: stored projection: string-lookalike
+ok 59 - stored projection: string-lookalike
+  ---
+  duration_ms: 0.290647
+  type: 'test'
+  ...
+# Subtest: stored projection: unicode
+ok 60 - stored projection: unicode
+  ---
+  duration_ms: 0.203456
+  type: 'test'
+  ...
+# Subtest: stored projection: spelling
+ok 61 - stored projection: spelling
+  ---
+  duration_ms: 0.193071
+  type: 'test'
+  ...
+# Subtest: stored projection: trailing-newline
+ok 62 - stored projection: trailing-newline
+  ---
+  duration_ms: 0.150045
+  type: 'test'
+  ...
+# Subtest: stored reference distinguishes newline/whitespace from reserialized content
+ok 63 - stored reference distinguishes newline/whitespace from reserialized content
+  ---
+  duration_ms: 0.958742
+  type: 'test'
+  ...
+# Subtest: digest ignores only integrity and does not trust its declared digest
+ok 64 - digest ignores only integrity and does not trust its declared digest
+  ---
+  duration_ms: 0.730759
+  type: 'test'
+  ...
+# Subtest: input and output buffers do not share storage
+ok 65 - input and output buffers do not share storage
+  ---
+  duration_ms: 0.19945
+  type: 'test'
+  ...
+# Subtest: strict eligibility: duplicate
+ok 66 - strict eligibility: duplicate
+  ---
+  duration_ms: 0.6914
+  type: 'test'
+  ...
+# Subtest: strict eligibility: nested-duplicate
+ok 67 - strict eligibility: nested-duplicate
+  ---
+  duration_ms: 0.280331
+  type: 'test'
+  ...
+# Subtest: strict eligibility: surrogate
+ok 68 - strict eligibility: surrogate
+  ---
+  duration_ms: 0.143646
+  type: 'test'
+  ...
+# Subtest: strict eligibility: negative-zero
+ok 69 - strict eligibility: negative-zero
+  ---
+  duration_ms: 0.144327
+  type: 'test'
+  ...
+# Subtest: malformed and BOM input is not normalized
+ok 70 - malformed and BOM input is not normalized
+  ---
+  duration_ms: 0.251889
+  type: 'test'
+  ...
+# Subtest: invalid UTF-8 rejects before parsing; shared buffers rejected
+ok 71 - invalid UTF-8 rejects before parsing; shared buffers rejected
+  ---
+  duration_ms: 0.347753
+  type: 'test'
+  ...
+# Subtest: non-object input and canonicalization failure never produce an inspection
+ok 72 - non-object input and canonicalization failure never produce an inspection
+  ---
+  duration_ms: 0.392921
+  type: 'test'
+  ...
+# Subtest: raw byte bound at equality and over
+ok 73 - raw byte bound at equality and over
+  ---
+  duration_ms: 24.84383
+  type: 'test'
+  ...
+# Subtest: depth, string, key, entry and node ceilings reject excess
+ok 74 - depth, string, key, entry and node ceilings reject excess
+  ---
+  duration_ms: 33.049213
+  type: 'test'
+  ...
+# Subtest: budget failures propagate unchanged at early and late checkpoints
+ok 75 - budget failures propagate unchanged at early and late checkpoints
+  ---
+  duration_ms: 4.870646
+  type: 'test'
+  ...
+1..75
+# tests 75
+# suites 0
+# pass 75
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1251.867268

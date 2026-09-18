@@ -22,6 +22,7 @@ import {
   validateCompletion,
   encodeOutput,
   refusal,
+  allPass,
   type Evidence,
   type RefusalKind,
 } from "./output.ts";
@@ -156,6 +157,17 @@ export async function evaluateInnerFiles(
   options: InnerOptions,
   harness: InnerHarness = {},
 ): Promise<any> {
+  return (await prepareInnerFiles(recordPath, expectedPath, options, harness))
+    .output;
+}
+
+/** Provisional private transport. Only the outer lifecycle may release snapshot bytes. */
+export async function prepareInnerFiles(
+  recordPath: string,
+  expectedPath: string | undefined,
+  options: InnerOptions,
+  harness: InnerHarness = {},
+): Promise<{ output: any; proposed_record_base64?: string }> {
   try {
     const budget = harness.budget ?? createBudget(options.signal);
     let bytes: Buffer;
@@ -170,14 +182,19 @@ export async function evaluateInnerFiles(
         throw new InvocationError("input_access_error", "record_access");
       throw e;
     }
-    return await complete(
+    const output = await complete(
       bytes,
       expectedFile(expectedPath, () => budget.checkpoint()),
       options,
       budget,
       harness,
     );
+    const result: { output: any; proposed_record_base64?: string } = { output };
+    if (allPass(output))
+      result.proposed_record_base64 = bytes.toString("base64");
+    budget.checkpoint();
+    return result;
   } catch (e) {
-    return refused(e);
+    return { output: refused(e) };
   }
 }

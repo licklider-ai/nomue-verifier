@@ -130,9 +130,18 @@ export function expectedFile(
       bytes = readBounded(path, LIMITS.expectedBytes, checkpoint);
     } catch (e) {
       if (
-        ["ENOENT", "EACCES", "EPERM", "ENOTDIR"].includes(
-          (e as NodeJS.ErrnoException).code ?? "",
-        )
+        (e instanceof InvocationError &&
+          e.kind === "input_access_error" &&
+          e.reason === "regular_file_required") ||
+        [
+          "ENOENT",
+          "EACCES",
+          "EPERM",
+          "ENOTDIR",
+          "EISDIR",
+          "ELOOP",
+          "ENAMETOOLONG",
+        ].includes((e as NodeJS.ErrnoException).code ?? "")
       )
         throw new ExpectedContextAccessError("expected input inaccessible");
       throw e;

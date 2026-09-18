@@ -91,7 +91,7 @@ one owner in `stored-bytes.ts`; legacy adapter size guards remain explicit.
 
 ```sh
 npm ci --ignore-scripts
-node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts
+node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts
 npx tsc --project development/r3-holm/tsconfig.json
 npm test
 npm run test:package
@@ -113,9 +113,9 @@ never both. A runs only on six genuine passes. Its exact numerator and displayed
 bits are compared separately; malformed child output becomes an invocation
 refusal. Final output is checked against its schema, dependency graph and private
 evaluation evidence, then serialized and checked again. The API never forwards
-Record bytes. A remaining outer supervisor must cover startup, the process tree,
-aggregate memory, cleanup and trusted completion before any full-call success.
-The current implementation does not attest those controls or qualify a host.
+Record bytes. The new development-only `controlledCall` joins this inner result to a direct
+supervisor lifecycle and original-byte forwarding. The released CLI is unchanged;
+this checkpoint does not qualify a host or complete D1.
 
 Tests include 14 hand-specified raw input/projection pairs, independent expected
 hashes from those literal targets, strict-parser rejection, bounds, early/late
@@ -127,10 +127,32 @@ or independent researcher review is claimed for these author tests.
 `tests/boundary.ts` names every file in this directory in its existing
 repository inventory; it does not use a wildcard or edit historical extraction
 evidence. `scripts/package-smoke.mjs` additionally rejects any `development/`
-entry in the actual npm tarball. See [current handoff](INNER-CALL-HANDOFF.md) for coverage, self-review,
+entry in the actual npm tarball. See [current handoff](OUTER-CALL-HANDOFF.md) for coverage, self-review,
 remaining work and the bounded independent implementation-review request.
 
 Prepared with OpenAI Codex assistance in the continuing author/coordinator
 context under the owner's R3 work direction. Public inputs only; no private product
 source or production orchestration is included. Self-review is not independent
 clearance and no human expert review is claimed.
+
+## Controlled-call reproduction
+
+```sh
+python -B development/r3-holm/outer-supervisor.test.py
+# Only on an explicitly delegated Linux x64 / Node 24.19.0 / Python 3.12.14 host:
+python -I development/r3-holm/outer-host.py --delegation "$NOMUE_DELEGATION" --output /tmp/r3-host-evidence
+```
+
+The test runner never enables root controllers. A read-only or unavailable cgroup
+is NOT_RUN for enforcement, not a passing mock. The dedicated CI lane retains
+actual inputs, expectations, outputs and receipts. `projectTrustedReceipt` is a
+trusted-transport test helper, not authentication or a receipt-import API. Use
+`controlledCall` for a new supervised invocation. Its evidence callback supplies
+no input to verification. Raw memory of the supervisor/caller is outside the leaf
+limit; supervisor loss still requires external delegation cleanup.
+
+File paths deliberately follow symbolic links to regular targets. Expected-only
+path failures, including directories/loops/overlong names, produce C error;
+resource and unexpected host failures still refuse the invocation. Candidate.5
+uses `p_generation: not_asserted`; p generation remains outside the checked scope.
+The versioned vocabulary change needs D3 schema/public-surface disposition.

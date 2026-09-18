@@ -21,7 +21,7 @@ jobs:
       - run: npm ci
       - run: npm test
       - name: Unissued R3 component regression (not runtime qualification)
-        run: node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts
+        run: node --import tsx --test development/r3-holm/dependencies.test.ts development/r3-holm/stored-bytes.test.ts development/r3-holm/local-checks.test.ts development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts
       - name: Strict typecheck of unissued R3 components
         run: npx tsc --project development/r3-holm/tsconfig.json
       - name: Pack, install, and exercise the published CLI shape
@@ -52,8 +52,35 @@ jobs:
         run: |
           set -euo pipefail
           export NOMUE_TEST_PYTHON="$(command -v python)"
-          node --import tsx --test development/r3-holm/inner-call.test.ts
+          node --import tsx --test development/r3-holm/inner-call.test.ts development/r3-holm/controlled-call.test.ts
           python development/r3-holm/numerics/test_worker.py
+          python -B development/r3-holm/outer-supervisor.test.py
+
+  r3-controlled-host:
+    name: unissued R3 controlled-host regression (not adoption)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24.19.0"
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.14"
+      - run: npm ci
+      - name: Actual cgroup controls, cleanup and source-bound full calls
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo env "PATH=$PATH" "LD_LIBRARY_PATH=${LD_LIBRARY_PATH:-}" python -I development/r3-holm/outer-host.py --provision-ci --output "$RUNNER_TEMP/r3-controlled-host"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r3-controlled-host-evidence
+          path: ${{ runner.temp }}/r3-controlled-host/
+          if-no-files-found: error
 
   offline-kit-regression:
     name: offline isolation kit regression (internal only)

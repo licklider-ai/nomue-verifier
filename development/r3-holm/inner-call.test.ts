@@ -343,6 +343,30 @@ test("bounded file adapter checks actual bytes and preserves S-failure no-read b
   }
 });
 
+test("expected directory is C unreadable while Record-local passes remain", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "holm-expected-"));
+  try {
+    const rp = join(dir, "record");
+    writeFileSync(rp, encode(record()));
+    const out = await evaluateInnerFiles(rp, dir, options, harness);
+    assert.equal(out.kind, "report");
+    assert.equal(outcome(out, "C").execution, "error");
+    assert.deepEqual(outcome(out, "C").reasons, [
+      "candidate:holm:expected_unreadable",
+    ]);
+    assert.equal(Object.hasOwn(outcome(out, "C"), "outcome"), false);
+    for (const stage of ["S", "K", "D", "H", "I"])
+      assert.equal(outcome(out, stage).outcome, "pass");
+    assert.equal(outcome(out, "A").execution, "not_run");
+    assert.equal(
+      (await evaluateInnerFiles(dir, rp, options, harness)).refusal_kind,
+      "input_access_error",
+    );
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test("cancellation is an invocation refusal; copied arithmetic cannot rewrite private inspected data", async () => {
   const ac = new AbortController();
   ac.abort();

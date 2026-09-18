@@ -128,11 +128,11 @@ export function refusal(kind: RefusalKind): any {
   return value;
 }
 
-/** Schema+graph cannot prove S or A true. Compare with private evidence too. */
-export function validateCompletion(output: unknown, evidence: Evidence): void {
+/** Structural output/graph validation. Actual evaluations are checked separately. */
+export function validateWire(output: unknown): void {
   if (!shape(output)) throw new GraphInvariantError("output schema");
   const v = output as any;
-  if (v.kind !== "report") throw new GraphInvariantError("report expected");
+  if (v.kind === "refusal") return;
   const wire = [...v.conformance, ...v.verification];
   const rows = wire.map(({ check_id, scope: _scope, ...r }: any, i: number) => {
     if (r.stage !== STAGES[i] || check_id !== wireId(STAGES[i]))
@@ -144,6 +144,47 @@ export function validateCompletion(output: unknown, evidence: Evidence): void {
     };
   });
   validateResults(rows);
+  for (const row of wire) {
+    if (
+      row.execution !== "not_run" &&
+      row.reasons.some(
+        (r: string) =>
+          !owned[row.stage as Stage].includes(r.replace("candidate:holm:", "")),
+      )
+    )
+      throw new GraphInvariantError("unowned wire reason");
+    const expectedKind = ["H", "A"].includes(row.stage)
+      ? "selected_holm"
+      : row.stage === "C"
+        ? "expected_context"
+        : "record";
+    if (row.scope.kind !== expectedKind)
+      throw new GraphInvariantError("wire scope");
+  }
+  if (jcsCanonicalize(wire[3].scope) !== jcsCanonicalize(wire[6].scope))
+    throw new GraphInvariantError("selected scopes differ");
+  if (
+    (wire[0].outcome !== "pass") !==
+    (wire[3].scope.selection === "unavailable")
+  )
+    throw new GraphInvariantError("selection availability");
+}
+
+/** Structural validation alone does not establish that the checks were run. */
+export function allPass(output: any): boolean {
+  validateWire(output);
+  return (
+    output.kind === "report" &&
+    [...output.conformance, ...output.verification].every(
+      (r: any) => r.execution === "completed" && r.outcome === "pass",
+    )
+  );
+}
+
+export function validateCompletion(output: unknown, evidence: Evidence): void {
+  validateWire(output);
+  if ((output as any).kind !== "report")
+    throw new GraphInvariantError("report expected");
   if (jcsCanonicalize(output) !== jcsCanonicalize(makeReport(evidence)))
     throw new GraphInvariantError("output differs from private evidence");
 }
