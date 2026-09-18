@@ -17,6 +17,7 @@ const postExtractionOperationalFiles = new Set([
   ".github/ISSUE_TEMPLATE/config.yml",
   ".github/ISSUE_TEMPLATE/documentation.yml",
   ".github/ISSUE_TEMPLATE/feedback.yml",
+  ".github/workflows/publish-npm.yml",
   "REBUILD.md",
   "scripts/rebuild-evidence.mjs",
   "scripts/package-smoke.mjs",
