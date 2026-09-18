@@ -42,5 +42,5 @@ dereference Record-supplied identifiers over the network.
 ## Supported versions
 
 The published `main` branch is the supported verifier-package line. The package remains
-experimental and currently retains version `0.2.1-rc.0`; this does not alter the
+experimental and currently uses version `0.2.1-rc.1`; this does not alter the
 published status of nomue Protocol Release 1.

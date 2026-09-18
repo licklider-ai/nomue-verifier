@@ -36,7 +36,7 @@ const expectedPin: Record<string, unknown> = {
   release_decision_commit: D,
   signed_release_source_commit: R,
   protocol_snapshot_hash: SNAPSHOT,
-  packaging_version: "0.2.1-rc.0",
+  packaging_version: "0.2.1-rc.1",
 };
 
 for (const [key, expected] of Object.entries(expectedPin)) {
