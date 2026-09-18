@@ -115,11 +115,11 @@
     },
     {
       "path": "package-lock.json",
-      "sha256": "40589dd5f0ad2bba5b98c64a555345181adb48f9389273b0502e95c4f2c9478e"
+      "sha256": "3b3e32991ba836c4f79012100b0c86948d462f633c4bd90846c66756633ad809"
     },
     {
       "path": "package.json",
-      "sha256": "bd9936b65c2588d9db05cd65728b53b2d2db592082f8127994458f6390e76e15"
+      "sha256": "05fe1922d83a5fdb8d19256af934fa38507c7ac0c8a403257222d108954ab6c1"
     },
     {
       "path": "reference/verifier/src/jcs.ts",

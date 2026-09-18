@@ -15,6 +15,12 @@ const historicalExtractionFiles = new Set(
 // extraction. Release 1 operational/rebuild/offline-evidence files added later are
 // authorized here explicitly instead of rewriting that historical manifest.
 const postExtractionOperationalFiles = new Set([
+  // Founder-authorized CI cancellation repair; unchanged public check semantics.
+  "reference/stats-kernel/src/precise-ci.ts",
+  "tests/ci-precision.ts",
+  "tests/ci-reference.json",
+  "tests/generate-ci-reference.py",
+  "CI-ACCURACY-REPAIR.md",
   ".github/ISSUE_TEMPLATE/bug.yml",
   ".github/ISSUE_TEMPLATE/config.yml",
   ".github/ISSUE_TEMPLATE/documentation.yml",

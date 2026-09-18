@@ -170,3 +170,17 @@ Earlier checkpoint records remain historical evidence, not approvals of later he
 The current [D1 oracle checkpoint](ORACLES-HANDOFF.md) follows the independent
 B-2 integration receipt. It repairs retained-result comparison and adds raw-byte
 and component-boundary evidence; D1 remains open. Earlier handoffs are chronology.
+
+## Main integration before development merge
+
+During merge preparation, main advanced to
+`421756e69e9911858a79f1f9314aa883b466c6ac` (the separately merged Welch interval
+repair, PR #21). Its package metadata/lockfile changed, so the existing R3 runtime
+inventory correctly refused the synthetic merge. This continuation incorporates
+that main commit and explicitly refreshes only those two inventory hashes.
+The other 30 pinned files, Holm kernel/worker, contracts and R3 invocation logic
+remain byte-identical. Holm does not import the Welch kernel or decimal.js.
+Earlier archives retain their original manifests and scope; the refreshed runtime
+requires a new successful controlled-host CI run before merging PR #20. The
+Protocol merge self-review records that outcome separately. This bookkeeping
+repair does not remove pin enforcement or extend R3 support or D1 completion.
