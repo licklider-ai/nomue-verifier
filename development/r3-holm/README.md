@@ -172,7 +172,7 @@ B-2 integration receipt. It repairs retained-result comparison and adds raw-byte
 and component-boundary evidence; D1 remains open. Earlier handoffs are chronology.
 
 The current [context cross-product checkpoint](CONTEXT-MATRIX-HANDOFF.md) adds
-98 ordinary cases and 14 callback-only error cases. It tests independent Record
+105 ordinary cases and 14 callback-only error cases. It tests independent Record
 results, exact blocker/reason propagation and context binding without changing
 runtime behavior. The earlier oracle delta's independent review remains pending.
 

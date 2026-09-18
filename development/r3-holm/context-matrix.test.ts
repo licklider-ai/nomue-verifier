@@ -12,6 +12,7 @@ import {
   expectedRows,
   recordColumns,
   contextColumns,
+  CONFORMANCE_ROW_COUNT,
 } from "./context-matrix.ts";
 import { fixedReply } from "./outer-fixtures.ts";
 
@@ -29,15 +30,24 @@ function check(out: any, expected: ReturnType<typeof expectedRows>) {
   assert.equal(out.kind, "report");
   assert.equal(Object.hasOwn(out, "refusal_kind"), false);
   const project = ({ scope: _scope, ...rest }: any) => rest;
-  assert.deepEqual(out.conformance.map(project), expected.slice(0, 4));
-  assert.deepEqual(out.verification.map(project), expected.slice(4));
+  assert.deepEqual(
+    out.conformance.map(project),
+    expected.slice(0, CONFORMANCE_ROW_COUNT),
+  );
+  assert.deepEqual(
+    out.verification.map(project),
+    expected.slice(CONFORMANCE_ROW_COUNT),
+  );
   assert.ok(
     Object.values(out.guarantee_boundary).every((v) => v === "not_asserted"),
   );
 }
-test("context matrix is exactly seven Record columns by fourteen context columns", () => {
-  assert.equal(cases.length, 98);
-  assert.equal(new Set(cases.map((c) => c.id)).size, 98);
+test("context matrix is exactly seven Record columns by fifteen context columns", () => {
+  assert.equal(recordColumns.length, 7);
+  assert.equal(contextColumns.length, 15);
+  const size = recordColumns.length * contextColumns.length;
+  assert.equal(cases.length, size);
+  assert.equal(new Set(cases.map((c) => c.id)).size, size);
   for (const r of recordColumns)
     for (const c of contextColumns)
       assert.equal(
@@ -45,6 +55,24 @@ test("context matrix is exactly seven Record columns by fourteen context columns
         1,
       );
   assert.equal(cases.filter((c) => c.forward).length, 1);
+});
+test("schema suppression does not hide malformed expected C arguments", () => {
+  for (const column of recordColumns) {
+    assert.throws(
+      () => expectedRows(column, "pass", "context_mismatch"),
+      /invalid expected C/,
+    );
+    assert.throws(() => expectedRows(column, "fail"), /invalid expected C/);
+    assert.throws(
+      () => expectedRows(column, "error", "context_mismatch"),
+      /invalid expected C/,
+    );
+  }
+  // A valid hypothetical C mismatch is still suppressed when S fails.
+  assert.equal(
+    expectedRows("schema", "fail", "context_mismatch")[5].execution,
+    "not_run",
+  );
 });
 for (const c of cases)
   test(`${c.id}: exact rows, reasons, blockers and file boundary`, async () => {

@@ -1,4 +1,5 @@
 /** Test-only expectations authored from D0; no candidate evaluator/graph imports. */
+import assert from "node:assert/strict";
 import { baseRecord, seal, context } from "./outer-fixtures.ts";
 import { jcsCanonicalize } from "../../reference/verifier/src/jcs.ts";
 
@@ -26,7 +27,10 @@ export const contextColumns = [
   "revision-id",
   "unselected",
   "order",
+  "inputs",
 ] as const;
+// D0 report partition: S/K/D/H are conformance; I/C/A are verification.
+export const CONFORMANCE_ROW_COUNT = 4;
 export type RecordColumn = (typeof recordColumns)[number];
 type ContextColumn = (typeof contextColumns)[number];
 type Stage = "S" | "K" | "D" | "H" | "I" | "C" | "A";
@@ -63,6 +67,20 @@ export function expectedRows(
   c: "pass" | "fail" | "error",
   cReason?: string,
 ): ExpectedRow[] {
+  assert(
+    (c === "pass" && cReason === undefined) ||
+      (c === "fail" && cReason === "context_mismatch") ||
+      (c === "error" &&
+        [
+          "expected_missing",
+          "expected_parse",
+          "expected_schema",
+          "expected_unreadable",
+          "expected_type",
+        ].includes(cReason ?? "")),
+    "invalid expected C state/reason pair",
+  );
+  // S failure intentionally suppresses C, but never hides malformed arguments.
   if (column === "schema") {
     const r = ["record_schema"];
     return [
@@ -193,9 +211,12 @@ export function contextMatrix(): ContextCase[] {
         case "order":
           e.declaration.analyses.reverse();
           break;
+        case "inputs":
+          e.inputs.members[0].p_hex = "0000000000000000";
+          break;
       }
       if (
-        ["record-id", "revision-id", "unselected", "order"].includes(
+        ["record-id", "revision-id", "unselected", "order", "inputs"].includes(
           contextColumn,
         )
       ) {

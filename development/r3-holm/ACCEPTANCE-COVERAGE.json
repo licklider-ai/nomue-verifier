@@ -1,12 +1,12 @@
 {
   "status": "implementation accounting, not adoption or executed-host evidence",
   "design_source": "Protocol 1eb6b93 D0 ACCEPTANCE.md, 44 locators",
-  "ordinary_case_count": 156,
+  "ordinary_case_count": 163,
   "context_matrix": {
     "source": "context-matrix.ts",
-    "ordinary_case_count": 98,
+    "ordinary_case_count": 105,
     "callback_only_case_count": 14,
-    "expectations": "Exact seven rows, reasons and blockers; author expectations, not whole-row closure",
+    "expectations": "Seven rows excluding scope, with exact reasons and blockers; all four C comparison fields perturbed; author expectations, not whole-row closure",
     "contributes_to_locators": [
       "R3D-01",
       "R3D-02",

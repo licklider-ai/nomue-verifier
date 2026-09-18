@@ -13,34 +13,47 @@ import { spawnSync } from "node:child_process";
 
 const source = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const root = mkdtempSync(join(tmpdir(), "r3-context-sensitivity-"));
+// A floor allows future test additions without weakening the existing suite.
+const MINIMUM_MATRIX_TESTS = 122;
 const mutations = [
   [
     "accept-mismatching-context",
     "local-checks.ts",
     "jcsCanonicalize(actual) === jcsCanonicalize(value)",
     "true",
+    30,
   ],
   [
     "drop-propagated-reasons",
     "dependencies.ts",
     "[...new Set(blocking.flatMap((item) => item.reasons))]",
     "[...new Set(blocking.flatMap((item) => item.reasons))].slice(0, 1)",
+    83,
   ],
   [
     "read-context-after-schema-failure",
     "local-checks.ts",
     "return { reference, evaluations };",
     "{ acquireExpected(); return { reference, evaluations }; }",
+    17,
   ],
   [
     "drop-context-blocker",
     "dependencies.ts",
     "blocking.map((item) => item.checkId)",
     'blocking.filter((item) => item.stage !== "C").map((item) => item.checkId)',
+    113,
+  ],
+  [
+    "ignore-inputs-in-context",
+    "local-checks.ts",
+    "jcsCanonicalize(actual) === jcsCanonicalize(value)",
+    "jcsCanonicalize({ ...actual, inputs: null }) === jcsCanonicalize({ ...(value as Record<string, unknown>), inputs: null })",
+    6,
   ],
 ];
 const results = [];
-for (const [name, file, from, to] of mutations) {
+for (const [name, file, from, to, minimumFailures] of mutations) {
   const dest = join(root, name);
   for (const path of [
     "development",
@@ -81,10 +94,17 @@ for (const [name, file, from, to] of mutations) {
     exit: run.status,
     tests,
     fail,
+    minimumFailures,
     log: join(dest, "mutation.tap"),
   });
-  if (run.status !== 1 || tests !== 114 || fail === 0)
-    throw Error(JSON.stringify(results));
+  if (
+    run.status !== 1 ||
+    tests < MINIMUM_MATRIX_TESTS ||
+    fail < minimumFailures
+  )
+    throw Error(
+      `Sensitivity regression: ${name}; expected exit 1, at least ${MINIMUM_MATRIX_TESTS} tests and ${minimumFailures} failures; observed ${JSON.stringify(results.at(-1))}`,
+    );
 }
 const summary = {
   status: "inner test sensitivity only, not controlled-host corruption",
