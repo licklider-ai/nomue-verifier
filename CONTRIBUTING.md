@@ -71,6 +71,18 @@ Security issues in this verifier should be reported privately as described in
 This verifier repository does not operate a CLA, DCO, or separate patent agreement.
 The Apache License 2.0 applies to distributed artifacts as stated in LICENSE.
 
+## What this verifier implements
+
+- Checks that are public in a nomue Protocol release or public release
+  candidate. Support for a new Protocol release may follow that release.
+- Full recomputation inside the public-check domain the Protocol declares for
+  each numerical check, with an explicit unsupported outcome outside it.
+- The numerical methods and libraries listed in
+  [NUMERICAL-METHODS.md](NUMERICAL-METHODS.md).
+
+Production optimization, orchestration, runtime supervision and host
+qualification are outside this repository.
+
 ## Scope boundary
 
 This repository does not claim:

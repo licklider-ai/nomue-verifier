@@ -119,6 +119,9 @@ For the exact 0.2.1 bundle, the verifier can check the registered scopes for:
   two-sided 95% Welch-Satterthwaite confidence interval, test statistic, degrees of
   freedom, and p-value.
 
+[NUMERICAL-METHODS.md](NUMERICAL-METHODS.md) lists the method and library used for
+each numerical quantity.
+
 Verification runs locally after dependencies are installed. The verifier does not call
 a nomue server, fetch Record-supplied URIs, load remote schemas, or execute
 Record-supplied code.
