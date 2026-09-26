@@ -45,6 +45,9 @@ const postExtractionOperationalFiles = new Set([
   "reference/verifier/src/approval.ts",
   "reference/verifier/src/attestation.ts",
   "reference/verifier/src/lifecycle.ts",
+  // Steward direction 2026-09-26: numerical methods list and development freeze.
+  "NUMERICAL-METHODS.md",
+  "development/README.md",
   // Protocol PR #355 D0 GO permits these unissued D1 development assets.
   // Exact entries only: none is a supported bundle or npm runtime module.
   "development/r3-holm/fault-injections.ts",

@@ -21,6 +21,8 @@ Keep the Protocol resource adapter distinct from the package adapter.
 The imported approval, attestation, lifecycle and paired-t spike sources remain
 unreleased development material. Do not add them to the npm runtime or infer
 new supported bundles from their presence. Retain published release identities.
+They and everything under `development/` are frozen as of 2026-09-26: keep
+them as they are, do not extend them, and do not run them in CI.
 
 Run npm test and npm run test:package for runtime or packaging changes. Use
 the corresponding pinned Protocol conformance/oracle tests for reference
@@ -37,3 +39,26 @@ Before any public push or PR, inspect the actual outgoing files and text for
 unnecessary production detail. Use public or explicitly publication-cleared inputs.
 The public checker is not intentionally degraded to create a paid-product gap.
 Preserve the methodology and evidence needed to reproduce covered checks.
+
+## Scope and numerical independence
+
+Steward direction adopted 2026-09-26:
+
+- Implement only checks that are public in a Protocol release or public
+  release candidate. Support for a Protocol release may follow it later.
+- For each numerical check, recompute fully inside the public-check domain the
+  Protocol declares, and return the Protocol's explicit unsupported outcome
+  outside it. The Protocol decides the domain; this repository does not.
+- Prefer high-precision generic methods (arbitrary precision, exact arithmetic,
+  guard digits) where the cost is justified. Otherwise use a pinned library.
+  Keep NUMERICAL-METHODS.md current with every numerical path or dependency
+  change.
+- Choose methods and dependencies from public sources and general numerical
+  practice. Do not bring code, constants or techniques from non-public
+  implementations into this repository.
+- Report a suspected defect in a numerical library privately to the
+  maintainers, not in a public issue, pull request or commit message, until the
+  maintainers decide how the Protocol handles the affected region.
+- Out of scope: production optimization, orchestration, runtime supervision,
+  host qualification, and execution-environment provenance beyond source pins,
+  lockfiles and the existing package rebuild check.
